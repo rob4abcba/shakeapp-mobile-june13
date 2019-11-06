@@ -20,8 +20,8 @@ module.exports = {
     }
   },
 
-  //	backendURL: "http://localhost:8000/node_app",	// Can't end with a '/'
-  backendURL: 'https://www.shakeapp-backend.net/node_app', // Can't end with a '/'
+  backendURL: "http://ec2-54-93-93-212.eu-central-1.compute.amazonaws.com:8000/node_app",	// Can't end with a '/'
+  //backendURL: 'https://www.shakeapp-backend.net/node_app', // Can't end with a '/'
   updateCheckFrequency: 10000,
   memoryCheckFrequency: 1000,
 

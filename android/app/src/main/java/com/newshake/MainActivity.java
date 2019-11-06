@@ -2,6 +2,8 @@ package com.newshake;
 
 import com.facebook.react.ReactActivity;
 
+
+//key store newshake password
 public class MainActivity extends ReactActivity {
 
   /**

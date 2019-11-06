@@ -36,6 +36,7 @@ var styles = require('../Styles');
 //https://stackoverflow.com/questions/48637585/how-to-capture-videos-with-react-native-camera-module
 class Mood extends Component {
   constructor(props) {
+    console.log('enter this mood rn camera');
     super(props);
     this.state = {
             captureMode: captureModePhoto,

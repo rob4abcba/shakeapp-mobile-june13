@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
+// org.reactjs.native.example.newshake
+
 import {createStore, applyMiddleware, compose} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from './reducers';

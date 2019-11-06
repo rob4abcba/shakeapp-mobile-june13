@@ -42,7 +42,7 @@ class VerificationCode extends Component {
   onVerifyPhoneNumberPress() {
     const {phone, countryCode} = this.props;
     const SMSCode = this.state.verificationCode;
-    console.warn(phone + ' ' + countryCode);
+    console.warn(phone + ' ' + countryCode + "\n"+SMSCode);
     var phoneFixed = countryCode + phone;
 
     this.props.verifyPhoneNumber(phoneFixed, SMSCode, this, function(

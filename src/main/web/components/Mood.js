@@ -141,6 +141,7 @@ class Mood extends React.Component {
   }
 
   takePicture = async function() {
+    alert('enter')
     if (this.camera) {
       const photo = await this.camera.takePictureAsync();
       this.setState({hasPhoto: true, photoURL: photo.uri});
@@ -278,8 +279,13 @@ class Mood extends React.Component {
           alignSelf: 'flex-end',
         }}>
         <TouchableOpacity
-          style={[{flex: 0.3, alignSelf: 'flex-end'}]}
-          onPress={this.takePicture.bind(this)}
+          style={[{
+            flex: 0.8, 
+            alignSelf: 'flex-end'
+          }]}
+          onPress={()=>{  
+            this.takePicture.bind(this)
+          }}
           onLongPress={
             this.state.isRecording ? () => {} : this.takeVideo.bind(this)
           }>

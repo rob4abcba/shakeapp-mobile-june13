@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   ScrollView,
   View,
@@ -12,8 +12,8 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 
-import {Card} from './common/Card';
-import {connect} from 'react-redux';
+import { Card } from './common/Card';
+import { connect } from 'react-redux';
 import {
   phoneChanged,
   passwordChanged,
@@ -23,17 +23,17 @@ import {
   configFetch,
   updateNotificationId,
 } from '../actions';
-import {Actions} from 'react-native-router-flux';
-import {Header, Spinner} from './common';
+import { Actions } from 'react-native-router-flux';
+import { Header, Spinner } from './common';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Platform} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import CountryPicker, {
   getAllCountries,
 } from 'react-native-country-picker-modal';
 
-import {ScaledSheet} from 'react-native-size-matters';
+import { ScaledSheet } from 'react-native-size-matters';
 
 import Modal from 'react-native-modal';
 import * as RNLocalize from 'react-native-localize';
@@ -114,9 +114,9 @@ class LoginForm extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(
       'Welcome.js - componentWillReceiveProps: ' +
-        nextProps.user +
-        ' ' +
-        nextProps.validToken,
+      nextProps.user +
+      ' ' +
+      nextProps.validToken,
     );
     console.log(
       'Welcome.js - componentWillReceiveProps: ' + nextProps.validToken,
@@ -141,30 +141,30 @@ class LoginForm extends Component {
   }
 
   onButtonPress() {
-    const {phone, password} = this.props;
+    const { phone, password } = this.props;
 
     var phoneFixed = '+' + this.state.callingCode + phone;
 
-    this.props.loginUser(phoneFixed, password, this, function(
+    this.props.loginUser(phoneFixed, password, this, function (
       success,
       token,
       thisRef,
     ) {
       if (!success) {
-        thisRef.setState({isVisible: true});
+        thisRef.setState({ isVisible: true });
       } else {
       }
     });
   }
 
   onForgotPasswordPress() {
-    Actions.forgotPassword({type: 'push'});
+    Actions.forgotPassword({ type: 'push' });
   }
 
   renderButton() {
     if (this.props.loading) {
       return (
-        <View style={{marginTop: 30}}>
+        <View style={{ marginTop: 30 }}>
           <Spinner size="large" />
         </View>
       );
@@ -189,13 +189,13 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         {/* Error modal */}
         <Modal
           backdropOpacity={0}
-          style={{alignItems: 'center'}}
+          style={{ alignItems: 'center' }}
           isVisible={this.state.isVisible}
-          onBackdropPress={() => this.setState({isVisible: false})}>
+          onBackdropPress={() => this.setState({ isVisible: false })}>
           <View
             style={{
               width: 300,
@@ -206,9 +206,9 @@ class LoginForm extends Component {
               borderRadius: 8,
               shadowOpacity: 0.1,
               shadowColor: 'rgb(36, 100, 193)',
-              shadowOffset: {width: 4, height: 2},
+              shadowOffset: { width: 4, height: 2 },
             }}>
-            <Text style={{fontSize: 24, fontWeight: '800'}}>
+            <Text style={{ fontSize: 24, fontWeight: '800' }}>
               Couldn't sign in
             </Text>
 
@@ -240,9 +240,9 @@ class LoginForm extends Component {
                   borderRadius: 8,
                   shadowOpacity: 0.1,
                   shadowColor: 'rgb(36, 100, 193)',
-                  shadowOffset: {width: 4, height: 2},
+                  shadowOffset: { width: 4, height: 2 },
                 }}
-                onPress={() => this.setState({isVisible: false})}>
+                onPress={() => this.setState({ isVisible: false })}>
                 <Text
                   style={{
                     color: 'white',
@@ -260,11 +260,11 @@ class LoginForm extends Component {
 
         <View
           style={styles.container}
-          contentContainerStyle={{justifyContent: 'space-between'}}>
+          contentContainerStyle={{ justifyContent: 'space-between' }}>
           <View style={style.logoContainer}>
             <Image
               source={require('../assets/shake-logo.png')}
-              style={{height: 30, width: 23, backgroundColor: 'white'}}
+              style={{ height: 30, width: 23, backgroundColor: 'white' }}
               resizeMode={'contain'}
             />
             <Text
@@ -280,18 +280,18 @@ class LoginForm extends Component {
 
           <KeyboardAwareScrollView
             style={styles.container}
-            resetScrollToCoords={{x: 0, y: 0}}>
+            resetScrollToCoords={{ x: 0, y: 0 }}>
             <View style={style.headerContainer}>
               <Text style={style.titleText}>Welcome</Text>
 
               <Text style={style.subtitleText}>
-                Sign in to continue to Shake.
+                Sign in to continue to ShakeYo.
               </Text>
             </View>
 
-            <View style={{flex: 1, paddingLeft: 36, paddingRight: 36}}>
+            <View style={{ flex: 1, paddingLeft: 36, paddingRight: 36 }}>
               <View style={[style.textInputContainer]}>
-                <View style={{padding: 10}}>
+                <View style={{ padding: 10 }}>
                   <CountryPicker
                     onChange={value => {
                       this.setState({
@@ -325,7 +325,7 @@ class LoginForm extends Component {
                 <Icon name="mobile" color="#62cfb9" size={30} />
               </View>
 
-              <View style={[style.textInputContainer, {marginTop: 20}]}>
+              <View style={[style.textInputContainer, { marginTop: 20 }]}>
                 <TextInput
                   ref="passwordInput"
                   style={style.textInput}
@@ -349,7 +349,7 @@ class LoginForm extends Component {
                 }}
                 onPress={() => Actions.forgotPassword()}>
                 <Text
-                  style={{fontSize: 14, fontWeight: '500', color: '#62cfb9'}}>
+                  style={{ fontSize: 14, fontWeight: '500', color: '#62cfb9' }}>
                   Forgot your password?
                 </Text>
               </TouchableOpacity>
@@ -372,11 +372,11 @@ class LoginForm extends Component {
                       flexDirection: 'row',
                     }}
                     onPress={() => Actions.registration()}>
-                    <Text style={{fontSize: 14, fontWeight: '500'}}>
+                    <Text style={{ fontSize: 14, fontWeight: '500' }}>
                       Don’t have an account?{' '}
                     </Text>
                     <Text
-                      style={[style.secondaryButtonText, {color: '#62cfb9'}]}>
+                      style={[style.secondaryButtonText, { color: '#62cfb9' }]}>
                       Sign up.
                     </Text>
                   </TouchableOpacity>
@@ -406,10 +406,10 @@ class LoginForm extends Component {
                 flexDirection: 'row',
               }}
               onPress={() => Actions.registration()}>
-              <Text style={{fontSize: 14, fontWeight: '500'}}>
+              <Text style={{ fontSize: 14, fontWeight: '500' }}>
                 Don’t have an account?{' '}
               </Text>
-              <Text style={{fontSize: 14, fontWeight: '500', color: '#62cfb9'}}>
+              <Text style={{ fontSize: 14, fontWeight: '500', color: '#62cfb9' }}>
                 Sign up.
               </Text>
             </TouchableOpacity>
@@ -451,7 +451,7 @@ const style = ScaledSheet.create({
     borderRadius: 9,
     shadowOpacity: 0.1,
     shadowColor: 'rgb(36, 100, 193)',
-    shadowOffset: {width: 4, height: 2},
+    shadowOffset: { width: 4, height: 2 },
     paddingLeft: 24,
     paddingRight: 24,
     marginTop: '50@vs',
@@ -483,7 +483,7 @@ const style = ScaledSheet.create({
     borderRadius: 8,
     shadowOpacity: 0.1,
     shadowColor: 'rgb(36, 100, 193)',
-    shadowOffset: {width: 4, height: 2},
+    shadowOffset: { width: 4, height: 2 },
   },
 
   secondaryButtonText: {
@@ -492,7 +492,7 @@ const style = ScaledSheet.create({
   },
 });
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({ auth }) => {
   const {
     user,
     phone,
@@ -503,7 +503,7 @@ const mapStateToProps = ({auth}) => {
     validatingToken,
   } = auth;
 
-  return {user, phone, password, error, loading, validToken, validatingToken};
+  return { user, phone, password, error, loading, validToken, validatingToken };
 };
 
 export default connect(

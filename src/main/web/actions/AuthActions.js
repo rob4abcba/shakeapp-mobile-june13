@@ -1,4 +1,4 @@
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import {
   NAME_CHANGED,
   PHONE_CHANGED,
@@ -41,7 +41,7 @@ export const phoneChanged = (text, countryCode) => {
   console.warn(countryCode);
   return {
     type: PHONE_CHANGED,
-    payload: {phone: text, countryCode: countryCode},
+    payload: { phone: text, countryCode: countryCode },
   };
 };
 
@@ -54,7 +54,7 @@ export const passwordChanged = text => {
 
 export const forgotPassword = (phone, thisRef, callback) => {
   return dispatch => {
-    dispatch({type: FORGOT_PASSWORD});
+    dispatch({ type: FORGOT_PASSWORD });
 
     fetch(config.backendURL + '/user/account/forgot_password', {
       method: 'GET',
@@ -68,22 +68,22 @@ export const forgotPassword = (phone, thisRef, callback) => {
       .then(responseJson => {
         if (responseJson.success) {
           callback(true, thisRef);
-          dispatch({type: FORGOT_PASSWORD_SUCCESS});
+          dispatch({ type: FORGOT_PASSWORD_SUCCESS });
         } else {
           callback(false, thisRef);
-          dispatch({type: FORGOT_PASSWORD_FAIL});
+          dispatch({ type: FORGOT_PASSWORD_FAIL });
         }
       })
       .catch(error => {
         callback(false, thisRef);
-        dispatch({type: FORGOT_PASSWORD_FAIL});
+        dispatch({ type: FORGOT_PASSWORD_FAIL });
       });
   };
 };
 
 export const verifyPhoneNumber = (phone, SMSCode, thisRef, callback) => {
   return dispatch => {
-    dispatch({type: PHONE_VERIFICATION});
+    dispatch({ type: PHONE_VERIFICATION });
     fetch(config.backendURL + '/user/register_verify', {
       method: 'POST',
       headers: {
@@ -107,19 +107,19 @@ export const verifyPhoneNumber = (phone, SMSCode, thisRef, callback) => {
           });
         } else {
           callback(false, '', thisRef);
-          dispatch({type: PHONE_VERIFICATION_FAIL});
+          dispatch({ type: PHONE_VERIFICATION_FAIL });
         }
       })
       .catch(error => {
         callback(false, '', thisRef);
-        dispatch({type: PHONE_VERIFICATION_FAIL});
+        dispatch({ type: PHONE_VERIFICATION_FAIL });
       });
   };
 };
 
 export const recoverPassword = (phone, SMSCode, thisRef, callback) => {
   return dispatch => {
-    dispatch({type: RECOVER_PASSWORD});
+    dispatch({ type: RECOVER_PASSWORD });
     console.log(
       'AuthActions.js > recoverPassword - BEFORE: ' + phone + SMSCode,
     );
@@ -139,7 +139,7 @@ export const recoverPassword = (phone, SMSCode, thisRef, callback) => {
       .then(responseJson => {
         console.log(
           'AuthActions.js > recoverPassword - RESPONSE: ' +
-            responseJson.success,
+          responseJson.success,
         );
 
         if (responseJson.success) {
@@ -157,14 +157,14 @@ export const recoverPassword = (phone, SMSCode, thisRef, callback) => {
           callback(false, '', thisRef);
           console.log('AuthActions.js > recoverPassword - ON FAIL 1');
 
-          dispatch({type: RECOVER_PASSWORD_FAIL});
+          dispatch({ type: RECOVER_PASSWORD_FAIL });
         }
       })
       .catch(error => {
         callback(false, '', thisRef);
         console.log('AuthActions.js > recoverPassword - ON FAIL 2');
 
-        dispatch({type: RECOVER_PASSWORD_FAIL});
+        dispatch({ type: RECOVER_PASSWORD_FAIL });
       });
   };
 };
@@ -178,7 +178,7 @@ export const registerUser = (
   callback,
 ) => {
   return dispatch => {
-    dispatch({type: REGISTER_USER});
+    dispatch({ type: REGISTER_USER });
 
     fetch(config.backendURL + '/user/register', {
       method: 'POST',
@@ -196,24 +196,25 @@ export const registerUser = (
       .then(response => response.json())
       .then(responseJson => {
         if (responseJson.success) {
-          dispatch({type: REGISTER_USER_SUCCESS, payload: responseJson.token});
+          console.warn(JSON.stringify(responseJson))
+          dispatch({ type: REGISTER_USER_SUCCESS, payload: responseJson.token });
           callback(true, thisRef);
         } else {
           // callback(false, thisRef);
-          dispatch({type: REGISTER_USER_FAIL});
+          dispatch({ type: REGISTER_USER_FAIL });
         }
       })
       .catch(error => {
         console.warn(error);
         // callback(false, thisRef);
-        dispatch({type: REGISTER_USER_FAIL});
+        dispatch({ type: REGISTER_USER_FAIL });
       });
   };
 };
 
 export const loginUser = (phone, password, thisRef, callback) => {
   return dispatch => {
-    dispatch({type: LOGIN_USER});
+    dispatch({ type: LOGIN_USER });
 
     fetch(config.backendURL + '/user/login', {
       method: 'POST',
@@ -251,12 +252,12 @@ export const loginUser = (phone, password, thisRef, callback) => {
 
 export const logoutUser = user => {
   return dispatch => {
-    dispatch({type: LOGOUT_USER});
+    dispatch({ type: LOGOUT_USER });
   };
 };
 
 const loginUserFail = dispatch => {
-  dispatch({type: LOGIN_USER_FAIL});
+  dispatch({ type: LOGIN_USER_FAIL });
 };
 
 export const loginUserSuccess = user => {
@@ -316,7 +317,7 @@ export const changePassword = (
           );
 
           callback(false, thisRef);
-          dispatch({type: PHONE_VERIFICATION_FAIL});
+          dispatch({ type: PHONE_VERIFICATION_FAIL });
         }
       })
       .catch(error => {
@@ -325,14 +326,14 @@ export const changePassword = (
         );
 
         callback(false, thisRef);
-        dispatch({type: PHONE_VERIFICATION_FAIL});
+        dispatch({ type: PHONE_VERIFICATION_FAIL });
       });
   };
 };
 
 export const checkValidToken = (token, callback) => {
   return dispatch => {
-    dispatch({type: VALID_TOKEN});
+    dispatch({ type: VALID_TOKEN });
 
     console.log('checking if token is valid...');
     fetch(config.backendURL + '/user/valid_token', {
@@ -350,19 +351,19 @@ export const checkValidToken = (token, callback) => {
           if (callback) {
             callback(true);
           }
-          dispatch({type: VALID_TOKEN_DONE, payload: true});
+          dispatch({ type: VALID_TOKEN_DONE, payload: true });
         } else {
           if (callback) {
             callback(false);
           }
-          dispatch({type: VALID_TOKEN_DONE, payload: false});
+          dispatch({ type: VALID_TOKEN_DONE, payload: false });
         }
       })
       .catch(error => {
         if (callback) {
           callback(false);
         }
-        dispatch({type: VALID_TOKEN_DONE, payload: true});
+        dispatch({ type: VALID_TOKEN_DONE, payload: true });
       });
   };
 };
@@ -382,7 +383,7 @@ export const onBlockShake = (token, phone, friendID, thisRef, callback) => {
 
   return dispatch => {
     console.log('AuthActions > onBlockShake() > phone: ' + phone);
-    dispatch({type: BLOCK_SHAKE});
+    dispatch({ type: BLOCK_SHAKE });
 
     fetch(call, {
       method: 'POST',
@@ -402,21 +403,21 @@ export const onBlockShake = (token, phone, friendID, thisRef, callback) => {
 
         if (responseJson.success) {
           callback(true, thisRef);
-          dispatch({type: BLOCK_SHAKE_SUCCESS});
+          dispatch({ type: BLOCK_SHAKE_SUCCESS });
         } else {
           callback(false, thisRef);
-          dispatch({type: BLOCK_SHAKE_SUCCESS});
+          dispatch({ type: BLOCK_SHAKE_SUCCESS });
         }
       })
       .catch(error => {
         callback(false, thisRef);
         console.warn(error);
-        dispatch({type: BLOCK_SHAKE_SUCCESS});
+        dispatch({ type: BLOCK_SHAKE_SUCCESS });
       });
   };
 };
 
-export const chatsFetch = ({user}) => {
+export const chatsFetch = ({ user }) => {
   return dispatch => {
     fetch(config.backendURL + '/user/chats', {
       method: 'POST',
@@ -429,7 +430,7 @@ export const chatsFetch = ({user}) => {
       .then(response => response.json())
       .then(responseJson => {
         if (responseJson.success) {
-          dispatch({type: CHATS_FETCH_SUCCESS, payload: responseJson.chats});
+          dispatch({ type: CHATS_FETCH_SUCCESS, payload: responseJson.chats });
         }
         // else
         // loginUserFail(dispatch);
