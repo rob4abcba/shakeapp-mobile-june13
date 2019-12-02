@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
   ScrollView,
@@ -110,13 +111,39 @@ class Nearby extends Component {
 
     Permissions.check('location', {type: 'always'}).then(response => {
       if (response !== 'denied') {
-        navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+        try {
+          navigator.geolocation.getCurrentPosition(
+            ({coords}) => {
+              this.geoUpdate.bind(this);
+            },
+            (err) => {
+              console.log(err);
+            },
+            { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+            );
+          } catch (e) {
+            console.log(e);  // getCurrentPosition is not a function
+          }
+        // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
       }
     });
 
     Permissions.check('location', {type: 'whenInUse'}).then(response => {
       if (response !== 'denied') {
-        navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+        try {
+        navigator.geolocation.getCurrentPosition(
+          ({coords}) => {
+            this.geoUpdate.bind(this);
+          },
+          (err) => {
+            console.log(err);
+          },
+          { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+          );
+        } catch (e) {
+          console.log(e); // getCurrentPosition is not a function
+        }
+        // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
       }
     });
 
