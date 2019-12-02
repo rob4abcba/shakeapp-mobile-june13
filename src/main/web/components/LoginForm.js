@@ -285,7 +285,7 @@ class LoginForm extends Component {
               <Text style={style.titleText}>Welcome</Text>
 
               <Text style={style.subtitleText}>
-                Sign in to continue to ShakeApp.
+                Sign in to continue to ShakeApp fix-info.plist-NearbyNearby2.js.
               </Text>
             </View>
 
