@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import Swiper from 'react-native-deck-swiper';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, Image, View} from 'react-native';
 
 // demo purposes only
 function* range(start, end) {
@@ -9,11 +10,21 @@ function* range(start, end) {
   }
 }
 
+const Users = [
+  { id: "1", photo: require('../assets/cook.png') },
+  { id: "2", photo: require('../assets/drinks.png') },
+];
+
 export default class UserSwiper55 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cards: [...range(1, 50)],
+      // cards: [...Users],
+      // cards: [
+      //   { id: 1, photo: require('../assets/cook.png') },
+      //   { id: 2, photo: require('../assets/drinks.png') },
+      // ],
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0,
@@ -21,13 +32,17 @@ export default class UserSwiper55 extends Component {
   }
 
   renderCard = (card, index) => {
+    // return Users.map((user,i) => {
     return (
       <View style={styles.card}>
         <Text style={styles.text}>
-          {card} - {index}
+          card {card} - index {index}
         </Text>
+        <Image style={styles.image} source={require('../assets/cook.png')} resizeMode="cover" />
+        {/* <Image style={styles.image} source={user.photo} resizeMode="cover" />       */}
       </View>
     );
+    // });
   };
 
   onSwiped = type => {
@@ -161,6 +176,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 50,
     backgroundColor: 'transparent',
+  },
+  image: {
+    borderRadius: 5,
+    flex: 1,
+    width: '100%',
   },
   done: {
     textAlign: 'center',
