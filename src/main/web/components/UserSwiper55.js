@@ -19,7 +19,7 @@ export default class UserSwiper55 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [...range(1, 50)],
+      cards: [...range(1, 5)],
       // cards: [...Users],
       // cards: [
       //   { id: 1, photo: require('../assets/cook.png') },
