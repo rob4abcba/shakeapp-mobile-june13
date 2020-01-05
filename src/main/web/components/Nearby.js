@@ -117,11 +117,13 @@ class Nearby extends Component {
               this.geoUpdate.bind(this);
             },
             (err) => {
+              console.log('err = ');
               console.log(err);
             },
             { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
             );
           } catch (e) {
+            console.log('e = ');
             console.log(e);  // getCurrentPosition is not a function
           }
         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
@@ -136,11 +138,13 @@ class Nearby extends Component {
             this.geoUpdate.bind(this);
           },
           (err) => {
+            console.log('err = ');
             console.log(err);
           },
           { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
           );
         } catch (e) {
+          console.log('e = ');
           console.log(e); // getCurrentPosition is not a function
         }
         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
