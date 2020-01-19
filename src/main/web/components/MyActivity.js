@@ -50,7 +50,7 @@ class MyActivity extends Component {
     index: 0,
     routes: [
       {key: 'first', title: 'Notifications'},
-      {key: 'second', title: 'Your shakers'},
+      // {key: 'second', title: 'Your shakers'},
     ],
   };
 
