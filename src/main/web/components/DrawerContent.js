@@ -42,9 +42,9 @@ class DrawerContent extends React.Component {
     Actions.myActivity({route: 0});
   }
 
-  onChatPress() {
-    Actions.myActivity({route: 1});
-  }
+  // onChatPress() {
+  //   Actions.myActivity({route: 1});
+  // }
 
   onProfilePress() {
     Actions.profile();
@@ -461,14 +461,14 @@ class DrawerContent extends React.Component {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{paddingBottom: 12}}
             onPress={this.onChatPress.bind(this)}>
             <Text
               style={{fontSize: 22, fontWeight: '500', letterSpacing: -0.4}}>
               Chat
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <TouchableOpacity
             style={{paddingBottom: 12}}
