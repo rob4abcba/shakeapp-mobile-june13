@@ -254,13 +254,18 @@ class Nearby extends Component {
       if (status === BackgroundGeolocation.AUTHORIZED) {
         this.setState({isVisible: false});
 
-        navigator.geolocation.getCurrentPosition(
+        // navigator.geolocation.getCurrentPosition(
+        console.log("navigatorYZ = " + navigator);  
+        navigator.geolocation.getCurrentPosition(  
           position => {
-            console.warn('POSITION ' + JSON.stringify(position) + ' ' + user);
+            console.warn('POSITION_Yo ' + JSON.stringify(position) + ' ' + user);
 
             this.props.sendNewLocation(
-              position.coords.latitude,
-              position.coords.longitude,
+              // RL Add dummy coordinates for SF (37, -122) just in case position.coords.latitude & longitude are invalid.
+              // position.coords.latitude || "37.773972",
+              // position.coords.longitude || "-122.431297",              
+              position.coords.latitude || "39.773972",
+              position.coords.longitude || "-129.431297",
               user,
               this,
               function(success, thisRef) {
@@ -372,7 +377,8 @@ class Nearby extends Component {
   onMoodDone() {
     this.setState({moodFirstSetup: false});
   }
-
+ 
+  
   render2() {
     if (!this.props.data) {
       return <Spinner size="large" />;
@@ -385,7 +391,8 @@ class Nearby extends Component {
 
     // if (this.props.data.mood.firstSetup)
     if (this.state.moodFirstSetup) {
-      return <Mood onDone={this.onMoodDone.bind(this)} />;
+      console.log(this.props)
+      // return <Mood onDone={this.onMoodDone.bind(this)} />;
     }
 
     const {fullName} = this.props.data;
@@ -393,8 +400,8 @@ class Nearby extends Component {
 
     return (
       <View>
-        <UserSwiper55 nearbyUsers={this.props.nearbyList} />
-
+        {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
+        <UserSwiper nearbyUsers={this.props.nearbyList} />
         <Footer
           photoURL={this.props.data.mood.photoURL}
           notificationCount={this.props.data.notificationCount}
@@ -415,7 +422,8 @@ class Nearby extends Component {
 
     if (this.props.data.mood.firstSetup) {
       //    if (this.state.moodFirstSetup)
-      return <Mood onDone={this.onMoodDone.bind(this)} />;
+      console.log(this.props)
+      // return <Mood onDone={this.onMoodDone.bind(this)} />;
     }
 
     return (
@@ -428,7 +436,8 @@ class Nearby extends Component {
           />
         )}>
         <View style={{height: viewportHeight - 50}}>
-          <UserSwiper55 nearbyUsers={this.props.nearbyList} />
+          {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
+          <UserSwiper nearbyUsers={this.props.nearbyList} />
         </View>
       </StickyHeaderFooterScrollView>
     );
