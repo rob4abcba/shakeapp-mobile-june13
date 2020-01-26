@@ -88,7 +88,8 @@ const RouterComponent = () => {
             <Scene
               key="nearbyUserDetail"
               component={NearbyUserDetail}
-              hideNavBar
+              title="nearbyUserDetailYo"
+              // hideNavBar
             />
 
             <Scene
