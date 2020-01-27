@@ -27,6 +27,7 @@ import {Spinner, Footer} from './common';
 import {Actions} from 'react-native-router-flux';
 import NearbyUser from './NearbyUser';
 import UserSwiper from './UserSwiper';
+// import UserSwiper2 from './UserSwiper2';
 //import UserSwiper5 from './UserSwiper5';
 import UserSwiper55 from './UserSwiper55';
 import NearbyRestaurant from './NearbyRestaurant';
@@ -256,6 +257,34 @@ class Nearby extends Component {
 
         // navigator.geolocation.getCurrentPosition(
         console.log("navigatorYZ = " + navigator);  
+        if (!navigator.geolocation) 
+        {
+          this.props.sendNewLocation(
+            // RL Add dummy coordinates for SF (37, -122) just in case position.coords.latitude & longitude are invalid.
+            // position.coords.latitude || "37.773972",
+            // position.coords.longitude || "-122.431297",              
+            "39.773972",
+            "-129.431297",
+            user,
+            this,
+            function(success, thisRef) {
+              if (success) {
+                thisRef.props.profileFetch(user);
+                thisRef.props.nearbyUsersFetch({user}, thisRef, function(
+                  success,
+                  nearbyRef,
+                ) {});
+                thisRef.props.nearbyRestaurantsFetch(
+                  {user},
+                  thisRef,
+                  function(success, nearbyRestaurantRef) {},
+                );
+              } else {
+                // try again pop up
+              }
+            },
+          );
+        } else {
         navigator.geolocation.getCurrentPosition(  
           position => {
             console.warn('POSITION_Yo ' + JSON.stringify(position) + ' ' + user);
@@ -289,6 +318,7 @@ class Nearby extends Component {
           error => this.setState({error: error.message}),
           {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
         );
+      }
       } else {
         // Unable to procceed
 
@@ -402,6 +432,8 @@ class Nearby extends Component {
       <View>
         {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
         <UserSwiper nearbyUsers={this.props.nearbyList} />
+        {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
+
         <Footer
           photoURL={this.props.data.mood.photoURL}
           notificationCount={this.props.data.notificationCount}
