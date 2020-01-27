@@ -111,7 +111,7 @@ export default class UserSwiper extends Component {
           </View>
 
           <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            Choose the restaurant
+            Choose the restaurant (UserSwiper.js)
           </Text>
 
           <FlatList
