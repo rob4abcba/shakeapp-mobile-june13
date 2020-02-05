@@ -27,7 +27,7 @@ import {Spinner, Footer} from './common';
 import {Actions} from 'react-native-router-flux';
 import NearbyUser from './NearbyUser';
 import UserSwiper from './UserSwiper';
-// import UserSwiper2 from './UserSwiper2';
+import UserSwiper2 from './UserSwiper2';
 //import UserSwiper5 from './UserSwiper5';
 import UserSwiper55 from './UserSwiper55';
 import NearbyRestaurant from './NearbyRestaurant';
@@ -431,8 +431,8 @@ class Nearby extends Component {
     return (
       <View>
         {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
-        <UserSwiper nearbyUsers={this.props.nearbyList} />
-        {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
+        {/* <UserSwiper nearbyUsers={this.props.nearbyList} /> */}
+        <UserSwiper2 nearbyUsers={this.props.nearbyList} />
 
         <Footer
           photoURL={this.props.data.mood.photoURL}
@@ -469,7 +469,9 @@ class Nearby extends Component {
         )}>
         <View style={{height: viewportHeight - 50}}>
           {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
-          <UserSwiper nearbyUsers={this.props.nearbyList} />
+          {/* <UserSwiper nearbyUsers={this.props.nearbyList} /> */}
+          <UserSwiper2 nearbyUsers={this.props.nearbyList} />
+          
         </View>
       </StickyHeaderFooterScrollView>
     );
