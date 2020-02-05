@@ -5666,6 +5666,14 @@ react-native-camera@^3.6.0:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-card-stack-swiper@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/react-native-card-stack-swiper/-/react-native-card-stack-swiper-1.1.9.tgz#9fd97167a17ad412ba33c65390751f36722eca74"
+  integrity sha512-DacmRQFpQUG7I6LRxaBFMPLDz8GSggD9asbT5Radq44/ZuWpqgRnb4igDsxDuH9grnQE6bFG5LYczcCqofzNsA==
+  dependencies:
+    prop-types "15.5.10"
+    react-lifecycles-compat "^3.0.4"
+
 react-native-communications@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
