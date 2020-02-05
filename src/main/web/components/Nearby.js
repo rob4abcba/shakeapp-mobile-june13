@@ -105,6 +105,7 @@ class Nearby extends Component {
   }
 
   componentWillMount() {
+    console.log('this.props.nearbyList = ', this.props.nearbyList)
     StatusBar.setHidden(true);
     const {user} = this.props;
 
@@ -431,8 +432,8 @@ class Nearby extends Component {
     return (
       <View>
         {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
-        {/* <UserSwiper nearbyUsers={this.props.nearbyList} /> */}
-        <UserSwiper2 nearbyUsers={this.props.nearbyList} />
+        <UserSwiper nearbyUsers={this.props.nearbyList} />
+        {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
 
         <Footer
           photoURL={this.props.data.mood.photoURL}
@@ -443,6 +444,7 @@ class Nearby extends Component {
   }
 
   render() {
+    console.log(this.props.nearbyList)
     if (!this.props.data) {
       return <Spinner size="large" />;
     }
@@ -468,10 +470,9 @@ class Nearby extends Component {
           />
         )}>
         <View style={{height: viewportHeight - 50}}>
+          <UserSwiper nearbyUsers={this.props.nearbyList} />
+          {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
           {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
-          {/* <UserSwiper nearbyUsers={this.props.nearbyList} /> */}
-          <UserSwiper2 nearbyUsers={this.props.nearbyList} />
-          
         </View>
       </StickyHeaderFooterScrollView>
     );
