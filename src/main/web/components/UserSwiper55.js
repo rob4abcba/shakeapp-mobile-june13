@@ -38,7 +38,7 @@ export default class UserSwiper55 extends Component {
         <Text style={styles.text}>
           card {card} - index {index}
         </Text>
-        <Image style={styles.image} source={require('../assets/cook.png')} resizeMode="cover" />
+        <Image style={styles.image} source={require('../assets/drinks.png')} resizeMode="cover" />
         {/* <Image style={styles.image} source={user.photo} resizeMode="cover" />       */}
       </View>
     );

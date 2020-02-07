@@ -82,19 +82,26 @@ const RouterComponent = () => {
             key="start"
             inactiveBackgroundColor="#FFF"
             activeBackgroundColor="#DDD"
-            hideNavBar>
-            <Scene key="nearby" type="replace" component={Nearby} hideNavBar />
+            // hideNavBar
+            >
+            <Scene 
+            key="nearby" 
+            type="replace" 
+            component={Nearby} 
+            // hideNavBar 
+            />
 
             <Scene
               key="nearbyUserDetail"
               component={NearbyUserDetail}
-              hideNavBar
+              title="nearbyUserDetailYo"
+              // hideNavBar
             />
 
             <Scene
               key="nearbyRestaurantDetail"
               component={NearbyRestaurantDetail}
-              hideNavBar
+              // hideNavBar
             />
 
             <Scene key="myActivity" component={MyActivity} hideNavBar />
@@ -102,7 +109,7 @@ const RouterComponent = () => {
             <Scene
               key="chatConversation"
               component={ChatConversation}
-              hideNavBar
+              // hideNavBar
             />
 
             <Scene key="settings" component={Settings} hideNavBar />

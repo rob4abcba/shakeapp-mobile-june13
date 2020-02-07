@@ -27,6 +27,7 @@ import {Spinner, Footer} from './common';
 import {Actions} from 'react-native-router-flux';
 import NearbyUser from './NearbyUser';
 import UserSwiper from './UserSwiper';
+import UserSwiper2 from './UserSwiper2';
 //import UserSwiper5 from './UserSwiper5';
 import UserSwiper55 from './UserSwiper55';
 import NearbyRestaurant from './NearbyRestaurant';
@@ -104,6 +105,7 @@ class Nearby extends Component {
   }
 
   componentWillMount() {
+    console.log('this.props.nearbyList = ', this.props.nearbyList)
     StatusBar.setHidden(true);
     const {user} = this.props;
 
@@ -254,13 +256,46 @@ class Nearby extends Component {
       if (status === BackgroundGeolocation.AUTHORIZED) {
         this.setState({isVisible: false});
 
-        navigator.geolocation.getCurrentPosition(
+        // navigator.geolocation.getCurrentPosition(
+        console.log("navigatorYZ = " + navigator);  
+        if (!navigator.geolocation) 
+        {
+          this.props.sendNewLocation(
+            // RL Add dummy coordinates for SF (37, -122) just in case position.coords.latitude & longitude are invalid.
+            // position.coords.latitude || "37.773972",
+            // position.coords.longitude || "-122.431297",              
+            "39.773972",
+            "-129.431297",
+            user,
+            this,
+            function(success, thisRef) {
+              if (success) {
+                thisRef.props.profileFetch(user);
+                thisRef.props.nearbyUsersFetch({user}, thisRef, function(
+                  success,
+                  nearbyRef,
+                ) {});
+                thisRef.props.nearbyRestaurantsFetch(
+                  {user},
+                  thisRef,
+                  function(success, nearbyRestaurantRef) {},
+                );
+              } else {
+                // try again pop up
+              }
+            },
+          );
+        } else {
+        navigator.geolocation.getCurrentPosition(  
           position => {
-            console.warn('POSITION ' + JSON.stringify(position) + ' ' + user);
+            console.warn('POSITION_Yo ' + JSON.stringify(position) + ' ' + user);
 
             this.props.sendNewLocation(
-              position.coords.latitude,
-              position.coords.longitude,
+              // RL Add dummy coordinates for SF (37, -122) just in case position.coords.latitude & longitude are invalid.
+              // position.coords.latitude || "37.773972",
+              // position.coords.longitude || "-122.431297",              
+              position.coords.latitude || "39.773972",
+              position.coords.longitude || "-129.431297",
               user,
               this,
               function(success, thisRef) {
@@ -284,6 +319,7 @@ class Nearby extends Component {
           error => this.setState({error: error.message}),
           {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
         );
+      }
       } else {
         // Unable to procceed
 
@@ -372,7 +408,8 @@ class Nearby extends Component {
   onMoodDone() {
     this.setState({moodFirstSetup: false});
   }
-
+ 
+  
   render2() {
     if (!this.props.data) {
       return <Spinner size="large" />;
@@ -385,7 +422,8 @@ class Nearby extends Component {
 
     // if (this.props.data.mood.firstSetup)
     if (this.state.moodFirstSetup) {
-      return <Mood onDone={this.onMoodDone.bind(this)} />;
+      console.log(this.props)
+      // return <Mood onDone={this.onMoodDone.bind(this)} />;
     }
 
     const {fullName} = this.props.data;
@@ -393,7 +431,9 @@ class Nearby extends Component {
 
     return (
       <View>
-        <UserSwiper55 nearbyUsers={this.props.nearbyList} />
+        {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
+        <UserSwiper nearbyUsers={this.props.nearbyList} />
+        {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
 
         <Footer
           photoURL={this.props.data.mood.photoURL}
@@ -404,6 +444,7 @@ class Nearby extends Component {
   }
 
   render() {
+    console.log(this.props.nearbyList)
     if (!this.props.data) {
       return <Spinner size="large" />;
     }
@@ -415,7 +456,8 @@ class Nearby extends Component {
 
     if (this.props.data.mood.firstSetup) {
       //    if (this.state.moodFirstSetup)
-      return <Mood onDone={this.onMoodDone.bind(this)} />;
+      console.log(this.props)
+      // return <Mood onDone={this.onMoodDone.bind(this)} />;
     }
 
     return (
@@ -428,7 +470,9 @@ class Nearby extends Component {
           />
         )}>
         <View style={{height: viewportHeight - 50}}>
-          <UserSwiper55 nearbyUsers={this.props.nearbyList} />
+          <UserSwiper nearbyUsers={this.props.nearbyList} />
+          {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
+          {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
         </View>
       </StickyHeaderFooterScrollView>
     );

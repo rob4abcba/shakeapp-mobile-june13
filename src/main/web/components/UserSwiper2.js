@@ -4,12 +4,16 @@ import NearbyUserDetail from './NearbyUserDetail';
 
 import CardStack, {Card} from 'react-native-card-stack-swiper';
 
-export default class UserSwiper2 extends Component<{}> {
+// RL type argument {} can only be used in a .ts file
+// export default class UserSwiper2 extends Component<{}> {
+export default class UserSwiper2 extends Component {  
   render() {
     return (
       <View style={{flex: 1}}>
         <CardStack
-          style={styles.content}
+          // RL styles.content does not seem to exist
+          // style={styles.content}
+          style={styles.container}
           renderNoMoreCards={() => (
             <Text style={{fontWeight: '700', fontSize: 18, color: 'gray'}}>
               No more cards :(
@@ -18,20 +22,33 @@ export default class UserSwiper2 extends Component<{}> {
           ref={swiper => {
             this.swiper = swiper;
           }}
-          onSwiped={() => console.log('onSwiped')}
-          onSwipedLeft={() => console.log('onSwipedLeft')}>
-          {this.addCard()}
+          // RL Temporarily replace our code with example react-native-card-stack-swiper code
+          // onSwiped={() => console.log('onSwiped')}
+          // onSwipedLeft={() => console.log('onSwipedLeft')}
+          >
+          {/* {this.addCard2()} */}
+          <Card style={[styles.card, styles.card1]}><Text style={styles.label}>A</Text></Card>
+    <Card style={[styles.card, styles.card2]}><Text style={styles.label}>B</Text></Card>
+    <Card style={[styles.card, styles.card1]}><Text style={styles.label}>C</Text></Card>
         </CardStack>
+
+        {/* <CardStack ref={swiper => { this.swiper = swiper }}>
+    <Card style={[styles.card, styles.card1]}><Text style={styles.label}>A</Text></Card>
+    <Card style={[styles.card, styles.card2]}><Text style={styles.label}>B</Text></Card>
+    <Card style={[styles.card, styles.card1]}><Text style={styles.label}>C</Text></Card>
+  </CardStack> */}
 
         <View style={styles.footer}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.button, styles.red]}
               onPress={() => {
-                this.swiper.swipeBottom();
+                this.swiper.swipeLeft();
               }}>
+                <Text>swipeLeft</Text>
               <Image
                 source={require('../assets/red.png')}
+                // source={require('../assets/cook.png')}
                 resizeMode={'contain'}
                 style={{height: 62, width: 62}}
               />
@@ -39,10 +56,12 @@ export default class UserSwiper2 extends Component<{}> {
             <TouchableOpacity
               style={[styles.button, styles.orange]}
               onPress={() => {
-                this.swiper.goBackFromBottom();
+                this.swiper.goBackFromTop();
               }}>
+                <Text>goBackFromTop</Text>
               <Image
                 source={require('../assets/back.png')}
+                // source={require('../assets/drinks.png')}
                 resizeMode={'contain'}
                 style={{height: 32, width: 32, borderRadius: 5}}
               />
@@ -50,10 +69,12 @@ export default class UserSwiper2 extends Component<{}> {
             <TouchableOpacity
               style={[styles.button, styles.green]}
               onPress={() => {
-                this.swiper.swipeTop();
+                this.swiper.swipeRight();
               }}>
+                <Text>swipeRight</Text>
               <Image
                 source={require('../assets/green.png')}
+                // source={require('../assets/seafood.png')}
                 resizeMode={'contain'}
                 style={{height: 62, width: 62}}
               />
@@ -69,6 +90,8 @@ export default class UserSwiper2 extends Component<{}> {
       <View>
         {this.props.nearbyUsers &&
           this.props.nearbyUsers.map((user, index) => (
+            // RL Cannot have exactly one card or you will get TypeError null is
+            // RL How add console.log inside JSX?
             <Card style={[styles.card, styles.card1]}>
               <NearbyUserDetail nearbyUser={user} nearby={true} />
             </Card>
@@ -76,6 +99,21 @@ export default class UserSwiper2 extends Component<{}> {
       </View>
     );
   };
+  // RL Added addCard2 as a test.  Try addCard2 vs. addCard.
+  addCard2 = () => {
+    return (
+      <View>
+            <Card style={styles.card}>
+              <View><Text>Dummy Text</Text></View> 
+            </Card>
+
+      </View>
+    );
+  };
+
+
+
+
 }
 
 const styles = StyleSheet.create({

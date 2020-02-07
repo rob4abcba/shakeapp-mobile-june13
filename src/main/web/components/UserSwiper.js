@@ -39,16 +39,30 @@ export default class UserSwiper extends Component {
   skipInvite() {
     this.setState({invite: false});
   }
-
+  ListEmpty = () => {
+    return (
+      //View to show when list is empty
+      <View>
+        <Text style={{ textAlign: 'center' }}>No Data Found</Text>
+      </View>
+    );
+  };
+  
   renderNearbyUserDetail = ({item, index}) => {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1/2}}>
+        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
+            UserSwiper.js > renderNearbyUserDetail > Top
+        </Text>
         <NearbyUserDetail
           nearbyUser={item}
           nearby={true}
           onInvite={this.onInvite.bind(this)}
           skipInvite={this.skipInvite.bind(this)}
         />
+        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
+            UserSwiper.js > renderNearbyUserDetail > Bottom
+        </Text>
       </View>
     );
   };
@@ -56,6 +70,9 @@ export default class UserSwiper extends Component {
   renderCarousel() {
     return (
       <View style={[styles.container, styles.containerLight]}>
+        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
+            UserSwiper.js > renderCarousel() > Top
+        </Text>
         <Carousel
           data={this.state.nearbyUsers}
           renderItem={this.renderNearbyUserDetail.bind(this)}
@@ -68,13 +85,17 @@ export default class UserSwiper extends Component {
           contentContainerCustomStyle={styles.sliderContentContainer}
           scrollInterpolator={scrollInterpolator}
           slideInterpolatedStyle={animatedStyle}
-          vertical={true}
+          vertical={false}
         />
+        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
+            UserSwiper.js > renderCarousel() > Bottom
+        </Text>
       </View>
     );
   }
 
   render() {
+    console.log("Inside render of UserSwiper.js")
     if (this.state.invite) {
       return this.nearByResturants();
     } else if (this.state.report) {
@@ -111,11 +132,12 @@ export default class UserSwiper extends Component {
           </View>
 
           <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            Choose the restaurant
+            Choose the restaurant (UserSwiper.js > nearByResturants() > ScrollView)
           </Text>
 
           <FlatList
             data={this.state.nearbyRestaurantList}
+            ListEmptyComponent={this.ListEmpty}
             keyExtractor={(x, i) => i.toString()}
             renderItem={({item}) => (
               <NearbyRestaurant

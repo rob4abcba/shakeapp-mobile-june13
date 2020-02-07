@@ -535,7 +535,7 @@ class NearbyUserDetail extends Component {
           </View>
 
           <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            Choose the restaurant
+            Choose the restaurant (NearbyUserDetail2.js)
           </Text>
 
           <FlatList
