@@ -29,7 +29,9 @@ class MyActivity extends Component {
     super(props);
 
     // CHAT
-    this.socket = SocketIOClient('https://www.shakeapp-backend.net');
+    // RL this.socket = SocketIOClient('https://www.shakeapp-backend.net');
+    this.socket = SocketIOClient('http://localhost:8000');
+    
     this.socket.emit('init', {
       token: this.props.user,
     });
@@ -41,6 +43,15 @@ class MyActivity extends Component {
         senderID: message.senderID,
         restaurant: message.restaurant,
       };
+      // // RL
+      // const testMessage = {
+      //   date: message.date,
+      //   message: message.message,
+      //   isRead: message.isRead,
+      //   senderID: message.senderID,
+      //   restaurant: message.restaurant,
+      // };
+      // // RL
       this.props.onSendMessage(message.senderID, newMessage); // The conversation ID is who we're speaking with
     });
   }
