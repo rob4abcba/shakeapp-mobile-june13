@@ -14,12 +14,16 @@ import styles from './swipe/styles/index.style';
 import {scrollInterpolator, animatedStyle} from './swipe/utils/animations';
 import NearbyUserDetail from './NearbyUserDetail';
 import NearbyRestaurant from './NearbyRestaurant';
+import NearbyUserDetail2 from "./NearbyUserDetail2";
+import SocketIOClient from "socket.io-client";
 
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 export default class UserSwiper extends Component {
   constructor(props) {
     super(props);
+      this.socket = SocketIOClient('http://localhost:8000');
+      console.log("yesssssss");
     this.state = {
       nearbyUsers: props.nearbyUsers,
     };
@@ -54,15 +58,13 @@ export default class UserSwiper extends Component {
         <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
             UserSwiper.js > renderNearbyUserDetail > Top
         </Text>
-        <NearbyUserDetail
+        <NearbyUserDetail2
+            conn={this.socket}
           nearbyUser={item}
           nearby={true}
           onInvite={this.onInvite.bind(this)}
           skipInvite={this.skipInvite.bind(this)}
         />
-        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            UserSwiper.js > renderNearbyUserDetail > Bottom
-        </Text>
       </View>
     );
   };
