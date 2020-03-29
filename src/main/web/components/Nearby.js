@@ -376,6 +376,12 @@ class Nearby extends Component {
     }
   }
 
+  // // RL
+  // componentDidMount() {
+  //   this.onSendMessage()
+  // }
+  // // RL
+
   primaryButtonPress() {
     BackgroundGeolocation.showLocationSettings();
   }

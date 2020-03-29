@@ -1,0 +1,300 @@
+Index: src/main/web/components/NearbyUserDetail2.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/web/components/NearbyUserDetail2.js	(revision 1b0281e055722a0f3d64660e6134104bcead6360)
++++ src/main/web/components/NearbyUserDetail2.js	(date 1585414372000)
+@@ -30,6 +30,7 @@
+ import TimeAgo from 'javascript-time-ago';
+ // Load locale-specific relative date/time formatting rules.
+ import en from 'javascript-time-ago/locale/en';
++import SocketIOClient from "socket.io-client";
+ // Add locale-specific relative date/time formatting rules.
+ TimeAgo.locale(en);
+ // Create relative date/time formatter.
+@@ -59,6 +60,7 @@
+     modalTitle: '',
+     modalButton: '',
+     modalDescription: '',
++      msg:'',
+ 
+     //Report Abuse or feedback
+     report: false,
+@@ -67,10 +69,13 @@
+ 
+   componentWillMount() {
+     StatusBar.setHidden(true);
++      this.props.conn.emit('init', {
++          token: this.props.user,
++      });
+   }
+ 
+   onBackButtonPress() {
+-    Actions.pop();
++      this.setState({isVisible : true});
+   }
+ 
+   tryAgain() {
+@@ -86,68 +91,35 @@
+     this.setState({report: false});
+   }
+ 
++  onSend() {
++        const {user, onSendMessage} = this.props;
++        this.props.conn.emit('message', {
++            message: this.state.msg,
++            token: this.props.user,
++            receiverID: this.props.nearbyUser.user._id,
++        });
++        // const newMessage = {
++        //     date: message[0].createdAt,
++        //     message: message[0].text,
++        //     isRead: false,
++        //     senderID: this.props.user._id,
++        // };
++        this.tryAgain();
++        //this.props.onSendMessage(this.props.friend._id, newMessage); // The conversation ID is who we're speaking with
++    };
++
+   onButtonPress(restaurantID) {
+     const {user} = this.props;
+     const {_id} = this.props.nearbyUser.user;
+ 
+-    if (
+-      this.props.notification &&
+-      this.props.nearbyUser.user.notificationType == 'shake'
+-    ) {
+-      this.props.sendShake(true, this.props.user, _id, this, function(
+-        success,
+-        thisRef,
+-      ) {
+-        if (!success) {
+-          thisRef.setState({
+-            modalTitle: 'Error',
+-            modalDescription: 'Network problem.',
+-            modalButton: 'Try again',
+-            isVisible: true,
+-          });
+-        } else {
+-          // thisRef.setState({
+-          //   modalTitle: "And we're Shaking!",
+-          //   modalDescription: "Invite accepted.",
+-          //   modalButton: "Great!",
+-          //   isVisible: true
+-          // });
+-          Actions.popTo('myActivity');
+-        }
+-      });
+-    } else {
+-      if (!this.state.invite) {
+-        this.setState({invite: true});
+-      } else {
+-        this.props.sendShake(
+-          false,
+-          this.props.user,
+-          _id,
+-          this,
+-          function(success, thisRef) {
+-            if (!success) {
+-              thisRef.setState({
+-                modalTitle: 'Error',
+-                modalDescription: 'Shake was not sent.',
+-                modalButton: 'Try again',
+-                isVisible: true,
+-              });
+-            } else {
+-              thisRef.setState({
+-                modalTitle: "And we're Shaking!",
+-                modalDescription: 'Your invites were\nsuccessfully sent.',
+-                modalButton: 'Great!',
+-                isVisible: true,
+-              });
+-            }
+-          },
+-          restaurantID,
+-        );
+-
+-        this.setState({invite: false});
+-        // Actions.popTo('nearby'); tirar?
+-      }
+-    }
++    this.setState({isVisible : true});
++
++      this.setState({
++          modalTitle: 'Lets talk',
++          modalDescription: 'Please write your message here.',
++          modalButton: 'Send',
++          isVisible: true,
++      });
+   }
+ 
+   onReportButtonPress(description) {
+@@ -186,8 +158,8 @@
+     }
+   }
+ 
+-  onDescriptionChange(description) {
+-    this.setState({description: description});
++  onMessageChange(message) {
++    this.setState({msg: message});
+   }
+   getPhotoVideoURL(user) {
+     console.log('ESTOU AQUI CRL: ' + JSON.stringify(user));
+@@ -219,7 +191,8 @@
+     }
+ 
+     return (
+-      <View style={{flex: 1}}>
++      <View style={{flex: 1}}
++      >
+         {/* Error modal */}
+         <Modal
+           backdropOpacity={0}
+@@ -229,6 +202,7 @@
+           <View
+             style={{
+               width: 300,
++                height: 500,
+               alignItems: 'center',
+               justifyContent: 'center',
+               backgroundColor: 'white',
+@@ -252,8 +226,19 @@
+               }}>
+               {this.state.modalDescription}
+             </Text>
++              <View style={[style.textInputContainer]}>
++                  <TextInput
++                      placeholder="Enter message"
++                      inputStyle={styles.inputStyle}
++                      multiline={false}
++                      maxLength={200}
++                      onChangeText={this.onMessageChange.bind(this)}
++                      value={this.state.msg}
++                  />
++              </View>
++
+ 
+-            <View
++              <View
+               style={{
+                 width: '100%',
+                 paddingLeft: 36,
+@@ -272,7 +257,7 @@
+                   shadowColor: 'rgb(36, 100, 193)',
+                   shadowOffset: {width: 4, height: 2},
+                 }}
+-                onPress={() => this.tryAgain()}>
++                onPress={() => this.onSend(this.state.message)}>
+                 <Text
+                   style={{
+                     color: 'white',
+@@ -288,7 +273,8 @@
+         </Modal>
+         {/* Error modal */}
+ 
+-        <View style={{flex: 1}}>
++        <View style={{flex: 1}}
++        >
+           <ImageBackground
+             source={{uri: photoURL}}
+             style={{width: '100%', height: '100%', flex: 1}}>
+@@ -297,7 +283,8 @@
+               style={{height: 100, width: '100%', position: 'absolute', top: 0}}
+             />
+ 
+-            <View style={{flex: 1}}>
++            <View style={{flex: 1}}
++            >
+               {!!videoURL && (
+                 <Video
+                   //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
+@@ -442,9 +429,9 @@
+             </View>
+           )}
+ 
+-          <Text style={{paddingTop: 20}}>{bio}</Text>
++          <Text style={{padding: 14}}>{bio}</Text>
+ 
+-          <View style={{flex: 1, justifyContent: 'flex-end', marginBottom: 36}}>
++          <View style={{flex: 1, justifyContent: 'flex-end', padding: 16}}>
+             <TouchableOpacity
+               onPress={this.onButtonPress.bind(this)}
+               style={{
+@@ -461,7 +448,7 @@
+               this.props.nearbyUser.user.notificationType == 'shake' ? (
+                 <Text
+                   style={{
+-                    color: 'white',
++                    color: 'black',
+                     letterSpacing: -0.2,
+                     fontSize: 18,
+                     fontWeight: '600',
+@@ -476,7 +463,7 @@
+                     fontSize: 18,
+                     fontWeight: '600',
+                   }}>
+-                  Invite {fullName}
++                  Chat with Me
+                 </Text>
+               )}
+             </TouchableOpacity>
+@@ -651,13 +638,12 @@
+   },
+ 
+   textInputContainer: {
+-    flex: 1,
++    flex: 0.2,
+     flexDirection: 'row',
+-    justifyContent: 'space-between',
++    justifyContent: 'center',
+     alignItems: 'center',
+     backgroundColor: 'white',
+-    height: '59@vs',
+-    marginTop: '50@vs',
++      width:250,
+     borderRadius: 9,
+     borderWidth: 1,
+     borderColor: 'grey',
+Index: src/main/web/components/UserSwiper.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/web/components/UserSwiper.js	(revision 1b0281e055722a0f3d64660e6134104bcead6360)
++++ src/main/web/components/UserSwiper.js	(date 1585233364000)
+@@ -14,12 +14,16 @@
+ import {scrollInterpolator, animatedStyle} from './swipe/utils/animations';
+ import NearbyUserDetail from './NearbyUserDetail';
+ import NearbyRestaurant from './NearbyRestaurant';
++import NearbyUserDetail2 from "./NearbyUserDetail2";
++import SocketIOClient from "socket.io-client";
+ 
+ const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
+ 
+ export default class UserSwiper extends Component {
+   constructor(props) {
+     super(props);
++      this.socket = SocketIOClient('http://localhost:8000');
++      console.log("yesssssss");
+     this.state = {
+       nearbyUsers: props.nearbyUsers,
+     };
+@@ -54,15 +58,13 @@
+         <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
+             UserSwiper.js > renderNearbyUserDetail > Top
+         </Text>
+-        <NearbyUserDetail
++        <NearbyUserDetail2
++            conn={this.socket}
+           nearbyUser={item}
+           nearby={true}
+           onInvite={this.onInvite.bind(this)}
+           skipInvite={this.skipInvite.bind(this)}
+         />
+-        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
+-            UserSwiper.js > renderNearbyUserDetail > Bottom
+-        </Text>
+       </View>
+     );
+   };
