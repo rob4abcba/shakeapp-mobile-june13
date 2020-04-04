@@ -34,20 +34,20 @@ target 'newshake' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'newshakeTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  # target 'newshakeTests' do
+  #   inherit! :search_paths
+  #   # Pods for testing
+  # end
 
   use_native_modules!
 end
 
-target 'newshake-tvOS' do
-  # Pods for newshake-tvOS
+# target 'newshake-tvOS' do
+#   # Pods for newshake-tvOS
 
-  target 'newshake-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  # target 'newshake-tvOSTests' do
+  #   inherit! :search_paths
+  #   # Pods for testing
+  # end
 
-end
+# end
