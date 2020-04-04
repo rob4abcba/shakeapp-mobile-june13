@@ -27,7 +27,10 @@ import NearbyUser from './NearbyUser';
 import NearbyRestaurant from './NearbyRestaurant';
 import {Icon, Badge} from 'react-native-elements';
 import Preferences from './Preferences';
-import Mood from './Mood';
+// import Mood from './Mood';
+// import Mood from './Mood2';
+import Mood from './Mood_RNCamera';
+
 import GridView from 'react-native-super-grid';
 import BackgroundGeolocation from 'react-native-mauron85-background-geolocation';
 import Modal from 'react-native-modal';
