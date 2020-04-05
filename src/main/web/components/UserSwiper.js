@@ -54,10 +54,7 @@ export default class UserSwiper extends Component {
   
   renderNearbyUserDetail = ({item, index}) => {
     return (
-      <View style={{flex: 1/2}}>
-        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            UserSwiper.js > renderNearbyUserDetail > Top
-        </Text>
+        <View style={{flex: 1}}>
         <NearbyUserDetail2
             conn={this.socket}
           nearbyUser={item}
@@ -72,9 +69,6 @@ export default class UserSwiper extends Component {
   renderCarousel() {
     return (
       <View style={[styles.container, styles.containerLight]}>
-        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            UserSwiper.js > renderCarousel() > Top
-        </Text>
         <Carousel
           data={this.state.nearbyUsers}
           renderItem={this.renderNearbyUserDetail.bind(this)}
@@ -89,9 +83,6 @@ export default class UserSwiper extends Component {
           slideInterpolatedStyle={animatedStyle}
           vertical={false}
         />
-        <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            UserSwiper.js > renderCarousel() > Bottom
-        </Text>
       </View>
     );
   }

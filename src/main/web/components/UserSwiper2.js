@@ -47,8 +47,8 @@ export default class UserSwiper2 extends Component {
               }}>
                 <Text>swipeLeft</Text>
               <Image
-                source={require('../assets/red.png')}
-                // source={require('../assets/cook.png')}
+                  //source={require('../assets/red.png')}
+                  source={require('../assets/cook.png')}
                 resizeMode={'contain'}
                 style={{height: 62, width: 62}}
               />
@@ -60,8 +60,8 @@ export default class UserSwiper2 extends Component {
               }}>
                 <Text>goBackFromTop</Text>
               <Image
-                source={require('../assets/back.png')}
-                // source={require('../assets/drinks.png')}
+                  //source={require('../assets/back.png')}
+                  source={require('../assets/drinks.png')}
                 resizeMode={'contain'}
                 style={{height: 32, width: 32, borderRadius: 5}}
               />
@@ -73,8 +73,8 @@ export default class UserSwiper2 extends Component {
               }}>
                 <Text>swipeRight</Text>
               <Image
-                source={require('../assets/green.png')}
-                // source={require('../assets/seafood.png')}
+                  //source={require('../assets/green.png')}
+                  source={require('../assets/seafood.png')}
                 resizeMode={'contain'}
                 style={{height: 62, width: 62}}
               />

@@ -13,7 +13,7 @@ import LoginForm from './components/LoginForm';
 import ForgotPassword from './components/ForgotPassword';
 import ChangePassword from './components/ChangePassword';
 import Nearby from './components/Nearby';
-import NearbyUserDetail from './components/NearbyUserDetail';
+import NearbyUserDetail from './components/NearbyUserDetail2';
 import NearbyRestaurantDetail from './components/NearbyRestaurantDetail';
 import DrawerContent from './components/DrawerContent';
 import Profile from './components/Profile';

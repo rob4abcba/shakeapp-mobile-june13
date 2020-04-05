@@ -30,7 +30,6 @@ import {ScaledSheet} from 'react-native-size-matters';
 import TimeAgo from 'javascript-time-ago';
 // Load locale-specific relative date/time formatting rules.
 import en from 'javascript-time-ago/locale/en';
-import SocketIOClient from "socket.io-client";
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.locale(en);
 // Create relative date/time formatter.
@@ -57,6 +56,7 @@ class NearbyUserDetail extends Component {
     invite: false,
     // Modal Error
     isVisible: false,
+      chatIsVisible: false,
     modalTitle: '',
     modalButton: '',
     modalDescription: '',
@@ -75,7 +75,7 @@ class NearbyUserDetail extends Component {
   }
 
   onBackButtonPress() {
-      this.setState({isVisible : true});
+      Actions.pop();
   }
 
   tryAgain() {
@@ -91,8 +91,7 @@ class NearbyUserDetail extends Component {
     this.setState({report: false});
   }
 
-  onSend() {
-        const {user, onSendMessage} = this.props;
+    onChatSend() {
         this.props.conn.emit('message', {
             message: this.state.msg,
             token: this.props.user,
@@ -104,23 +103,78 @@ class NearbyUserDetail extends Component {
         //     isRead: false,
         //     senderID: this.props.user._id,
         // };
-        this.tryAgain();
-        //this.props.onSendMessage(this.props.friend._id, newMessage); // The conversation ID is who we're speaking with
+        this.setState({chatIsVisible: false});
+        Actions.popTo('nearby');        //this.props.onSendMessage(this.props.friend._id, newMessage); // The conversation ID is who we're speaking with
     };
 
   onButtonPress(restaurantID) {
     const {user} = this.props;
     const {_id} = this.props.nearbyUser.user;
 
-    this.setState({isVisible : true});
+      if (
+          this.props.notification &&
+          this.props.nearbyUser.user.notificationType == 'shake'
+      ) {
+          this.props.sendShake(true, this.props.user, _id, this, function (
+              success,
+              thisRef,
+          ) {
+              if (!success) {
+                  thisRef.setState({
+                      modalTitle: 'Error',
+                      modalDescription: 'Network problem.',
+                      modalButton: 'Try again',
+                      isVisible: true,
+                  });
+              } else {
+                  // thisRef.setState({
+                  //   modalTitle: "And we're Shaking!",
+                  //   modalDescription: "Invite accepted.",
+                  //   modalButton: "Great!",
+                  //   isVisible: true
+                  // });
+                  Actions.popTo('myActivity');
+              }
+          });
+      } else {
+          if (!this.state.invite) {
+              this.setState({invite: true});
+          } else {
+              this.props.sendShake(
+                  false,
+                  this.props.user,
+                  _id,
+                  this,
+                  function (success, thisRef) {
+                      if (!success) {
+                          thisRef.setState({
+                              modalTitle: 'Error',
+                              modalDescription: 'Shake was not sent.',
+                              modalButton: 'Try again',
+                              isVisible: true,
+                          });
+                      } else {
+                          thisRef.setState({
+                              modalTitle: "And we're Shaking!",
+                              modalDescription: 'Your invites were\nsuccessfully sent.',
+                              modalButton: 'Great!',
+                              isVisible: true,
+                          });
+                      }
+                  },
+                  restaurantID,
+              );
 
-      this.setState({
-          modalTitle: 'Lets talk',
-          modalDescription: 'Please write your message here.',
-          modalButton: 'Send',
-          isVisible: true,
-      });
+              this.setState({invite: false});
+              // Actions.popTo('nearby'); tirar?
+          }
+      }
   }
+
+    onChatButtonPress() {
+
+        this.setState({chatIsVisible: true});
+    }
 
   onReportButtonPress(description) {
     const {user} = this.props;
@@ -158,9 +212,15 @@ class NearbyUserDetail extends Component {
     }
   }
 
-  onMessageChange(message) {
+    onDescriptionChange(description) {
+        this.setState({description: description});
+    }
+
+
+    onMessageChange(message) {
     this.setState({msg: message});
   }
+
   getPhotoVideoURL(user) {
     console.log('ESTOU AQUI CRL: ' + JSON.stringify(user));
     if (user.mood != undefined) {
@@ -191,7 +251,7 @@ class NearbyUserDetail extends Component {
     }
 
     return (
-      <View style={{flex: 1}}
+        <View style={{flex: 1, marginBottom: 20}}
       >
         {/* Error modal */}
         <Modal
@@ -226,55 +286,118 @@ class NearbyUserDetail extends Component {
               }}>
               {this.state.modalDescription}
             </Text>
-              <View style={[style.textInputContainer]}>
-                  <TextInput
-                      placeholder="Enter message"
-                      inputStyle={styles.inputStyle}
-                      multiline={false}
-                      maxLength={200}
-                      onChangeText={this.onMessageChange.bind(this)}
-                      value={this.state.msg}
-                  />
-              </View>
-
 
               <View
-              style={{
-                width: '100%',
-                paddingLeft: 36,
-                paddingTop: 40,
-                paddingRight: 36,
-                paddingBottom: 36,
-              }}>
-              <TouchableOpacity
-                style={{
-                  height: 50,
-                  backgroundColor: '#62cfb9',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 8,
-                  shadowOpacity: 0.1,
-                  shadowColor: 'rgb(36, 100, 193)',
-                  shadowOffset: {width: 4, height: 2},
-                }}
-                onPress={() => this.onSend(this.state.message)}>
-                <Text
                   style={{
-                    color: 'white',
-                    letterSpacing: -0.2,
-                    fontSize: 18,
-                    fontWeight: '600',
+                      width: '100%',
+                      paddingLeft: 36,
+                      paddingTop: 40,
+                      paddingRight: 36,
+                      paddingBottom: 36,
                   }}>
-                  {this.state.modalButton}
-                </Text>
-              </TouchableOpacity>
-            </View>
+                  <TouchableOpacity
+                      style={{
+                          height: 50,
+                          backgroundColor: '#62cfb9',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 8,
+                          shadowOpacity: 0.1,
+                          shadowColor: 'rgb(36, 100, 193)',
+                          shadowOffset: {width: 4, height: 2},
+                      }}
+                      onPress={() => this.tryAgain()}>
+                      <Text
+                          style={{
+                              color: 'white',
+                              letterSpacing: -0.2,
+                              fontSize: 18,
+                              fontWeight: '600',
+                          }}>
+                          {this.state.modalButton}
+                      </Text>
+                  </TouchableOpacity>
+              </View>
           </View>
         </Modal>
-        {/* Error modal */}
+            {/* Error modal */}
 
-        <View style={{flex: 1}}
-        >
+            {/* chat modal */}
+
+            <Modal
+                backdropOpacity={0}
+                style={{alignItems: 'center'}}
+                isVisible={this.state.chatIsVisible}
+                onBackdropPress={() => this.setState({chatIsVisible: false})}>
+                <View
+                    style={{
+                        width: 300,
+                        height: 500,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'white',
+                        paddingTop: 40,
+                        borderRadius: 8,
+                        shadowOpacity: 0.1,
+                        shadowColor: 'rgb(36, 100, 193)',
+                        shadowOffset: {width: 4, height: 2},
+                    }}>
+                    <Text style={{fontSize: 24, fontWeight: '800'}}>Let's talk</Text>
+
+                    <Text
+                        style={{
+                            selfAlign: 'center',
+                            fontSize: 15,
+                            paddingTop: 16,
+                            fontWeight: '500',
+                            color: '#484848',
+                        }}>Please write your message below.</Text>
+
+                    <View style={[style.textInputContainer]}>
+                        <TextInput
+                            placeholder="Enter message (140 char max) "
+                            inputStyle={styles.inputStyle}
+                            multiline={true}
+                            maxLength={140}
+                            onChangeText={this.onMessageChange.bind(this)}
+                            value={this.state.msg}
+                        />
+                    </View>
+
+
+                    <View
+                        style={{
+                            width: '100%',
+                            paddingLeft: 36,
+                            paddingTop: 40,
+                            paddingRight: 36,
+                            paddingBottom: 36,
+                        }}>
+                        <TouchableOpacity
+                            style={{
+                                height: 50,
+                                backgroundColor: '#62cfb9',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius: 8,
+                                shadowOpacity: 0.1,
+                                shadowColor: 'rgb(36, 100, 193)',
+                                shadowOffset: {width: 4, height: 2},
+                            }}
+                            onPress={() => this.onChatSend()}>
+                            <Text
+                                style={{
+                                    color: 'white',
+                                    letterSpacing: -0.2,
+                                    fontSize: 18,
+                                    fontWeight: '600',
+                                }}>Send</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
+            <View style={{flex: 1}}>
           <ImageBackground
             source={{uri: photoURL}}
             style={{width: '100%', height: '100%', flex: 1}}>
@@ -283,8 +406,7 @@ class NearbyUserDetail extends Component {
               style={{height: 100, width: '100%', position: 'absolute', top: 0}}
             />
 
-            <View style={{flex: 1}}
-            >
+              <View style={{flex: 1}}>
               {!!videoURL && (
                 <Video
                   //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
@@ -292,7 +414,6 @@ class NearbyUserDetail extends Component {
                   ref={ref => {
                     this.player = ref;
                   }}
-                  repeat
                   resizeMode={'cover'}
                   onError={err => {
                     console.warn(err);
@@ -333,27 +454,27 @@ class NearbyUserDetail extends Component {
               {fullName}
             </Text>
 
-            <View style={{flexDirection: 'row', paddingTop: 2}}>
-              <Image
-                source={require('../assets/shakes.png')}
-                style={{
-                  height: 18,
-                  width: 18,
-                  borderRadius: 9,
-                  backgroundColor: 'white',
-                }}
-              />
+              {/*<View style={{flexDirection: 'row', paddingTop: 2}}>*/}
+              {/*<Image*/}
+              {/*source={require('../assets/shakes.png')}*/}
+              {/*style={{*/}
+              {/*height: 18,*/}
+              {/*width: 18,*/}
+              {/*borderRadius: 9,*/}
+              {/*backgroundColor: 'white',*/}
+              {/*}}*/}
+              {/*/>*/}
 
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: '500',
-                  letterSpacing: 0.2,
-                  paddingLeft: 11,
-                }}>
-                {shakes} Shakes
-              </Text>
-            </View>
+              {/*<Text*/}
+              {/*style={{*/}
+              {/*fontSize: 15,*/}
+              {/*fontWeight: '500',*/}
+              {/*letterSpacing: 0.2,*/}
+              {/*paddingLeft: 11,*/}
+              {/*}}>*/}
+              {/*{shakes} Shakes*/}
+              {/*</Text>*/}
+              {/*</View>*/}
           </View>
 
           {birthday && (
@@ -431,7 +552,7 @@ class NearbyUserDetail extends Component {
 
           <Text style={{padding: 14}}>{bio}</Text>
 
-          <View style={{flex: 1, justifyContent: 'flex-end', padding: 16}}>
+            <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}>
             <TouchableOpacity
               onPress={this.onButtonPress.bind(this)}
               style={{
@@ -481,7 +602,7 @@ class NearbyUserDetail extends Component {
                 borderTopWidth: StyleSheet.hairlineWidth,
                 borderColor: 'rgba(117, 136, 147, 0.6)',
               }}>
-              <View style={{flex: 1, height: 25, justifyContent: 'center'}}>
+                <View style={{flex: 1, height: 25, justifyContent: 'center', marginBottom: 50}}>
                 <Text
                   style={{
                     fontSize: 12,
@@ -489,7 +610,8 @@ class NearbyUserDetail extends Component {
                     color: 'gray',
                     letterSpacing: 2.5,
                   }}>
-                  Report abusive content
+                    <IconAwesome name="flag" size={16} color="gray"/>;
+                    abusive content
                 </Text>
               </View>
             </TouchableOpacity>
