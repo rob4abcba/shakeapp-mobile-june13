@@ -21,7 +21,7 @@ module.exports = {
   },
 
   // backendURL: "http://ec2-3-82-144-226.compute-1.amazonaws.com:8000/node_app",	// Can't end with a '/'
-  backendURL: "http://localhost:8000/node_app",	// Can't end with a '/'
+    backendURL: "http://50.18.1.14:8000/node_app",	// Can't end with a '/'
   // OLD backendURL: "http://ec2-54-93-93-212.eu-central-1.compute.amazonaws.com:8000/node_app",	// Can't end with a '/'
   //backendURL: 'https://www.shakeapp-backend.net/node_app', // Can't end with a '/'
 
