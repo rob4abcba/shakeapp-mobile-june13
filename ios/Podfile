@@ -42,6 +42,10 @@ target 'newshake' do
   use_native_modules!
 end
 
+target 'OneSignalNotificationServiceExtension' do
+  pod 'OneSignal', '>= 2.9.3', '< 3.0'
+end
+
 # target 'newshake-tvOS' do
 #   # Pods for newshake-tvOS
 
