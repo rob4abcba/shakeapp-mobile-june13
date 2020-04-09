@@ -59,10 +59,20 @@ export default class App extends Component {
     ErrorUtils.setGlobalHandler(this.wrapGlobalHandler.bind(this));
 
     // --> One Signal
+
+    
+    OneSignal.init("ff61a010-ba89-4f27-84d8-6c9110499799");
+    OneSignal.addEventListener('received', this.onReceived);
+
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds);
     OneSignal.inFocusDisplaying(2);
   }
+
+  onReceived(notification) {
+    console.log('Notification received', notification);
+  }
+
 
   onIds(device) {
     global.notificationPlayerId = device.userId;
