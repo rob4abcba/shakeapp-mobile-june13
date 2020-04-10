@@ -15,6 +15,9 @@ import {RNS3} from 'react-native-aws3';
 
 import {logoutUser, profileFetch, saveMoodChanges} from '../actions';
 
+// RL Add
+import { Actions } from 'react-native-router-flux';
+
 const flashModeOrder = {
   off: 'on',
   on: 'auto',
@@ -165,7 +168,8 @@ class Mood extends React.Component {
           }
           this.setState({
             isRecording: false,
-            hasPhoto: true,
+            hasVideo: true,
+            hasPhoto: false,
             photoURL: video.uri,
           });
         }
@@ -320,6 +324,7 @@ class Mood extends React.Component {
     if (this.state.uploadinggg) {
       return;
     }
+    console.log("Mood.js: this.state = ", this.state);
 
     this.setState({uploadinggg: true});
 
@@ -341,6 +346,7 @@ class Mood extends React.Component {
       secretKey: '7tJrhDpQsrpZBhrD6T7YYWvHvlOSu0w3o0dkVCTp',
       successActionStatus: 201,
     };
+    console.log("Mood.js: file = ", file);
     RNS3.put(file, options).then(response => {
       if (response.status !== 201) {
         console.warn(JSON.stringify(response, null, 3));
@@ -349,7 +355,8 @@ class Mood extends React.Component {
         });
       } else {
         this.setState({renderVideo: false});
-        console.warn(JSON.stringify(response, null, 3));
+        console.log("console.log", JSON.stringify(response, null, 3));
+        console.warn("console.warn", JSON.stringify(response, null, 3));
         this.props.saveMoodChanges(
           this.props.user,
           response.body.postResponse.location,
@@ -357,6 +364,7 @@ class Mood extends React.Component {
           function(success, user, profileFetch, ref) {
             if (success) {
               if (file.type == 'video/mp4') {
+                console.log("Mood.js: after video/mp4");
                 ref.setState({uploadingVideo: true});
                 setTimeout(() => {
                   ref.setState({uploadingVideo: false, uploadinggg: false});
