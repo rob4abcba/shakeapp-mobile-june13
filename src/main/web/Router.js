@@ -26,6 +26,9 @@ import Onboarding from './components/Onboarding';
 
 import Preferences from './components/Preferences';
 import Mood from './components/Mood';
+// import Mood from './components/Mood2';
+// import Mood from './components/Mood_RNCamera';
+
 
 import MyActivity from './components/MyActivity';
 import ChatConversation from './components/ChatConversation';
