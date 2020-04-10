@@ -21,7 +21,8 @@ import {logoutUser, profileFetch, saveMoodChanges} from '../actions';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {verifyPhoneNumber, setValidToken} from '../actions';
 import {Actions} from 'react-native-router-flux';
-var ImagePicker = require('react-native-image-picker');
+import ImagePicker from 'react-native-image-picker';
+// var ImagePicker = require('react-native-image-picker');?
 import ImageResizer from 'react-native-image-resizer';
 
 var styles = require('../Styles');
