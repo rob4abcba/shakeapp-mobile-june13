@@ -22,8 +22,9 @@ const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 export default class UserSwiper extends Component {
   constructor(props) {
     super(props);
-      // this.socket = SocketIOClient('http://localhost:8000');
-      this.socket = SocketIOClient('http://50.18.1.14:8000/node_app');
+      this.socket = SocketIOClient('http://localhost:8000');
+      // this.socket = SocketIOClient('http://50.18.1.14:8000/node_app');
+      // this.socket = SocketIOClient('http://50.18.1.14:8000');
       console.log("yesssssss");
     this.state = {
       nearbyUsers: props.nearbyUsers,
