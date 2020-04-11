@@ -554,7 +554,7 @@ class NearbyUserDetail extends Component {
 
             <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}>
             <TouchableOpacity
-              onPress={this.onButtonPress.bind(this)}
+              onPress={this.onChatButtonPress.bind(this)}
               style={{
                 height: 50,
                 backgroundColor: '#62cfb9',
