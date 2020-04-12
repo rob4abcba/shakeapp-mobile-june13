@@ -31,7 +31,7 @@ class Mood2 extends Component {
   constructor(props) {
     super(props);
 
-    this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
+    this.selectPhotoTapped = this.selectPhotoTapped.bind(this); //MC: constructor is good place to bind methods / event handlers
   }
 
   state = {
