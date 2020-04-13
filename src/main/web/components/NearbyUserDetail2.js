@@ -558,7 +558,7 @@ class NearbyUserDetail extends Component {
               onPress={this.onChatButtonPress.bind(this)}
               style={{
                 height: 50,
-                backgroundColor: '#62cfb9',
+                backgroundColor: 'yellow',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 8,
@@ -585,7 +585,7 @@ class NearbyUserDetail extends Component {
                     fontSize: 18,
                     fontWeight: '600',
                   }}>
-                  Chat with Me
+                  <IconAwesome name="comment" size={48} color="green"/>
                 </Text>
               )}
             </TouchableOpacity>
