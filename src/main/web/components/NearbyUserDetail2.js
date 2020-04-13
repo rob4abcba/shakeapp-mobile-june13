@@ -332,11 +332,11 @@ class NearbyUserDetail extends Component {
                 <View
                     style={{
                         width: 300,
-                        height: 500,
+                        height: 400, //MC: Height of modal
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: 'white',
-                        paddingTop: 40,
+                        backgroundColor: 'pink',
+                        paddingTop: 40, //MC: Padding originally 40
                         borderRadius: 8,
                         shadowOpacity: 0.1,
                         shadowColor: 'rgb(36, 100, 193)',
@@ -398,7 +398,7 @@ class NearbyUserDetail extends Component {
                 </View>
             </Modal>
 
-            <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <ImageBackground
             source={{uri: photoURL}}
             style={{width: '100%', height: '100%', flex: 1}}>
@@ -428,11 +428,11 @@ class NearbyUserDetail extends Component {
               )}
             </View>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.topBackButton}
               onPress={this.onBackButtonPress.bind(this)}>
               <Icon name="arrow-back" type="ionicons" color="white" size={35} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </ImageBackground>
         </View>
 
