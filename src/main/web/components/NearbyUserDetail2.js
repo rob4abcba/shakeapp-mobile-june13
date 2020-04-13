@@ -611,8 +611,7 @@ class NearbyUserDetail extends Component {
                     color: 'gray',
                     letterSpacing: 2.5,
                   }}>
-                    <IconAwesome name="flag" size={16} color="gray"/>;
-                    abusive content
+                    <IconAwesome name="flag" size={24} color="red"/>
                 </Text>
               </View>
             </TouchableOpacity>
