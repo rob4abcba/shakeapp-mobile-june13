@@ -60,7 +60,7 @@ class NearbyUserDetail extends Component {
     modalTitle: '',
     modalButton: '',
     modalDescription: '',
-      msg:'',
+      msg:'', //MG: Set message initially to empty string
 
     //Report Abuse or feedback
     report: false,
@@ -172,8 +172,8 @@ class NearbyUserDetail extends Component {
   }
 
     onChatButtonPress() {
-
         this.setState({chatIsVisible: true});
+        this.setState({msg: ''});
     }
 
   onReportButtonPress(description) {
@@ -355,9 +355,10 @@ class NearbyUserDetail extends Component {
 
                     <View style={[style.textInputContainer]}>
                         <TextInput
+                            // clearButtonMode="always"
                             placeholder="Enter message (140 char max) "
                             inputStyle={styles.inputStyle}
-                            multiline={true}
+                            multiline={false}
                             maxLength={140}
                             onChangeText={this.onMessageChange.bind(this)}
                             value={this.state.msg}
@@ -762,13 +763,15 @@ const style = ScaledSheet.create({
   textInputContainer: {
     flex: 0.2,
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    // alignItems: 'flex-start',
     backgroundColor: 'white',
       width:250,
     borderRadius: 9,
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'blue',
     paddingLeft: 10,
     paddingRight: 10,
   },
