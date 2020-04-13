@@ -28,8 +28,8 @@ import NearbyRestaurant from './NearbyRestaurant';
 import {Icon, Badge} from 'react-native-elements';
 import Preferences from './Preferences';
 // import Mood from './Mood';
-// import Mood from './Mood2';
-import Mood from './Mood_RNCamera';
+import Mood from './Mood2';
+// import Mood from './Mood_RNCamera';
 
 import GridView from 'react-native-super-grid';
 import BackgroundGeolocation from 'react-native-mauron85-background-geolocation';
