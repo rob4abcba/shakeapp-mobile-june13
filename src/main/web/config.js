@@ -24,7 +24,8 @@ module.exports = {
   // backendURL: "http://localhost:8000/node_app",	// Can't end with a '/'
   // OLD backendURL: "http://ec2-54-93-93-212.eu-central-1.compute.amazonaws.com:8000/node_app",	// Can't end with a '/'
   // backendURL: 'https://www.shakeapp-backend.net/node_app', // Can't end with a '/'
-  backendURL: 'http://50.18.1.14:8000/node_app',
+  // backendURL: 'http://50.18.1.14:8000/node_app', // OLD Elastic IP
+  backendURL: 'http://54.176.181.106:8000/node_app',
 
 
   updateCheckFrequency: 10000,
