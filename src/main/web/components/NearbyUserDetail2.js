@@ -400,7 +400,7 @@ class NearbyUserDetail extends Component {
 
             <View style={{flex: 1}}>
           <ImageBackground
-            source={{uri: photoURL}}
+            source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png':photoURL}}
             style={{width: '100%', height: '200%', flex: 1}}>
             <LinearGradient
               colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
