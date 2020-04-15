@@ -401,7 +401,7 @@ class NearbyUserDetail extends Component {
             <View style={{flex: 1}}>
           <ImageBackground
             source={{uri: photoURL}}
-            style={{width: '100%', height: '100%', flex: 1}}>
+            style={{width: '100%', height: '200%', flex: 1}}>
             <LinearGradient
               colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
               style={{height: 100, width: '100%', position: 'absolute', top: 0}}
@@ -428,18 +428,18 @@ class NearbyUserDetail extends Component {
               )}
             </View>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.topBackButton}
               onPress={this.onBackButtonPress.bind(this)}>
               <Icon name="arrow-back" type="ionicons" color="white" size={35} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </ImageBackground>
         </View>
 
         <View
           style={{
             flex: 1,
-            backgroundColor: 'white',
+            backgroundColor: 'rgba(255,255,255,.2)',
             paddingLeft: 36,
             paddingRight: 36,
           }}>
