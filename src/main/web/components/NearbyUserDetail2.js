@@ -332,11 +332,11 @@ class NearbyUserDetail extends Component {
                 <View
                     style={{
                         width: 300,
-                        height: 500,
+                        height: 400, //MC: Height of modal
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: 'white',
-                        paddingTop: 40,
+                        backgroundColor: 'pink',
+                        paddingTop: 40, //MC: Padding originally 40
                         borderRadius: 8,
                         shadowOpacity: 0.1,
                         shadowColor: 'rgb(36, 100, 193)',
@@ -398,7 +398,7 @@ class NearbyUserDetail extends Component {
                 </View>
             </Modal>
 
-            <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <ImageBackground
             source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png':photoURL}}
             style={{width: '100%', height: '200%', flex: 1}}>
@@ -558,7 +558,7 @@ class NearbyUserDetail extends Component {
               onPress={this.onChatButtonPress.bind(this)}
               style={{
                 height: 50,
-                backgroundColor: '#62cfb9',
+                backgroundColor: 'yellow',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 8,
@@ -585,7 +585,7 @@ class NearbyUserDetail extends Component {
                     fontSize: 18,
                     fontWeight: '600',
                   }}>
-                  Chat with Me
+                  <IconAwesome name="comment" size={48} color="green"/>
                 </Text>
               )}
             </TouchableOpacity>
@@ -611,8 +611,7 @@ class NearbyUserDetail extends Component {
                     color: 'gray',
                     letterSpacing: 2.5,
                   }}>
-                    <IconAwesome name="flag" size={16} color="gray"/>;
-                    abusive content
+                    <IconAwesome name="flag" size={24} color="red"/>
                 </Text>
               </View>
             </TouchableOpacity>
