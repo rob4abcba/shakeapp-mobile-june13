@@ -421,7 +421,7 @@ class DrawerContent extends React.Component {
               {fullName}
             </Text>
 
-            <View
+            {/* <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -446,7 +446,7 @@ class DrawerContent extends React.Component {
                 }}>
                 {shakes} Shakes
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
 
