@@ -601,17 +601,19 @@ class NearbyUserDetail extends Component {
                 paddingLeft: 15,
                 paddingTop: 20,
                 borderTopWidth: StyleSheet.hairlineWidth,
-                borderColor: 'rgba(117, 136, 147, 0.6)',
+                borderColor: 'rgba(117, 136, 147, 0.9)',
               }}>
                 <View style={{flex: 1, height: 25, justifyContent: 'center', marginBottom: 50}}>
                 <Text
                   style={{
                     fontSize: 12,
                     fontWeight: '500',
-                    color: 'gray',
+                    color: 'red',
                     letterSpacing: 2.5,
+                    
                   }}>
-                    <IconAwesome name="flag" size={24} color="red"/>
+                    <IconAwesome name="flag" size={24} color="red" />
+                     - Send message to Shake team
                 </Text>
               </View>
             </TouchableOpacity>
