@@ -335,7 +335,10 @@ class NearbyUserDetail extends Component {
                         height: 400, //MC: Height of modal
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: 'pink',
+                        backgroundColor: 'white',
+                        // backgroundColor: 'rgba(0,0,0,0.1)',
+                        // backgroundColor: 'transparent',
+                        // backgroundColor: 'rgb(0, 255, 0, 1.0)',
                         paddingTop: 40, //MC: Padding originally 40
                         borderRadius: 8,
                         shadowOpacity: 0.1,
@@ -511,7 +514,8 @@ class NearbyUserDetail extends Component {
                     height: 34,
                     width: 34,
                     borderRadius: 17,
-                    backgroundColor: 'white',
+                    // backgroundColor: 'white',
+                    backgroundColor: 'rgba(0,0,0,0.1)'
                   }}
                 />
               )}
@@ -522,7 +526,8 @@ class NearbyUserDetail extends Component {
                     height: 34,
                     width: 34,
                     borderRadius: 17,
-                    backgroundColor: 'white',
+                    // backgroundColor: 'white',
+                    backgroundColor: 'rgba(0,0,0,0.1)'
                   }}
                 />
               )}
@@ -533,7 +538,8 @@ class NearbyUserDetail extends Component {
                     height: 34,
                     width: 34,
                     borderRadius: 17,
-                    backgroundColor: 'white',
+                    // backgroundColor: 'white',
+                    backgroundColor: 'rgba(0,0,0,0.1)'
                   }}
                 />
               )}
@@ -544,7 +550,10 @@ class NearbyUserDetail extends Component {
                     height: 34,
                     width: 34,
                     borderRadius: 17,
-                    backgroundColor: 'white',
+                    // backgroundColor: 'white',
+                    backgroundColor: 'rgba(0,0,0,0.1)'
+
+
                   }}
                 />
               )}
@@ -553,12 +562,18 @@ class NearbyUserDetail extends Component {
 
           <Text style={{padding: 14}}>{bio}</Text>
 
-            <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}>
+            {/* <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}> */}
+            <View style={{flex: 1, alignItems: 'center', padding: 16, marginBottom: 60}}>  
             <TouchableOpacity
               onPress={this.onChatButtonPress.bind(this)}
+              activeOpacity={0.5} //MC: Opacity when clicked
               style={{
                 height: 50,
-                backgroundColor: 'yellow',
+                width: 100,
+                // backgroundColor: 'pink',
+                // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 8,
@@ -566,7 +581,7 @@ class NearbyUserDetail extends Component {
                 shadowColor: 'rgb(36, 100, 193)',
                 shadowOffset: {width: 4, height: 2},
               }}>
-              {this.props.notification &&
+              {/* {this.props.notification &&
               this.props.nearbyUser.user.notificationType == 'shake' ? (
                 <Text
                   style={{
@@ -587,7 +602,25 @@ class NearbyUserDetail extends Component {
                   }}>
                   <IconAwesome name="comment" size={48} color="green"/>
                 </Text>
-              )}
+              )} */}
+
+
+<Image style={{width:100 }} source={require('../assets/chat_shake.png')} resizeMode="contain"/>
+
+
+
+                {/* <Text
+                  style={{
+                    color: 'white',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  <IconAwesome name="comment" size={48} color="green"/>
+                </Text> */}
+
+
+
             </TouchableOpacity>
           </View>
           <View>
@@ -601,7 +634,7 @@ class NearbyUserDetail extends Component {
                 paddingLeft: 15,
                 paddingTop: 20,
                 borderTopWidth: StyleSheet.hairlineWidth,
-                borderColor: 'rgba(117, 136, 147, 0.9)',
+                borderColor: 'rgba(255, 0, 0, 0.9)',
               }}>
                 <View style={{flex: 1, height: 25, justifyContent: 'center', marginBottom: 50}}>
                 <Text
