@@ -636,18 +636,17 @@ class NearbyUserDetail extends Component {
                 borderTopWidth: StyleSheet.hairlineWidth,
                 borderColor: 'rgba(255, 0, 0, 0.9)',
               }}>
-                <View style={{flex: 1, height: 25, justifyContent: 'center', marginBottom: 50}}>
-                <Text
+                <View style={{flex: 1, height: 25, alignItems: 'center', justifyContent: 'center', marginBottom: 50}}>
+                {/* <Text
                   style={{
                     fontSize: 12,
                     fontWeight: '500',
                     color: 'red',
                     letterSpacing: 2.5,
                     
-                  }}>
-                    <IconAwesome name="flag" size={24} color="red" />
-                     - Send message to Shake team
-                </Text>
+                  }}> */}
+                    <IconAwesome name="flag" size={24} color="black" />
+                {/* </Text> */}
               </View>
             </TouchableOpacity>
           </View>
