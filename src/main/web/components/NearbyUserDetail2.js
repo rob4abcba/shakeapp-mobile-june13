@@ -441,16 +441,19 @@ class NearbyUserDetail extends Component {
 
         <View
           style={{
-            flex: 1,
+            // flex: 1, //Controls height of transparent banner with info at bottom of user profiles
+            flex: 1/2,
             backgroundColor: 'rgba(255,255,255,.2)',
             paddingLeft: 36,
             paddingRight: 36,
           }}>
           <View
             style={{
-              paddingTop: 26,
+              // paddingTop: 26,
+              paddingTop: 0,
               justifyContent: 'space-between',
               flexDirection: 'row',
+              // flexDirection: 'column',
               alignItems: 'center',
             }}>
             <Text
@@ -563,12 +566,12 @@ class NearbyUserDetail extends Component {
           <Text style={{padding: 14}}>{bio}</Text>
 
             {/* <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}> */}
-            <View style={{flex: 1, alignItems: 'center', padding: 16, marginBottom: 60}}>  
+            <View style={{flex: 1/2, alignItems: 'center', padding: 5, marginBottom: 5}}>  
             <TouchableOpacity
               onPress={this.onChatButtonPress.bind(this)}
               activeOpacity={0.5} //MC: Opacity when clicked
               style={{
-                height: 50,
+                height: 5,
                 width: 100,
                 // backgroundColor: 'pink',
                 // backgroundColor: 'rgb(255, 255, 0, alpha)',
@@ -632,11 +635,11 @@ class NearbyUserDetail extends Component {
                 alignItems: 'flex-end',
                 paddingRight: 12,
                 paddingLeft: 15,
-                paddingTop: 20,
+                paddingTop: 5,
                 borderTopWidth: StyleSheet.hairlineWidth,
                 borderColor: 'rgba(255, 0, 0, 0.9)',
               }}>
-                <View style={{flex: 1, height: 25, alignItems: 'center', justifyContent: 'center', marginBottom: 50}}>
+                <View style={{flex: 1, height: 25, alignItems: 'center', justifyContent: 'center', marginBottom: 5}}>
                 {/* <Text
                   style={{
                     fontSize: 12,
