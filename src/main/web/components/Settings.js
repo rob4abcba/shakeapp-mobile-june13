@@ -254,6 +254,9 @@ class Settings extends Component {
     this.setState({isVisible: false});
     if (this.state.modalTitle == 'Signing out') {
       this.props.logoutUser(this.props.user);
+      // Tried to fix issue of Signout not showing Signout
+      // Actions.popTo('auth')
+      // Actions.login();
     } else {
     }
   }
