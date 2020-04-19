@@ -417,8 +417,8 @@ class Nearby extends Component {
     this.setState({moodFirstSetup: false});
   }
  
-  // render2() {
-  render() {
+  render2() {
+  // render() {
     if (!this.props.data) {
       return <Spinner size="large" />;
     }
@@ -450,8 +450,8 @@ class Nearby extends Component {
       </View>
     );
   }
-  // render() { //Swap render2 & render to get profile icon & Shake logo notification footer on top
-  render2() {
+  render() { //Swap render2 & render to get profile icon & Shake logo notification footer on top
+  // render2() {
     console.log(this.props.nearbyList)
     if (!this.props.data) {
       return <Spinner size="large" />;
@@ -471,14 +471,16 @@ class Nearby extends Component {
     return (
       <StickyHeaderFooterScrollView
         makeScrollable={false}
-        renderStickyFooter={() => (
-          <Footer
-            photoURL={this.props.data.mood.photoURL}
-            notificationCount={this.props.data.notificationCount}
-          />
-        )}>
-        <View style={{height: viewportHeight - 50}}>
-          <UserSwiper nearbyUsers={this.props.nearbyList} />
+          // renderStickyFooter={() => (
+          //   <Footer
+          //     photoURL={this.props.data.mood.photoURL}
+          //     notificationCount={this.props.data.notificationCount}
+          //   />
+          //)}
+      >
+          <View style={{height: viewportHeight}}>
+              <UserSwiper nearbyUsers={this.props.nearbyList} photoURL={this.props.data.mood.photoURL}
+                          notificationCount={this.props.data.notificationCount}/>
           {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
           {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
         </View>
