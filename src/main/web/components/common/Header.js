@@ -13,7 +13,8 @@ const Header = props => {
       <TouchableOpacity
         style={styles.topBackButton}
         onPress={() => Actions.pop()}>
-        <Icon name="chevron-left" type="evilicon" color="#484848" size={15} />
+        {/* <Icon name="chevron-left" type="evilicon" color="#484848" size={15} /> */}
+        <Icon name="chevron-left" type="evilicon" color="yellow" size={15} />
       </TouchableOpacity>
     </View>
   );
