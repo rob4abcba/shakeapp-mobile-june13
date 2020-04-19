@@ -566,7 +566,7 @@ class NearbyUserDetail extends Component {
           <Text style={{padding: 14}}>{bio}</Text>
 
             {/* <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}> */}
-            <View style={{flex: 1/2, alignItems: 'center', padding: 5, marginBottom: 5}}>  
+            <View style={{flex: 1/2, alignItems: 'center', padding: 15, marginTop: 15, marginBottom: 15}}>  
             <TouchableOpacity
               onPress={this.onChatButtonPress.bind(this)}
               activeOpacity={0.5} //MC: Opacity when clicked
