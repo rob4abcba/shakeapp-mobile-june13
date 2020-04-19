@@ -33,6 +33,16 @@ import Mood from './components/Mood2';
 import MyActivity from './components/MyActivity';
 import ChatConversation from './components/ChatConversation';
 
+
+//NavBar
+import Header from './components/common';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
+import {Text, View, TouchableOpacity} from 'react-native';
+var styles = require('./Styles');
+
+
 const RouterComponent = () => {
   return (
     <Router panHandlers={null}>
@@ -77,7 +87,23 @@ const RouterComponent = () => {
 
         <Drawer
           ref="navigation"
-          hideNavBar
+          hideNavBar // Uncomment to show bottom footer with profile icon bottom left and Shake icon bottom right which clicks to Notifications
+          
+          
+          // drawerIcon={<Icon name="chevron-left" type="evilicon" color="#484848" size={15} />}
+          drawerImage={require('./assets/Shake Logo - Apple/iPhone/shake-logo-iphone.png')}
+
+          // drawerIcon={
+          //   <View style={{flex: 0.1, backgroundColor: 'red'}}>
+          // <TouchableOpacity
+          //   style={styles.topRightButton}
+          //   onPress={() => Actions.pop()}>
+          //   <Icon name="chevron-left" type="evilicon" color="#484848" size={15} />
+          // </TouchableOpacity>
+          // </View>}
+      
+
+          // navBar={Header}
           key="main"
           contentComponent={DrawerContent}
           open={true}>
@@ -86,19 +112,22 @@ const RouterComponent = () => {
             inactiveBackgroundColor="#FFF"
             activeBackgroundColor="#DDD"
             // hideNavBar
+            // navBar={Header}
             >
             <Scene 
             key="nearby" 
             type="replace" 
             component={Nearby} 
-            // hideNavBar 
+            hideNavBar 
+            // navBar={Header}
             />
 
             <Scene
               key="nearbyUserDetail"
               component={NearbyUserDetail}
               title="nearbyUserDetailYo"
-              // hideNavBar
+              hideNavBar
+              // navBar={Header}
             />
 
             <Scene
@@ -115,7 +144,8 @@ const RouterComponent = () => {
               // hideNavBar
             />
 
-            <Scene key="settings" component={Settings} hideNavBar />
+            {/* <Scene key="settings" component={Settings} hideNavBar /> */}
+            <Scene key="settings" component={Settings} navBar={Header} />
 
             <Scene key="profile" component={Profile} hideNavBar />
 
