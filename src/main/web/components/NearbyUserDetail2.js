@@ -639,7 +639,7 @@ class NearbyUserDetail extends Component {
                 borderTopWidth: StyleSheet.hairlineWidth,
                 borderColor: 'rgba(255, 0, 0, 0.9)',
               }}>
-                <View style={{flex: 1, height: 25, alignItems: 'center', justifyContent: 'center', marginBottom: 5}}>
+                <View style={{flex: 1, height: 25, alignItems: 'flex-end', justifyContent: 'center', marginBottom: 5}}>
                 {/* <Text
                   style={{
                     fontSize: 12,
@@ -648,7 +648,7 @@ class NearbyUserDetail extends Component {
                     letterSpacing: 2.5,
                     
                   }}> */}
-                    <IconAwesome name="flag" size={24} color="black" />
+                    <IconAwesome name="flag" size={18} color="black" />
                 {/* </Text> */}
               </View>
             </TouchableOpacity>
