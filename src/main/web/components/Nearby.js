@@ -417,8 +417,8 @@ class Nearby extends Component {
     this.setState({moodFirstSetup: false});
   }
  
-  
-  render2() {
+  // render2() {
+  render() {
     if (!this.props.data) {
       return <Spinner size="large" />;
     }
@@ -450,8 +450,8 @@ class Nearby extends Component {
       </View>
     );
   }
-
-  render() {
+  // render() {
+  render2() {
     console.log(this.props.nearbyList)
     if (!this.props.data) {
       return <Spinner size="large" />;
