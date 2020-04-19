@@ -450,7 +450,7 @@ class Nearby extends Component {
       </View>
     );
   }
-  // render() {
+  // render() { //Swap render2 & render to get profile icon & Shake logo notification footer on top
   render2() {
     console.log(this.props.nearbyList)
     if (!this.props.data) {
