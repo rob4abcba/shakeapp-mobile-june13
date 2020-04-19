@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {
-  View,
-  ScrollView,
-  SafeAreaView,
-  Dimensions,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Text,
+    View,
+    ScrollView,
+    SafeAreaView,
+    Dimensions,
+    FlatList,
+    TouchableOpacity,
+    TextInput,
+    Text, Image,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styles from './swipe/styles/index.style';
@@ -16,6 +16,8 @@ import NearbyUserDetail from './NearbyUserDetail';
 import NearbyRestaurant from './NearbyRestaurant';
 import NearbyUserDetail2 from "./NearbyUserDetail2";
 import SocketIOClient from "socket.io-client";
+import {Actions} from "react-native-router-flux";
+import {Badge} from "react-native-elements";
 
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
@@ -102,6 +104,63 @@ export default class UserSwiper extends Component {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>{this.renderCarousel()}</View>
+          <TouchableOpacity
+              style={{position: 'absolute', top: 60, right: 10, marginRight: 20, height: 45, width: 47}}
+              onPress={() => Actions.myActivity({route: 0})}>
+              <Image
+                  source={require('../assets/shake-logo-transparent.png')}
+                  style={{height: 44, width: 35}}
+                  resizeMode={'contain'}
+              />
+
+              {this.props.notificationCount > 0 ? (
+                  <View style={{position: 'absolute', overflow: 'visible'}}>
+                      <Badge
+                          value={this.props.notificationCount}
+                          textStyle={{color: 'white', fontSize: 14}}
+                          status='error'
+                          containerStyle={{backgroundColor: 'rgba(0,0,0,0.0)'}}
+                      />
+                  </View>
+              ) : (
+                  false
+              )}
+          </TouchableOpacity>
+          <TouchableOpacity
+              style={{position: 'absolute', top: 60, left: 10, marginLeft: 20, height: 45, width: 47}}
+              onPress={() => Actions.mood()}>
+              <View
+                  style={{
+                      height: 45,
+                      width: 45,
+                      borderRadius: 22,
+                      backgroundColor: 'white',
+                      borderWidth: 2,
+                      borderColor: '#b1b1b1',
+                  }}>
+                  {this.props.photoURL ? (
+                      <Image
+                          source={{uri: this.props.photoURL}}
+                          style={{
+                              height: '100%',
+                              width: '100%',
+                              borderRadius: 20,
+                              backgroundColor: 'rgba(0,0,0,0)',
+                          }}
+                      />
+                  ) : (
+                      <Image
+                          source={require('../assets/avatar.jpg')}
+                          style={{
+                              height: '100%',
+                              width: '100%',
+                              borderRadius: 20,
+                              backgroundColor: 'rgba(0,0,0,0)',
+                          }}
+                      />
+                  )}
+              </View>
+          </TouchableOpacity>
       </SafeAreaView>
     );
   }
