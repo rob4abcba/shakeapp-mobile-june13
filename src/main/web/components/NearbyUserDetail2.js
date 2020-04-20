@@ -267,6 +267,7 @@ class NearbyUserDetail extends Component {
               justifyContent: 'center',
               backgroundColor: 'white',
               paddingTop: 40,
+              // marginTop: 40,
               borderRadius: 8,
               shadowOpacity: 0.1,
               shadowColor: 'rgb(36, 100, 193)',
@@ -715,6 +716,7 @@ class NearbyUserDetail extends Component {
             style={{
               height: 61,
               flexDirection: 'row',
+              marginTop: 60,
               alignItems: 'center',
               justifyContent: 'flex-end',
               paddingRight: 29,
