@@ -716,7 +716,7 @@ class NearbyUserDetail extends Component {
             style={{
               height: 61,
               flexDirection: 'row',
-              marginTop: 60,
+              marginTop: 60, //Move SKIP below Shake Notification at upper right
               alignItems: 'center',
               justifyContent: 'flex-end',
               paddingRight: 29,
