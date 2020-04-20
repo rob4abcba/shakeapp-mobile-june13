@@ -403,7 +403,8 @@ class NearbyUserDetail extends Component {
 
         <View style={{flex: 1}}>
           <ImageBackground
-            source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png':photoURL}}
+            // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
+            source={{uri: videoURL ? "": !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
             style={{width: '100%', height: '200%', flex: 1}}>
             <LinearGradient
               colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
@@ -411,7 +412,7 @@ class NearbyUserDetail extends Component {
             />
 
               <View style={{flex: 1}}>
-              {!!videoURL && (
+              {videoURL && (
                 <Video
                   //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
                   source={{uri: videoURL}} // Can be a URL or a local file.
