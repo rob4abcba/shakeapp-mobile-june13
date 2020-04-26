@@ -611,6 +611,8 @@ class NearbyUserDetail extends Component {
 
 
 <Image style={{width:100 }} source={require('../assets/chat_shake.png')} resizeMode="contain"/>
+{/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+<Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
 
 
 
