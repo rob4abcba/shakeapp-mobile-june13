@@ -259,7 +259,7 @@ class Mood2 extends Component {
             shadowOffset: {width: 4, height: 2},
           }}
           onPress={() => this.selectPhotoTapped(false)}>
-          <Text
+          {/* <Text
             style={{
               color: 'white',
               letterSpacing: -0.2,
@@ -267,7 +267,9 @@ class Mood2 extends Component {
               fontWeight: '600',
             }}>
             Take photo
-          </Text>
+          </Text> */}
+          <Image style={{width:100 }} source={require('../assets/camera-black.png')} resizeMode="contain"/>
+
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -283,7 +285,7 @@ class Mood2 extends Component {
             shadowOffset: {width: 4, height: 2},
           }}
           onPress={() => this.selectPhotoTapped(true)}>
-          <Text
+          {/* <Text
             style={{
               color: 'white',
               letterSpacing: -0.2,
@@ -291,7 +293,9 @@ class Mood2 extends Component {
               fontWeight: '600',
             }}>
             Take video
-          </Text>
+          </Text> */}
+          <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
+
         </TouchableOpacity>
       </View>
     ) : (
