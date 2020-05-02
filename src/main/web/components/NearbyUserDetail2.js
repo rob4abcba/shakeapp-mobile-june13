@@ -459,9 +459,85 @@ class NearbyUserDetail extends Component {
               alignItems: 'center',
             }}>
             <Text
-              style={{fontSize: 26, fontWeight: '700', letterSpacing: -0.5}}>
+              style={{flex: 1, fontSize: 26, fontWeight: '700', letterSpacing: -0.5}}>
               {fullName}
             </Text>
+
+
+
+
+
+
+
+            <View style={{flex: 1, 
+              alignItems: 'flex-end', 
+              justifyContent: 'flex-end', 
+              padding: 1, 
+              marginTop: 1, 
+              marginBottom: 1
+              }}>  
+            <TouchableOpacity
+              onPress={this.onChatButtonPress.bind(this)}
+              activeOpacity={0.5} //MC: Opacity when clicked
+              style={{
+                height: 5,
+                width: 100,
+                // backgroundColor: 'pink',
+                // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end',
+                borderRadius: 8,
+                shadowOpacity: 0.1,
+                shadowColor: 'rgb(36, 100, 193)',
+                shadowOffset: {width: 4, height: 2},
+              }}>
+              {/* {this.props.notification &&
+              this.props.nearbyUser.user.notificationType == 'shake' ? (
+                <Text
+                  style={{
+                    color: 'black',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  Chat
+                </Text>
+              ) : (
+                <Text
+                  style={{
+                    color: 'white',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  <IconAwesome name="comment" size={48} color="green"/>
+                </Text>
+              )} */}
+
+<Image style={{width:100 }} source={require('../assets/chat_shake.png')} resizeMode="contain"/>
+{/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+<Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
+
+                {/* <Text
+                  style={{
+                    color: 'white',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  <IconAwesome name="comment" size={48} color="green"/>
+                </Text> */}
+
+            </TouchableOpacity>
+          </View>
+
+
+
+
+
+
 
               {/*<View style={{flexDirection: 'row', paddingTop: 2}}>*/}
               {/*<Image*/}
