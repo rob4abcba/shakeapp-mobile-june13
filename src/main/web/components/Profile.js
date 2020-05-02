@@ -728,7 +728,7 @@ class Profile extends Component {
         </TouchableOpacity>
 
         {/*CHANGE PASSWORD*/}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             Actions.changePassword();
           }}
@@ -761,7 +761,7 @@ class Profile extends Component {
               }}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View
           style={{
