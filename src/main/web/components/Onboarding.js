@@ -51,7 +51,7 @@ let titles = ['Welcome', 'Set your Mood', 'Share experiences'];
 
 let descriptions = [
   'Discover new restaurants & friends\neveryday with Shake',
-  "Share with other Shakers your morning hair,\nthe new shirt you put on or today's smile",
+  "Share with other Shakers your morning hair or today's smile,\nthe new shirt you put on or today's smile",
   'Great food is great on it’s own, but\ngreat food with great company is even better.\nMake new connections and experience\nthe world one plate at a time.',
 ];
 
