@@ -336,8 +336,8 @@ class NearbyUserDetail extends Component {
                         height: 400, //MC: Height of modal
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: 'white',
-                        // backgroundColor: 'rgba(0,0,0,0.1)',
+                        // backgroundColor: 'white',
+                        backgroundColor: 'rgba(0,0,0,0.3)',
                         // backgroundColor: 'transparent',
                         // backgroundColor: 'rgb(0, 255, 0, 1.0)',
                         paddingTop: 40, //MC: Padding originally 40
@@ -444,10 +444,12 @@ class NearbyUserDetail extends Component {
         <View
           style={{
             // flex: 1, //Controls height of transparent banner with info at bottom of user profiles
-            flex: 1/2,
+            flex: 1,
             backgroundColor: 'rgba(255,255,255,.2)',
             paddingLeft: 36,
             paddingRight: 36,
+            justifyContent: 'flex-end',
+            // alignItems: 'flex-end',
           }}>
           <View
             style={{
@@ -469,7 +471,68 @@ class NearbyUserDetail extends Component {
 
 
 
+            <View style={{alignItems: 'flex-end', padding: 15, marginTop: 15, marginBottom: -100}}>  
+            <TouchableOpacity
+              onPress={this.onChatButtonPress.bind(this)}
+              activeOpacity={0.5} //MC: Opacity when clicked
+              style={{
+                height: 5,
+                width: 100,
+                // backgroundColor: 'pink',
+                // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 8,
+                shadowOpacity: 0.1,
+                shadowColor: 'rgb(36, 100, 193)',
+                shadowOffset: {width: 4, height: 2},
+              }}>
+              {/* {this.props.notification &&
+              this.props.nearbyUser.user.notificationType == 'shake' ? (
+                <Text
+                  style={{
+                    color: 'black',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  Chat
+                </Text>
+              ) : (
+                <Text
+                  style={{
+                    color: 'white',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  <IconAwesome name="comment" size={48} color="green"/>
+                </Text>
+              )} */}
 
+
+<Image style={{width:100 }} source={require('../assets/chat_shake.png')} resizeMode="contain"/>
+{/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+<Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
+
+
+
+                {/* <Text
+                  style={{
+                    color: 'white',
+                    letterSpacing: -0.2,
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
+                  <IconAwesome name="comment" size={48} color="green"/>
+                </Text> */}
+
+
+
+            </TouchableOpacity>
+          </View>
 
 
 
@@ -572,7 +635,6 @@ class NearbyUserDetail extends Component {
                     // backgroundColor: 'white',
                     backgroundColor: 'rgba(0,0,0,0.1)'
 
-
                   }}
                 />
               )}
@@ -580,6 +642,7 @@ class NearbyUserDetail extends Component {
           )}
 
           <Text style={{padding: 14}}>{bio}</Text>
+
 
             {/* <View style={{flex: 1, justifyContent: 'flex-end', padding: 16, marginBottom: 60}}> */}
             <View style={{flex: 1/2, alignItems: 'center', padding: 15, marginTop: 15, marginBottom: 15}}>  
@@ -623,12 +686,9 @@ class NearbyUserDetail extends Component {
                 </Text>
               )} */}
 
-
 <Image style={{width:100 }} source={require('../assets/chat_shake.png')} resizeMode="contain"/>
 {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
 <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
-
-
 
                 {/* <Text
                   style={{
@@ -640,11 +700,11 @@ class NearbyUserDetail extends Component {
                   <IconAwesome name="comment" size={48} color="green"/>
                 </Text> */}
 
-
-
             </TouchableOpacity>
           </View>
-          <View>
+
+
+          <View style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}>
             <TouchableOpacity
               onPress={this.onReportButtonPress.bind(this)}
               style={{
@@ -655,7 +715,8 @@ class NearbyUserDetail extends Component {
                 paddingLeft: 15,
                 paddingTop: 5,
                 borderTopWidth: StyleSheet.hairlineWidth,
-                borderColor: 'rgba(255, 0, 0, 0.9)',
+                // borderColor: 'rgba(255, 0, 0, 0.9)',
+                borderColor: 'rgba(0, 0, 0, 0)'
               }}>
                 <View style={{flex: 1, height: 25, alignItems: 'flex-end', justifyContent: 'center', marginBottom: 5}}>
                 {/* <Text
