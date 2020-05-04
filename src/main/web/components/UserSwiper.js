@@ -29,7 +29,7 @@ export default class UserSwiper extends Component {
       // this.socket = SocketIOClient('http://18.144.176.174:8001'); //MC: NonElastic WORKS!!
       this.socket = SocketIOClient('http://54.176.181.106:8001'); //MC: Elastic IP works also!!
 
-      console.log("yesssssss");
+      console.log("UserSwiper.js> constructor(props):  PROPS PROPS BABY.  VANILLA PROPS PROPS BABY", props);
     this.state = {
       nearbyUsers: props.nearbyUsers,
     };
