@@ -248,7 +248,8 @@ class Mood2 extends Component {
         <TouchableOpacity
           style={{
             height: 50,
-            backgroundColor: '#62cfb9',
+            // backgroundColor: '#62cfb9',
+            backgroundColor: 'white',
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 8,
@@ -274,7 +275,8 @@ class Mood2 extends Component {
         <TouchableOpacity
           style={{
             height: 50,
-            backgroundColor: '#62cfb9',
+            // backgroundColor: '#62cfb9',
+            backgroundColor: 'white',
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 8,
@@ -394,8 +396,8 @@ class Mood2 extends Component {
                   color: '#484848',
                   textAlign: 'center',
                 }}>
-                Share with other Shakers your morning hair,{'\n'}the new shirt
-                you put on, or today’s smile.
+                Share with other Shakers {'\n'}your morning hair{'\n'}
+                 or today’s smile.
               </Text>
 
               <Image
