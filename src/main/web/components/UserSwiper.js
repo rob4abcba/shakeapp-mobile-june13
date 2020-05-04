@@ -136,7 +136,8 @@ export default class UserSwiper extends Component {
                       borderRadius: 22,
                       backgroundColor: 'white',
                       borderWidth: 2,
-                      borderColor: '#b1b1b1',
+                      // borderColor: '#b1b1b1',
+                      borderColor: 'black',
                   }}>
                   {this.props.photoURL ? (
                       <Image
@@ -145,7 +146,8 @@ export default class UserSwiper extends Component {
                               height: '100%',
                               width: '100%',
                               borderRadius: 20,
-                              backgroundColor: 'rgba(0,0,0,0)',
+                              // backgroundColor: 'rgba(0,0,0,0)',
+                              backgroundColor: 'pink',
                           }}
                       />
                   ) : (
