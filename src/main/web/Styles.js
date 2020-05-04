@@ -134,11 +134,15 @@ var styles = StyleSheet.create({
   tabBar: {
     flexDirection: 'row',
     // paddingTop: 60,
+    backgroundColor: 'pink',
+    color: 'purple',
   },
   tabItem: {
     flex: 1,
     alignItems: 'center',
     padding: 16,
+    backgroundColor: 'red',
+    color: 'green',
   },
 });
 
