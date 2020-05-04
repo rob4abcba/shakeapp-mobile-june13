@@ -222,7 +222,12 @@ class NearbyUserDetail extends Component {
   }
 
   getPhotoVideoURL(user) {
-    console.log('ESTOU AQUI CRL: ' + JSON.stringify(user));
+    // console.log('NearbyUserDetail2: JSON.stringify(user.videoURL) = ' + JSON.stringify(user));
+    console.log('NearbyUserDetail2: JSON.stringify(user.fullName) = ' + JSON.stringify(user.fullName));
+    // console.log('NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user) = ' + JSON.stringify(this.props.nearbyUser.user));
+    console.log('NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.fullName) = ' + JSON.stringify(this.props.nearbyUser.user.fullName));
+    console.log('NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.videoURL) = ' + JSON.stringify(this.props.nearbyUser.user.videoURL));
+    console.log('NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.photoURL) = ' + JSON.stringify(this.props.nearbyUser.user.photoURL));
     if (user.mood != undefined) {
       photoURL = user.mood.photoURL;
       videoURL = user.mood.videoURL;
