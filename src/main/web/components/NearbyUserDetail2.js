@@ -256,7 +256,7 @@ class NearbyUserDetail extends Component {
     }
 
     return (
-        <View style={{flex: 1, marginBottom: 20}}
+        <View style={{flex: 1, marginBottom: 0}}
       >
         {/* Error modal */}
         <Modal
@@ -449,12 +449,13 @@ class NearbyUserDetail extends Component {
         <View
           style={{
             // flex: 1, //Controls height of transparent banner with info at bottom of user profiles
-            flex: 1,
+            flex: 0.6,
             backgroundColor: 'rgba(255,255,255,.2)',
             paddingLeft: 36,
             paddingRight: 36,
             justifyContent: 'flex-end',
             // alignItems: 'flex-end',
+            marginBottom: 0,
           }}>
           <View
             style={{
@@ -476,7 +477,7 @@ class NearbyUserDetail extends Component {
 
 
 
-            <View style={{alignItems: 'flex-end', padding: 15, marginTop: 15, marginBottom: -100}}>  
+            <View style={{alignItems: 'flex-end', padding: 15, marginTop: 15, marginBottom: -80}}>  
             <TouchableOpacity
               onPress={this.onChatButtonPress.bind(this)}
               activeOpacity={0.5} //MC: Opacity when clicked
@@ -651,8 +652,8 @@ class NearbyUserDetail extends Component {
 
 
 
-
-          <View style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}>
+          {/* <View style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}> */}
+          <View>
             <TouchableOpacity
               onPress={this.onReportButtonPress.bind(this)}
               style={{
@@ -666,7 +667,7 @@ class NearbyUserDetail extends Component {
                 // borderColor: 'rgba(255, 0, 0, 0.9)',
                 borderColor: 'rgba(0, 0, 0, 0)'
               }}>
-                <View style={{flex: 1, height: 25, alignItems: 'flex-end', justifyContent: 'center', marginBottom: 5}}>
+                <View style={{flex: 1, height: 25, alignItems: 'flex-end', justifyContent: 'center', marginBottom: 1}}>
                 {/* <Text
                   style={{
                     fontSize: 12,
