@@ -19,6 +19,12 @@ import SocketIOClient from "socket.io-client";
 import {Actions} from "react-native-router-flux";
 import {Badge} from "react-native-elements";
 
+// Need profileFetch from DrawerContent.js amazingCircle?
+import {socialAccountsFetch, profileFetch} from '../actions';
+import DrawerContent from './DrawerContent';
+
+
+
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 export default class UserSwiper extends Component {
@@ -57,6 +63,353 @@ export default class UserSwiper extends Component {
       </View>
     );
   };
+
+
+
+
+
+
+  // componentWillMount() {
+  //   // fetch data do profile
+  //   this.props.profileFetch(this.props.user);
+  // }
+
+
+
+
+
+  // amazingCircle(user) {
+  //   var colors = [];
+  //   var preferences = user.preferences;
+  //   if (preferences) {
+  //     if (preferences.meat) {
+  //       colors.push('#d94f4f');
+  //     }
+  //     if (preferences.veggie) {
+  //       colors.push('#62c769');
+  //     }
+  //     if (preferences.drinks) {
+  //       colors.push('#f7cc02');
+  //     }
+  //     if (preferences.seaFood) {
+  //       colors.push('#6ec7ec');
+  //     }
+  //   }
+
+  //   if (colors.length == 3) {
+  //     return (
+  //       <View
+  //         style={{
+  //           height: 108,
+  //           width: 108,
+  //           borderRadius: 54,
+  //           backgroundColor: 'white',
+  //           borderWidth: 4,
+  //           justifyContent: 'center',
+  //           alignItems: 'center',
+  //           borderColor: '#b1b1b1',
+  //         }}>
+  //         <Image
+  //           style={{
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[0],
+  //           }}
+  //           source={require('../assets/circle_3.png')}
+  //         />
+  //         <Image
+  //           style={{
+  //             transform: [{rotate: '120deg'}],
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[1],
+  //             opacity: 1,
+  //           }}
+  //           source={require('../assets/circle_3.png')}
+  //         />
+  //         <Image
+  //           style={{
+  //             transform: [{rotate: '240deg'}],
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[2],
+  //             opacity: 1,
+  //           }}
+  //           source={require('../assets/circle_3.png')}
+  //         />
+
+  //         <Image
+  //           style={{
+  //             position: 'absolute',
+  //             height: 100,
+  //             width: 100,
+  //             borderRadius: 50,
+  //             backgroundColor: 'white',
+  //           }}
+  //         />
+
+  //         {user.photoURL ? (
+  //           <Image
+  //             source={{uri: user.photoURL}}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         ) : (
+  //           <Image
+  //             source={require('../assets/avatar.jpg')}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         )}
+
+
+
+  //       </View>
+  //     );
+  //   } else if (colors.length == 4) {
+  //     return (
+  //       <View
+  //         style={{
+  //           height: 108,
+  //           width: 108,
+  //           borderRadius: 54,
+  //           backgroundColor: 'white',
+  //           borderWidth: 4,
+  //           justifyContent: 'center',
+  //           alignItems: 'center',
+  //           borderColor: '#b1b1b1',
+  //         }}>
+  //         <Image
+  //           style={{
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[0],
+  //           }}
+  //           source={require('../assets/circle_4.png')}
+  //         />
+  //         <Image
+  //           style={{
+  //             transform: [{rotate: '90deg'}],
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[1],
+  //             opacity: 1,
+  //           }}
+  //           source={require('../assets/circle_4.png')}
+  //         />
+  //         <Image
+  //           style={{
+  //             transform: [{rotate: '180deg'}],
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[2],
+  //             opacity: 1,
+  //           }}
+  //           source={require('../assets/circle_4.png')}
+  //         />
+  //         <Image
+  //           style={{
+  //             transform: [{rotate: '270deg'}],
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[3],
+  //             opacity: 1,
+  //           }}
+  //           source={require('../assets/circle_4.png')}
+  //         />
+
+  //         <Image
+  //           style={{
+  //             position: 'absolute',
+  //             height: 100,
+  //             width: 100,
+  //             borderRadius: 50,
+  //             backgroundColor: 'white',
+  //           }}
+  //         />
+
+  //         {user.photoURL ? (
+  //           <Image
+  //             source={{uri: user.photoURL}}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         ) : (
+  //           <Image
+  //             source={require('../assets/avatar.jpg')}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         )}
+  //       </View>
+  //     );
+  //   } else if (colors.length == 2) {
+  //     return (
+  //       <View
+  //         style={{
+  //           height: 108,
+  //           width: 108,
+  //           borderRadius: 54,
+  //           backgroundColor: 'white',
+  //           borderWidth: 4,
+  //           justifyContent: 'center',
+  //           alignItems: 'center',
+  //           borderColor: '#b1b1b1',
+  //         }}>
+  //         <Image
+  //           style={{
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[0],
+  //           }}
+  //           source={require('../assets/circle_2.png')}
+  //         />
+  //         <Image
+  //           style={{
+  //             transform: [{rotate: '180deg'}],
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[1],
+  //             opacity: 1,
+  //           }}
+  //           source={require('../assets/circle_2.png')}
+  //         />
+
+  //         <Image
+  //           style={{
+  //             position: 'absolute',
+  //             height: 100,
+  //             width: 100,
+  //             borderRadius: 50,
+  //             backgroundColor: 'white',
+  //           }}
+  //         />
+
+  //         {user.photoURL ? (
+  //           <Image
+  //             source={{uri: user.photoURL}}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         ) : (
+  //           <Image
+  //             source={require('../assets/avatar.jpg')}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         )}
+  //       </View>
+  //     );
+  //   } else {
+  //     return (
+  //       <View
+  //         style={{
+  //           height: 108,
+  //           width: 108,
+  //           borderRadius: 54,
+  //           backgroundColor: 'white',
+  //           borderWidth: 4,
+  //           justifyContent: 'center',
+  //           alignItems: 'center',
+  //           borderColor: '#b1b1b1',
+  //         }}>
+  //         <Image
+  //           style={{
+  //             flex: 1,
+  //             height: 108,
+  //             width: 108,
+  //             position: 'absolute',
+  //             tintColor: colors[0],
+  //           }}
+  //           source={require('../assets/circle_1.png')}
+  //         />
+
+  //         <Image
+  //           style={{
+  //             position: 'absolute',
+  //             height: 100,
+  //             width: 100,
+  //             borderRadius: 50,
+  //             backgroundColor: 'white',
+  //           }}
+  //         />
+
+  //         {user.photoURL ? (
+  //           <Image
+  //             source={{uri: user.photoURL}}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         ) : (
+  //           <Image
+  //             source={require('../assets/avatar.jpg')}
+  //             style={{
+  //               height: 100,
+  //               width: 100,
+  //               borderRadius: 50,
+  //               backgroundColor: 'rgba(0,0,0,0)',
+  //             }}
+  //           />
+  //         )}
+  //       </View>
+  //     );
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
   
   renderNearbyUserDetail = ({item, index}) => {
     return (
@@ -92,6 +445,7 @@ export default class UserSwiper extends Component {
       </View>
     );
   }
+
 
   render() {
     console.log("Inside render of UserSwiper.js")
@@ -162,6 +516,11 @@ export default class UserSwiper extends Component {
                       />
                   )}
               </View>
+
+
+{/* // {this.amazingCircle(this.props.data)} */}
+
+
           </TouchableOpacity>
       </SafeAreaView>
     );
@@ -350,3 +709,18 @@ export default class UserSwiper extends Component {
     );
   }
 }
+
+
+
+// From DrawerContent.js to implement amazingCircle?
+// const mapStateToProps = ({auth, profile}) => {
+//   const {user} = auth;
+//   const {isFetchingProfileData, data} = profile;
+//   return {user, isFetchingProfileData, data};
+// };
+
+// // export default DrawerContent;
+// export default connect(
+//   mapStateToProps,
+//   {profileFetch},
+// )(DrawerContent);
