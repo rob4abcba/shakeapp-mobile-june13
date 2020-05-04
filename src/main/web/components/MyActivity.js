@@ -31,7 +31,7 @@ class MyActivity extends Component {
     // CHAT
     // RL this.socket = SocketIOClient('https://www.shakeapp-backend.net');
     this.socket = SocketIOClient('http://localhost:8000');
-    
+
     this.socket.emit('init', {
       token: this.props.user,
     });
@@ -131,6 +131,18 @@ class MyActivity extends Component {
     const inputRange = props.navigationState.routes.map((x, i) => i);
     return (
       <View style={styles.tabBar}>
+        {/* <Text
+          style={{
+            alignContent: 'center',
+            fontSize: 24,
+            fontWeight: '700',
+            letterSpacing: -0.4,
+            color: 'red',
+            paddingLeft: 3,
+          }}>
+          NOTIFICATIONS3
+        </Text> */}
+
         {props.navigationState.routes.map((route, i) => {
           const color = props.position.interpolate({
             inputRange,
@@ -143,9 +155,21 @@ class MyActivity extends Component {
               key={i}
               style={[styles.tabItem, {backgroundColor: color, opacity: 0.49}]}
               onPress={() => this.setState({index: i})}>
-              <Text style={{color: 'black', fontWeight: '500', fontSize: 16}}>
-                {route.title}
+              <Text style={{color: 'red', fontWeight: '500', fontSize: 16}}>
+                {route.title} Yo
               </Text>
+
+              {/* <Text
+                style={{
+                  alignContent: 'center',
+                  fontSize: 24,
+                  fontWeight: '700',
+                  letterSpacing: -0.4,
+                  color: 'red',
+                  paddingLeft: 3,
+                }}>
+                NOTIFICATIONS4
+              </Text> */}
             </AnimatedButton>
           );
         })}
@@ -155,7 +179,7 @@ class MyActivity extends Component {
 
   _renderScene = ({route}) => {
     return route.key == 'first' ? (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, backgroundColor: 'yellow'}}>
         <FlatList
           data={this.props.notificationsList}
           keyExtractor={(x, i) => i.toString()}
@@ -221,7 +245,7 @@ class MyActivity extends Component {
           <View
             style={{
               flex: 1,
-              marginLeft: 74,
+              marginLeft: 44,
               flexDirection: 'row',
               alignItems: 'center',
             }}>
@@ -241,7 +265,8 @@ class MyActivity extends Component {
                     height: '100%',
                     width: '100%',
                     borderRadius: 20,
-                    backgroundColor: 'rgba(0,0,0,0)',
+                    // backgroundColor: 'rgba(0,0,0,0)',
+                    backgroundColor: 'red',
                   }}
                 />
               ) : (
@@ -251,7 +276,8 @@ class MyActivity extends Component {
                     height: '100%',
                     width: '100%',
                     borderRadius: 20,
-                    backgroundColor: 'rgba(0,0,0,0)',
+                    // backgroundColor: 'rgba(0,0,0,0)',
+                    backgroundColor: 'red',
                   }}
                 />
               )}
@@ -263,11 +289,22 @@ class MyActivity extends Component {
                 fontWeight: '700',
                 letterSpacing: -0.4,
                 color: 'white',
-                paddingLeft: 13,
+                paddingLeft: 3,
               }}>
               {fullName}
             </Text>
           </View>
+          {/* <Text
+            style={{
+              alignContent: 'center',
+              fontSize: 24,
+              fontWeight: '700',
+              letterSpacing: -0.4,
+              color: 'white',
+              paddingLeft: 3,
+            }}>
+            NOTIFICATIONS1
+          </Text> */}
         </View>
 
         <TabView
@@ -275,7 +312,19 @@ class MyActivity extends Component {
           renderScene={this._renderScene}
           renderHeader={this._renderHeader}
           onIndexChange={this._handleIndexChange}
+          style={{ backgroundColor: 'pink' }}
         />
+        {/* <Text
+          style={{
+            alignContent: 'center',
+            fontSize: 24,
+            fontWeight: '700',
+            letterSpacing: -0.4,
+            color: 'red',
+            paddingLeft: 3,
+          }}>
+          NOTIFICATIONS2
+        </Text> */}
       </View>
     );
   }
@@ -287,7 +336,10 @@ const mapStateToProps = ({notification, auth, profile}) => {
   const {data} = profile;
   return {user, notificationsList, friendsList, data};
 };
-export default connect(
-  mapStateToProps,
-  {friendsFetch, notificationsFetch, onSendMessage, chatsFetch, profileFetch},
-)(MyActivity);
+export default connect(mapStateToProps, {
+  friendsFetch,
+  notificationsFetch,
+  onSendMessage,
+  chatsFetch,
+  profileFetch,
+})(MyActivity);
