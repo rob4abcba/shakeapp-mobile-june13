@@ -737,15 +737,17 @@ class NearbyUserDetail extends Component {
             paddingBottom: 61,
             paddingLeft: 24,
             paddingRight: 24,
+            backgroundColor: 'orange',
           }}>
           <View
             style={{
               height: 61,
               flexDirection: 'row',
-              marginTop: 60, //Move SKIP below Shake Notification at upper right
+              marginTop: 90, //Move SKIP below Shake Notification at upper right
               alignItems: 'center',
               justifyContent: 'flex-end',
               paddingRight: 29,
+              // backgroundColor: 'yellow',
             }}>
             <TouchableOpacity
               style={{justifyContent: 'space-between'}}
