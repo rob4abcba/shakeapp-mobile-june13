@@ -482,8 +482,8 @@ class NearbyUserDetail extends Component {
               onPress={this.onChatButtonPress.bind(this)}
               activeOpacity={0.5} //MC: Opacity when clicked
               style={{
-                height: 5,
-                width: 100,
+                height: 50,
+                width: 50,
                 // backgroundColor: 'pink',
                 // backgroundColor: 'rgb(255, 255, 0, alpha)',
                 // backgroundColor: 'rgba(255, 255, 0, 0.9)',
