@@ -247,9 +247,9 @@ class Mood2 extends Component {
       <View style={{flex: 1, justifyContent: 'center', flexDirection: 'row'}}>
         <TouchableOpacity
           style={{
-            height: 50,
-            // backgroundColor: '#62cfb9',
-            backgroundColor: 'white',
+            height: 70,
+            backgroundColor: '#62cfb9',
+            // backgroundColor: 'white',
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 8,
@@ -274,9 +274,9 @@ class Mood2 extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            height: 50,
-            // backgroundColor: '#62cfb9',
-            backgroundColor: 'white',
+            height: 70,
+            backgroundColor: '#62cfb9',
+            // backgroundColor: 'white',
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 8,
