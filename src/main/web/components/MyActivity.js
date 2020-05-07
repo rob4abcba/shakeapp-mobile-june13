@@ -319,8 +319,9 @@ class MyActivity extends Component {
           // activeColor={{color: 'red'}}
           // inactiveColor={{color: 'red'}}
           renderTabBar={ (props) => (<TabBar {...props}
-            indicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)' }}
-            style={{ backgroundColor: 'black' }}
+            // indicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)' }}
+            indicatorStyle={{ backgroundColor: 'yellow' }}
+            style={{ backgroundColor: 'blue' }}
           /> ) }
         />
         {/* <Text
