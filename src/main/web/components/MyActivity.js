@@ -13,7 +13,7 @@ import {
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {Icon} from 'react-native-elements';
-import {TabView, SceneMap} from 'react-native-tab-view';
+import {TabView, TabBar, SceneMap} from 'react-native-tab-view';
 import {Spinner} from './common';
 import NearbyUser from './NearbyUser';
 import {notificationsFetch, friendsFetch, profileFetch} from '../actions';
@@ -179,7 +179,7 @@ class MyActivity extends Component {
 
   _renderScene = ({route}) => {
     return route.key == 'first' ? (
-      <View style={{flex: 1, backgroundColor: 'yellow'}}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
         <FlatList
           data={this.props.notificationsList}
           keyExtractor={(x, i) => i.toString()}
@@ -307,12 +307,21 @@ class MyActivity extends Component {
           </Text> */}
         </View>
 
+
+
         <TabView
           navigationState={this.state}
           renderScene={this._renderScene}
           renderHeader={this._renderHeader}
           onIndexChange={this._handleIndexChange}
           style={{ backgroundColor: 'pink' }}
+          // indicatorStyle={{color: 'red'}}
+          // activeColor={{color: 'red'}}
+          // inactiveColor={{color: 'red'}}
+          renderTabBar={ (props) => (<TabBar {...props}
+            indicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)' }}
+            style={{ backgroundColor: 'black' }}
+          /> ) }
         />
         {/* <Text
           style={{
