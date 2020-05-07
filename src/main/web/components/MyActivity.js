@@ -179,7 +179,7 @@ class MyActivity extends Component {
 
   _renderScene = ({route}) => {
     return route.key == 'first' ? (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, backgroundColor: 'yellow'}}>
         <FlatList
           data={this.props.notificationsList}
           keyExtractor={(x, i) => i.toString()}
