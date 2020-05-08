@@ -40,6 +40,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 import {Text, View, TouchableOpacity} from 'react-native';
+import AuthScreen from './components/AuthScreen';
 var styles = require('./Styles');
 
 
@@ -141,6 +142,12 @@ const RouterComponent = () => {
             <Scene
               key="chatConversation"
               component={ChatConversation}
+              // hideNavBar
+            />
+
+            <Scene
+              key="chatAuth"
+              component={AuthScreen}
               // hideNavBar
             />
 
