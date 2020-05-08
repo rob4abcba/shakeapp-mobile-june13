@@ -520,29 +520,6 @@ class NearbyUserDetail extends Component {
                   shadowColor: 'rgb(36, 100, 193)',
                   shadowOffset: {width: 4, height: 2},
                 }}>
-                {/* {this.props.notification &&
-              this.props.nearbyUser.user.notificationType == 'shake' ? (
-                <Text
-                  style={{
-                    color: 'black',
-                    letterSpacing: -0.2,
-                    fontSize: 18,
-                    fontWeight: '600',
-                  }}>
-                  Chat
-                </Text>
-              ) : (
-                <Text
-                  style={{
-                    color: 'white',
-                    letterSpacing: -0.2,
-                    fontSize: 18,
-                    fontWeight: '600',
-                  }}>
-                  <IconAwesome name="comment" size={48} color="green"/>
-                </Text>
-              )} */}
-
                 <Image
                   style={{width: 100}}
                   source={require('../assets/chat_shake.png')}
@@ -550,16 +527,27 @@ class NearbyUserDetail extends Component {
                 />
                 {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                 {/* <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/> */}
-
-                {/* <Text
-                  style={{
-                    color: 'white',
-                    letterSpacing: -0.2,
-                    fontSize: 18,
-                    fontWeight: '600',
-                  }}>
-                  <IconAwesome name="comment" size={48} color="green"/>
-                </Text> */}
+              </TouchableOpacity>
+              <TouchableOpacity
+                // onPress={this.onChatButtonPress.bind(this)}
+                onPress={() => Actions.chatAuth()}
+                activeOpacity={0.5} //MC: Opacity when clicked
+                style={{
+                  height: 50,
+                  width: 50,
+                  // backgroundColor: 'pink',
+                  // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                  // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 8,
+                  shadowOpacity: 0.1,
+                  shadowColor: 'rgb(36, 100, 193)',
+                  shadowOffset: {width: 4, height: 2},
+                }}>
+                {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+                <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
               </TouchableOpacity>
             </View>
 
