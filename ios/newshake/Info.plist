@@ -4,32 +4,38 @@
 <dict>
 	<key></key>
 	<string></string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>newshake</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Your application need NSAppleMusicUsageDescription permission.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Your application need Calendars permission.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Your application need NSMotionUsageDescription permission.</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Your application need Camera permission.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Your application need NSBluetoothPeripheralUsageDescription permission.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Your application need Microphone permission.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>50.18.1.14</key>
@@ -43,33 +49,25 @@
 				<true/>
 			</dict>
 		</dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Your application need NSAppleMusicUsageDescription permission.</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Your application need NSBluetoothAlwaysUsageDescription permission.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Your application need NSBluetoothPeripheralUsageDescription permission.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Your application need Calendars permission.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Your application need Camera permission.</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Your application need Contacts permission.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>I want to get your location Information in background</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Your application need Microphone permission.</string>
-	<key>NSMotionUsageDescription</key>
-	<string>Your application need NSMotionUsageDescription permission.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your application need NSPhotoLibraryUsageDescription permission.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Your application need NSSpeechRecognitionUsageDescription permission.</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
@@ -89,25 +87,27 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>location</string>
-		<string>remote-notification</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>newshake</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>I want to get your location Information in background</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your application need NSPhotoLibraryUsageDescription permission.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Your application need NSBluetoothAlwaysUsageDescription permission.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Your application need NSSpeechRecognitionUsageDescription permission.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>NSLocationWhenInUseUsageDescription</string>
 </dict>
 </plist>
