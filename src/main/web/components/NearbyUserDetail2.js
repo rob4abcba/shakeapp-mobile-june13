@@ -17,6 +17,7 @@ import {Actions} from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import NearbyRestaurant from './NearbyRestaurant';
 import Video from 'react-native-video';
+import ConnectyCube from 'react-native-connectycube';
 import {Spinner, Card} from './common';
 import {Button} from 'react-native-elements';
 import IconAwesome from 'react-native-vector-icons/FontAwesome';
