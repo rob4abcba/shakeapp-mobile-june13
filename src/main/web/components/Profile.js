@@ -883,6 +883,18 @@ class Profile extends Component {
                 switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
                 switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
               />
+
+<Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        thumbColor={true ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        // onValueChange={toggleSwitch}
+        onValueChange={()=>{}}
+        // value={isEnabled}
+        value={true}
+      />
+
             </View>
           </View>
         </View>
