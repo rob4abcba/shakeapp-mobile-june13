@@ -6,6 +6,7 @@ export default class AuthService {
   init = () => ConnectyCube.init(...config);
 
   login = user => {
+    console.log("auth-service.js: user = ", user); //Why not see output from this console.log?
     return new Promise((resolve, reject) => {
       ConnectyCube.createSession(user)
         .then(() =>
