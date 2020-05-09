@@ -12,38 +12,38 @@ import {
 } from 'react-native';
 import {AuthService} from '../services/auth-service';
 // import {users} from '../config';
-import { ConnectyCube } from 'react-native-connectycube';
+import {ConnectyCube} from 'react-native-connectycube';
 
 const users = [
-    {
-      id: 72780,
-      name: 'Alice',
-      login: 'videouser1',
-      password: 'videouser1',
-      color: '#34ad86',
-    },
-    {
-      id: 72781,
-      name: 'Bob',
-      login: 'videouser2',
-      password: 'videouser2',
-      color: '#077988',
-    },
-    {
-      id: 590565,
-      name: 'Ciri',
-      login: 'videouser3',
-      password: 'videouser3',
-      color: '#13aaae',
-    },
-    {
-      id: 590583,
-      name: 'Dexter',
-      login: 'videouser4',
-      password: 'videouser4',
-      color: '#056a96',
-    },
-  ];
+  {
+    id: 72780,
+    name: 'Alice',
+    login: 'videouser1',
+    password: 'videouser1',
+    color: '#34ad86',
+  },
+  {
+    id: 72781,
+    name: 'Bob',
+    login: 'videouser2',
+    password: 'videouser2',
+    color: '#077988',
+  },
+  {
+    id: 590565,
+    name: 'Ciri',
+    login: 'videouser3',
+    password: 'videouser3',
+    color: '#13aaae',
+  },
+  {
+    id: 590583,
+    name: 'Dexter',
+    login: 'videouser4',
+    password: 'videouser4',
+    color: '#056a96',
+  },
+];
 
 export default class AuthScreen extends PureComponent {
   state = {isLogging: false};
@@ -53,10 +53,10 @@ export default class AuthScreen extends PureComponent {
   login = currentUser => {
     const _onSuccessLogin = () => {
       const {navigation} = this.props;
-      const opponentsIds = users  // one user will come from NearbyUserDetail2.js
+      const opponentsIds = users // one user will come from NearbyUserDetail2.js
         .filter(opponent => opponent.id !== currentUser.id)
         .map(opponent => opponent.id);
-
+      console.log('AuthScreen.js: BEFORE', AuthService);
       navigation.push('VideoScreen', {opponentsIds});
     };
 
@@ -66,6 +66,7 @@ export default class AuthScreen extends PureComponent {
 
     this.setIsLogging(true);
 
+    console.log('AuthScreen.js:', AuthService);
     AuthService.login(currentUser)
       .then(_onSuccessLogin)
       .catch(_onFailLogin)
@@ -75,7 +76,7 @@ export default class AuthScreen extends PureComponent {
   render() {
     const {isLogging} = this.state;
     const logoSrc = require('../assets/seafood.png');
-
+    // this.login.bind(this);
     return (
       <View style={[styles.container, styles.f1]}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -92,7 +93,7 @@ export default class AuthScreen extends PureComponent {
           </View>
         </SafeAreaView>
         <SafeAreaView style={[styles.authBtns, styles.f1]}>
-          {users.map(user => (
+          {/* {users.map(user => (
             <TouchableOpacity key={user.id} onPress={() => this.login(user)}>
               <View
                 style={[styles.authBtn(user.color), styles.centeredChildren]}>
@@ -101,7 +102,16 @@ export default class AuthScreen extends PureComponent {
                 </Text>
               </View>
             </TouchableOpacity>
-          ))}
+          ))} */}
+
+          <TouchableOpacity onPress={() => this.login(users[0])}>
+            <View
+              style={[styles.authBtn(users[0].color), styles.centeredChildren]}>
+              <Text style={styles.authBtnText}>
+                {`Log in as ${users[0].name}`}
+              </Text>
+            </View>
+          </TouchableOpacity>
         </SafeAreaView>
       </View>
     );
