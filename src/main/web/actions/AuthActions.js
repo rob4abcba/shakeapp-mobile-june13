@@ -175,6 +175,7 @@ export const registerUser = (
   countryCode,
   password,
   thisRef,
+  gender,
   callback,
 ) => {
   return dispatch => {
@@ -191,6 +192,7 @@ export const registerUser = (
         password: password,
         fullName: fullName,
         phone: phone,
+        gender: gender
       }),
     })
       .then(response => response.json())
