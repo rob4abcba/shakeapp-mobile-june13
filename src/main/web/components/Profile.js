@@ -884,7 +884,12 @@ class Profile extends Component {
                 switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
               />
 
-<Switch
+
+
+            </View>
+
+
+            <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
         thumbColor={true ? "#f5dd4b" : "#f4f3f4"}
@@ -895,7 +900,8 @@ class Profile extends Component {
         value={true}
       />
 
-            </View>
+
+
           </View>
         </View>
       </View>
