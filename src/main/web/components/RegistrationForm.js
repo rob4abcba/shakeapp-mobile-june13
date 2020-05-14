@@ -35,6 +35,7 @@ import CountryPicker, {
 } from 'react-native-country-picker-modal';
 import Modal from 'react-native-modal';
 import {ScaledSheet} from 'react-native-size-matters';
+import {SegmentedControls} from 'react-native-radio-buttons';
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class RegistrationForm extends Component {
     this.state = {
       cca2,
       callingCode,
+      gender: 'male',
       checked: false,
       data: {
         category: '',
@@ -122,6 +124,7 @@ class RegistrationForm extends Component {
       '+' + this.state.callingCode,
       password,
       this,
+      this.state.gender,
       function(success, thisRef) {
         if (success) {
           Actions.verificationCode({type: 'push'});
@@ -224,6 +227,10 @@ class RegistrationForm extends Component {
 
   tryAgain() {
     this.setState({isVisible: false});
+  }
+
+  onGenderChange(i) {
+    this.setState({gender: i});
   }
 
   render() {
@@ -396,6 +403,21 @@ class RegistrationForm extends Component {
               <Icon name="lock" color="#62cfb9" size={24} />
             </View>
 
+            <View style={[style.textInputContainer, {marginTop: 15}]}>
+              <SegmentedControls
+                options={['MALE', 'FEMALE', 'OTHER']}
+                onSelection={gender =>
+                  this.onGenderChange(gender.toLowerCase())
+                }
+                selectedOption={this.state.gender.toUpperCase()}
+                optionContainerStyle={{flex: 1, borderWidth: 0}}
+                tint={'#62cfb9'}
+                selectedTint={'white'}
+                backTint={'rgba(0,0,0,0.03)'}
+                containerStyle={{flex: 1, borderWidth: 0}}
+              />
+            </View>
+
             {Platform.OS === 'android' && (
               <View
                 style={{
@@ -491,12 +513,9 @@ const mapStateToProps = ({auth, config}) => {
   return {name, phone, password, error, loading};
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    nameChanged,
-    phoneChanged,
-    passwordChanged,
-    registerUser,
-  },
-)(RegistrationForm);
+export default connect(mapStateToProps, {
+  nameChanged,
+  phoneChanged,
+  passwordChanged,
+  registerUser,
+})(RegistrationForm);
