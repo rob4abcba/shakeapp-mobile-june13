@@ -269,7 +269,7 @@ class NearbyUserDetail extends Component {
     }
 
     return (
-      <View style={{flex: 1, marginBottom: 0}}>
+      <View style={{flexDirection: 'column-reverse', flex: 1, marginBottom: 0}}>
         {/* Error modal */}
         <Modal
           backdropOpacity={0}
@@ -421,9 +421,20 @@ class NearbyUserDetail extends Component {
             </View>
           </View>
         </Modal>
+        
+        
+        
+        
         <View style={{flexDirection: 'column-reverse', flex: 1 }}>
-          {/* <View style={{flexDirection: 'column-reverse', flex: 1}}> */}
+          
+          
+          
+          
           <View style={{flex: 9999}}>  
+
+
+
+
             {!videoURL && photoURL && (
               <ImageBackground
                 // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
@@ -670,6 +681,10 @@ class NearbyUserDetail extends Component {
                 </View>
               </ImageBackground>
             )}
+
+
+
+
             {!videoURL && !photoURL && (
               <ImageBackground
                 // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
@@ -702,7 +717,15 @@ class NearbyUserDetail extends Component {
                 />
               </ImageBackground>
             )}
+
+
+
+
           </View>
+
+
+
+
           <View style={{flex: 1}}>
             {videoURL && (
               <Video
