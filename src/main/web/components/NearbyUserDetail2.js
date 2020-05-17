@@ -425,28 +425,37 @@ class NearbyUserDetail extends Component {
         
         
         
-        <View style={{flexDirection: 'column-reverse', flex: 1 }}>
+    <View style={{flexDirection: 'column-reverse', flex: 1 }}>
 
-
+    <View
+                  style={{
+                    // flexDirection: 'column-reverse',
+                    flexDirection: 'row',
+                    flex: 300, //Controls height of transparent banner with info at bottom of user profiles
+                    // zIndex: 1,
+                    // backgroundColor: 'rgba(255,255,255,.3)', // TODO
+                    backgroundColor: 'rgba(0,255,111,.1)', // TODO
+                    paddingLeft: 5,
+                    paddingRight: 36,
+                    paddingBottom: 30, // Adjust
+                    // justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
+                    marginBottom: 0,
+                  }}>
 
 
         <View
                   style={{
                     // flexDirection: 'column-reverse',
                     flexDirection: 'column',
-                    // flexDirection: 'row',
                     flex: 9, //Controls height of transparent banner with info at bottom of user profiles
-                    // flex: 0.6,
                     zIndex: 1,
-                    backgroundColor: 'rgba(255,255,255,.7)', // TODO
+                    // backgroundColor: 'rgba(255,0,255,.2)', // TODO
                     paddingLeft: 36,
                     paddingRight: 36,
-                    justifyContent: 'flex-end',
-                    // alignItems: 'flex-end',
-                    // position: 'absolute',
-                    // bottom: 0,
-                    marginBottom: 50,
-                    // marginBottom: -400,
+                    // justifyContent: 'flex-end',
+                    justifyContent: 'center',
+                    marginBottom: 0,
                   }}>
                   <View
                     style={{
@@ -467,68 +476,6 @@ class NearbyUserDetail extends Component {
                       }}>
                       {fullName}
                     </Text>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        // flexDirection: 'row',
-                        alignItems: 'flex-end',
-                        padding: 15,
-                        marginTop: 15,
-                        marginBottom: -80,
-                      }}>
-                      <TouchableOpacity
-                        onPress={this.onChatButtonPress.bind(this)}
-                        activeOpacity={0.5} //MC: Opacity when clicked
-                        style={{
-                          height: 50,
-                          width: 50,
-                          // backgroundColor: 'pink',
-                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
-                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: 8,
-                          shadowOpacity: 0.1,
-                          shadowColor: 'rgb(36, 100, 193)',
-                          shadowOffset: {width: 4, height: 2},
-                        }}>
-                        <Image
-                          style={{width: 100}}
-                          source={require('../assets/chat_shake.png')}
-                          resizeMode="contain"
-                        />
-                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
-                        {/* <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/> */}
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        // onPress={this.onChatButtonPress.bind(this)}
-                        onPress={() => Actions.chatAuth()}
-                        activeOpacity={0.5} //MC: Opacity when clicked
-                        style={{
-                          height: 50,
-                          width: 50,
-                          // backgroundColor: 'pink',
-                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
-                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: 8,
-                          shadowOpacity: 0.1,
-                          shadowColor: 'rgb(36, 100, 193)',
-                          shadowOffset: {width: 4, height: 2},
-                        }}>
-                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
-                        <Image
-                          style={{width: 50}}
-                          source={require('../assets/icons8-video-call-100.png')}
-                          resizeMode="contain"
-                        />
-                      </TouchableOpacity>
-                    </View>
                   </View>
 
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -627,39 +574,104 @@ class NearbyUserDetail extends Component {
 
                   <Text style={{padding: 0}}>{bio}</Text>
 
-                  {/* <View style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}> */}
-                  <View>
-                    <TouchableOpacity
+
+                </View>
+          
+
+
+
+        <View
+                      style={{
+                        flexDirection: 'column',
+                        // flexDirection: 'row',
+                        alignItems: 'center',
+                        // justifyContent: 'flex-end',
+                        justifyContent: 'center',
+                        padding: 0,
+                        marginTop: 0,
+                        marginBottom: 0,
+                        flex: 9,
+                      }}>
+                      <TouchableOpacity
+                        onPress={this.onChatButtonPress.bind(this)}
+                        activeOpacity={0.5} //MC: Opacity when clicked
+                        style={{
+                          height: 50,
+                          width: 50,
+                          // backgroundColor: 'pink',
+                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 8,
+                          shadowOpacity: 0.1,
+                          shadowColor: 'rgb(36, 100, 193)',
+                          shadowOffset: {width: 4, height: 2},
+                        }}>
+                        <Image
+                          style={{width: 100}}
+                          source={require('../assets/chat_shake.png')}
+                          resizeMode="contain"
+                        />
+                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+                        {/* <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/> */}
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        // onPress={this.onChatButtonPress.bind(this)}
+                        onPress={() => Actions.chatAuth()}
+                        activeOpacity={0.5} //MC: Opacity when clicked
+                        style={{
+                          height: 50,
+                          width: 50,
+                          // backgroundColor: 'pink',
+                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 8,
+                          shadowOpacity: 0.1,
+                          shadowColor: 'rgb(36, 100, 193)',
+                          shadowOffset: {width: 4, height: 2},
+                        }}>
+                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+                        <Image
+                          style={{width: 50}}
+                          source={require('../assets/icons8-video-call-100.png')}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+
+
+                      <TouchableOpacity
                       onPress={this.onReportButtonPress.bind(this)}
                       style={{
                         flexDirection: 'row',
                         height: 25,
                         alignItems: 'flex-end',
                         paddingRight: 12,
-                        paddingLeft: 15,
+                        paddingLeft: 1,
                         paddingTop: 5,
                         borderTopWidth: StyleSheet.hairlineWidth,
                         // borderColor: 'rgba(255, 0, 0, 0.9)',
                         borderColor: 'rgba(0, 0, 0, 0)',
+                        backgroundColor: 'pink',
                       }}>
-                      <View
-                        style={{
-                          flex: 1,
-                          height: 25,
-                          alignItems: 'flex-end',
-                          justifyContent: 'center',
-                          marginBottom: 1,
-                        }}>
-                        <IconAwesome name="flag" size={18} color="black" />
-                      </View>
+
+                        <IconAwesome name="flag" size={18} color="black" resizeMode="contain" />
+
                     </TouchableOpacity>
-                  </View>
-                </View>
-          
-          
-          
-          
-          <View style={{flex: 99}}>  
+
+
+                    </View>
+
+
+      </View>    
+
+          <View style={{flex: 999}}>  
 
 
             {!videoURL && photoURL && (
@@ -682,17 +694,18 @@ class NearbyUserDetail extends Component {
             {!videoURL && !photoURL && (
               <ImageBackground
                 // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
-                resizeMode={'cover'}
-                // resizeMode='contain'
+                // resizeMode={'cover'}
+                resizeMode='contain'
                 //RL: Good syntax but missing other case and photo exists case
                 source={
                   gender === 'male'
                     ? require('../assets/shakeapp_man.png')
+                    // ? require('../assets/man_top_half.png')
                     : gender === 'female'
                     ? require('../assets/shakeapp_woman.png')
                     : require('../assets/seafood.png')
                 }
-                style={{flex: 1, height: undefined, width: undefined }}
+                style={{flex: 1, height: undefined, width: undefined, justifyContent: 'center'}}
                 // style={{width: '100%', height: '200%', flex: 1}}
                 >
           
