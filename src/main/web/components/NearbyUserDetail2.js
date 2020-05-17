@@ -426,41 +426,16 @@ class NearbyUserDetail extends Component {
         
         
         <View style={{flexDirection: 'column-reverse', flex: 1 }}>
-          
-          
-          
-          
-          <View style={{flex: 9999}}>  
 
 
 
 
-            {!videoURL && photoURL && (
-              <ImageBackground
-                // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
-                source={{
-                  uri: photoURL,
-                }}
-                resizeMode="contain" // If want entire photo shrunk to fit container in worse case axis
-                style={{flex: 1, height: undefined, width: undefined }}>
-                {/* style={{height: '100%', flex: 1}}> */}
-                {/* style={{width: '100%', flex: 1}}> */}
-                {/* style={{width: '100%', height: '100%', flex: 1}}> */}
-                <LinearGradient
-                  colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
-                  style={{
-                    height: 100,
-                    width: '100%',
-                    position: 'absolute',
-                    top: 0,
-                  }}
-                />
-
-                <View
+        <View
                   style={{
                     // flexDirection: 'column-reverse',
                     flex: 1, //Controls height of transparent banner with info at bottom of user profiles
                     // flex: 0.6,
+                    zIndex: 1,
                     backgroundColor: 'rgba(255,255,255,.2)',
                     paddingLeft: 36,
                     paddingRight: 36,
@@ -468,7 +443,7 @@ class NearbyUserDetail extends Component {
                     // alignItems: 'flex-end',
                     // position: 'absolute',
                     // bottom: 0,
-                    marginBottom: 0,
+                    marginBottom: 50,
                     // marginBottom: -400,
                   }}>
                   <View
@@ -665,20 +640,42 @@ class NearbyUserDetail extends Component {
                           justifyContent: 'center',
                           marginBottom: 1,
                         }}>
-                        {/* <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: '500',
-                    color: 'red',
-                    letterSpacing: 2.5,
-                    
-                  }}> */}
                         <IconAwesome name="flag" size={18} color="black" />
-                        {/* </Text> */}
                       </View>
                     </TouchableOpacity>
                   </View>
                 </View>
+          
+          
+          
+          
+          <View style={{flex: 9999}}>  
+
+
+
+
+            {!videoURL && photoURL && (
+              <ImageBackground
+                // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
+                source={{
+                  uri: photoURL,
+                }}
+                resizeMode="contain" // If want entire photo shrunk to fit container in worse case axis
+                style={{flex: 1, height: undefined, width: undefined }}>
+                {/* style={{height: '100%', flex: 1}}> */}
+                {/* style={{width: '100%', flex: 1}}> */}
+                {/* style={{width: '100%', height: '100%', flex: 1}}> */}
+
+                <LinearGradient
+                  colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
+                  style={{
+                    height: 100,
+                    width: '100%',
+                    position: 'absolute',
+                    top: 0,
+                  }}
+                />
+
               </ImageBackground>
             )}
 
@@ -688,7 +685,8 @@ class NearbyUserDetail extends Component {
             {!videoURL && !photoURL && (
               <ImageBackground
                 // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
-                resizeMode={'cover'}
+                // resizeMode={'cover'}
+                resizeMode='contain'
                 //RL: Good syntax but missing other case and photo exists case
                 source={
                   gender === 'male'
@@ -697,15 +695,10 @@ class NearbyUserDetail extends Component {
                     ? require('../assets/shakeapp_woman.png')
                     : require('../assets/seafood.png')
                 }
-                // style={{
-                //   height: 34,
-                //   width: 34,
-                //   borderRadius: 17,
-                //   // backgroundColor: 'white',
-                //   backgroundColor: 'rgba(0,0,0,0.1)',
-                // }}
-
-                style={{width: '100%', height: '200%', flex: 1}}>
+                style={{flex: 1, height: undefined, width: undefined }}
+                // style={{width: '100%', height: '200%', flex: 1}}
+                >
+          
                 <LinearGradient
                   colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
                   style={{
@@ -726,7 +719,7 @@ class NearbyUserDetail extends Component {
 
 
 
-          <View style={{flex: 1}}>
+          <View style={{flex: 888}}>
             {videoURL && (
               <Video
                 //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
@@ -746,6 +739,12 @@ class NearbyUserDetail extends Component {
               />
             )}
           </View>
+
+
+
+
+
+
         </View>
       </View>
     );
