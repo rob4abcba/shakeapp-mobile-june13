@@ -225,7 +225,7 @@ class Onboarding extends Component {
                 letterSpacing: 0.5,
                 paddingLeft: 6,
               }}>
-              Shake.
+              Shake
             </Text>
           </View>
 
