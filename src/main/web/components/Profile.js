@@ -91,6 +91,7 @@ class Profile extends Component {
   componentWillMount() {
     StatusBar.setHidden(true);
     this.props.profileFetch(this.props.user);
+    console.log("Profile.js: this.props.user = ", this.props.user);
 
     if (this.props.data) {
       this.setState({data: this.props.data});
@@ -269,7 +270,7 @@ class Profile extends Component {
     if (this.props.isFetchingProfileData) {
       return <Spinner size="large" />;
     }
-
+console.log("Profile.js: this.props.data = ", this.props.data)
     const {fullName, shakes, birthday} = this.props.data;
     var photoURL = this.props.data.mood.photoURL;
 
