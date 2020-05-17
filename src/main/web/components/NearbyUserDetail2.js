@@ -431,12 +431,12 @@ class NearbyUserDetail extends Component {
                   style={{
                     // flexDirection: 'column-reverse',
                     flexDirection: 'row',
-                    flex: 300, //Controls height of transparent banner with info at bottom of user profiles
+                    flex: 350, //Controls height of transparent banner with info at bottom of user profiles
                     // zIndex: 1,
                     // backgroundColor: 'rgba(255,255,255,.3)', // TODO
                     backgroundColor: 'rgba(0,255,111,.1)', // TODO
                     paddingLeft: 5,
-                    paddingRight: 36,
+                    paddingRight: 1,
                     paddingBottom: 30, // Adjust
                     // justifyContent: 'flex-end',
                     justifyContent: 'space-between',
@@ -448,11 +448,11 @@ class NearbyUserDetail extends Component {
                   style={{
                     // flexDirection: 'column-reverse',
                     flexDirection: 'column',
-                    flex: 9, //Controls height of transparent banner with info at bottom of user profiles
+                    flex: 50, //Controls height of transparent banner with info at bottom of user profiles
                     zIndex: 1,
                     // backgroundColor: 'rgba(255,0,255,.2)', // TODO
-                    paddingLeft: 36,
-                    paddingRight: 36,
+                    paddingLeft: 1,
+                    paddingRight: 1,
                     // justifyContent: 'flex-end',
                     justifyContent: 'center',
                     marginBottom: 0,
@@ -516,7 +516,7 @@ class NearbyUserDetail extends Component {
                   {preferences && (
                     <View
                       style={{
-                        marginTop: 12,
+                        marginTop: 2,
                         justifyContent: 'flex-start',
                         flexDirection: 'row',
                         alignItems: 'center',
