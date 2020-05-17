@@ -433,10 +433,12 @@ class NearbyUserDetail extends Component {
         <View
                   style={{
                     // flexDirection: 'column-reverse',
-                    flex: 1, //Controls height of transparent banner with info at bottom of user profiles
+                    flexDirection: 'column',
+                    // flexDirection: 'row',
+                    flex: 9, //Controls height of transparent banner with info at bottom of user profiles
                     // flex: 0.6,
                     zIndex: 1,
-                    backgroundColor: 'rgba(255,255,255,.2)',
+                    backgroundColor: 'rgba(255,255,255,.7)', // TODO
                     paddingLeft: 36,
                     paddingRight: 36,
                     justifyContent: 'flex-end',
@@ -452,6 +454,7 @@ class NearbyUserDetail extends Component {
                       paddingTop: 0,
                       justifyContent: 'space-between',
                       flexDirection: 'row',
+                      // flex: 1,
                       // flexDirection: 'column',
                       alignItems: 'center',
                     }}>
@@ -466,6 +469,8 @@ class NearbyUserDetail extends Component {
                     </Text>
                     <View
                       style={{
+                        flexDirection: 'column',
+                        // flexDirection: 'row',
                         alignItems: 'flex-end',
                         padding: 15,
                         marginTop: 15,
@@ -480,7 +485,8 @@ class NearbyUserDetail extends Component {
                           // backgroundColor: 'pink',
                           // backgroundColor: 'rgb(255, 255, 0, alpha)',
                           // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
                           justifyContent: 'center',
                           alignItems: 'center',
                           borderRadius: 8,
@@ -506,7 +512,8 @@ class NearbyUserDetail extends Component {
                           // backgroundColor: 'pink',
                           // backgroundColor: 'rgb(255, 255, 0, alpha)',
                           // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
                           justifyContent: 'center',
                           alignItems: 'center',
                           borderRadius: 8,
@@ -516,7 +523,7 @@ class NearbyUserDetail extends Component {
                         }}>
                         {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                         <Image
-                          style={{width: 100}}
+                          style={{width: 50}}
                           source={require('../assets/icons8-video-call-100.png')}
                           resizeMode="contain"
                         />
@@ -528,10 +535,13 @@ class NearbyUserDetail extends Component {
                     {/* <IconAwesome name="map-marker" color="#b1b1b1" size={17} /> */}
                     <Text
                       style={{
-                        color: '#b1b1b1',
+                        // color: '#b1b1b1',
+                        color: 'orange',
                         fontSize: 14,
-                        paddingLeft: 5,
-                        marginTop: 10,
+                        paddingLeft: 0,
+                        marginTop: 0,
+                        marginLeft: 0,
+                        marginBottom: 0,
                       }}>
                       {gender}
                     </Text>
@@ -539,15 +549,15 @@ class NearbyUserDetail extends Component {
 
                   {birthday && (
                     <Text
-                      style={{color: '#b1b1b1', fontSize: 14, marginTop: 5}}>
+                      style={{color: 'purple', fontSize: 14, marginTop: 5}}>
                       {_calculateAge(new Date(birthday)) + ' years old'}
                     </Text>
                   )}
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <IconAwesome name="map-marker" color="#b1b1b1" size={17} />
+                    <IconAwesome name="map-marker" color="purple" size={17} />
                     <Text
                       style={{
-                        color: '#b1b1b1',
+                        color: 'purple',
                         fontSize: 14,
                         paddingLeft: 5,
                         marginTop: 10,
@@ -615,7 +625,7 @@ class NearbyUserDetail extends Component {
                     </View>
                   )}
 
-                  <Text style={{padding: 14}}>{bio}</Text>
+                  <Text style={{padding: 0}}>{bio}</Text>
 
                   {/* <View style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}> */}
                   <View>
@@ -649,9 +659,7 @@ class NearbyUserDetail extends Component {
           
           
           
-          <View style={{flex: 9999}}>  
-
-
+          <View style={{flex: 99}}>  
 
 
             {!videoURL && photoURL && (
@@ -660,33 +668,22 @@ class NearbyUserDetail extends Component {
                 source={{
                   uri: photoURL,
                 }}
-                resizeMode="contain" // If want entire photo shrunk to fit container in worse case axis
+                resizeMode={'cover'}
+                // resizeMode="contain" // If want entire photo shrunk to fit container in worse case axis
                 style={{flex: 1, height: undefined, width: undefined }}>
                 {/* style={{height: '100%', flex: 1}}> */}
                 {/* style={{width: '100%', flex: 1}}> */}
                 {/* style={{width: '100%', height: '100%', flex: 1}}> */}
 
-                <LinearGradient
-                  colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
-                  style={{
-                    height: 100,
-                    width: '100%',
-                    position: 'absolute',
-                    top: 0,
-                  }}
-                />
-
               </ImageBackground>
             )}
-
-
 
 
             {!videoURL && !photoURL && (
               <ImageBackground
                 // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
-                // resizeMode={'cover'}
-                resizeMode='contain'
+                resizeMode={'cover'}
+                // resizeMode='contain'
                 //RL: Good syntax but missing other case and photo exists case
                 source={
                   gender === 'male'
@@ -699,7 +696,7 @@ class NearbyUserDetail extends Component {
                 // style={{width: '100%', height: '200%', flex: 1}}
                 >
           
-                <LinearGradient
+                {/* <LinearGradient
                   colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
                   style={{
                     height: 100,
@@ -707,38 +704,36 @@ class NearbyUserDetail extends Component {
                     position: 'absolute',
                     top: 0,
                   }}
-                />
+                /> */}
+
               </ImageBackground>
             )}
 
 
+{videoURL && (
+  <Video
+    //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
+    source={{uri: videoURL}} // Can be a URL or a local file.
+    ref={ref => {
+      this.player = ref;
+    }}
+    resizeMode={'cover'}
+    onError={err => {
+      console.warn(err);
+    }}
+    style={{
+      height: '100%',
+      width: '100%',
+      backgroundColor: 'rgba(0,0,0,0)',
+    }}
+  />
+)}
 
 
           </View>
 
 
 
-
-          <View style={{flex: 888}}>
-            {videoURL && (
-              <Video
-                //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
-                source={{uri: videoURL}} // Can be a URL or a local file.
-                ref={ref => {
-                  this.player = ref;
-                }}
-                resizeMode={'cover'}
-                onError={err => {
-                  console.warn(err);
-                }}
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  backgroundColor: 'rgba(0,0,0,0)',
-                }}
-              />
-            )}
-          </View>
 
 
 
