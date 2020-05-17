@@ -269,8 +269,8 @@ class Mood2 extends Component {
             }}>
             Take photo
           </Text> */}
-          <Image style={{width:100 }} source={require('../assets/icons8-polaroid-100.png')} resizeMode="contain"/>
-          {/* <Image style={{width:100 }} source={require('../assets/camera-white.png')} resizeMode="contain"/> */}
+          {/* <Image style={{width:100 }} source={require('../assets/icons8-polaroid-100.png')} resizeMode="contain"/> */}
+          <Image style={{width:80 }} source={require('../assets/camera-white.png')} resizeMode="contain"/>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -296,7 +296,7 @@ class Mood2 extends Component {
             }}>
             Take video
           </Text> */}
-          <Image style={{width:100 }} source={require('../assets/icons8-video-call-white.png')} resizeMode="contain"/>
+          <Image style={{width:60 }} source={require('../assets/icons8-video-call-white.png')} resizeMode="contain"/>
 
         </TouchableOpacity>
       </View>
