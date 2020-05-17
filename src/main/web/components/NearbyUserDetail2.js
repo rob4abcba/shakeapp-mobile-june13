@@ -611,7 +611,7 @@ class NearbyUserDetail extends Component {
                           shadowOffset: {width: 4, height: 2},
                         }}>
                         <Image
-                          style={{width: 100}}
+                          style={{width: 80}}
                           source={require('../assets/chat_shake.png')}
                           resizeMode="contain"
                         />
@@ -636,6 +636,7 @@ class NearbyUserDetail extends Component {
                           shadowOpacity: 0.1,
                           shadowColor: 'rgb(36, 100, 193)',
                           shadowOffset: {width: 4, height: 2},
+                          marginBottom: 30,
                         }}>
                         {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                         <Image
