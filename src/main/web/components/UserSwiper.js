@@ -463,8 +463,8 @@ export default class UserSwiper extends Component {
               onPress={() => Actions.myActivity({route: 0})}>
               <Image
                   // source={require('../assets/shake-logo-transparent.png')}
-                  // source={require('../assets/shake-logo.png')}
-                  source={require('../assets/symbol_shake_color.png')}
+                  source={require('../assets/shake-logo.png')} //black
+                  // source={require('../assets/symbol_shake_color.png')}
                   style={{height: 44, width: 35}}
                   resizeMode={'contain'}
               />
