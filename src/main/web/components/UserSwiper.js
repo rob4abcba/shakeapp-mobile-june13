@@ -467,6 +467,9 @@ export default class UserSwiper extends Component {
                   // source={require('../assets/symbol_shake_color.png')}
                   style={{height: 44, width: 35}}
                   resizeMode={'contain'}
+                  borderColor={'white'}
+                  backgroundColor={'white'}
+                  borderWidth={1}
               />
 
               {this.props.notificationCount > 0 ? (
