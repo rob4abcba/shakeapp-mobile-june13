@@ -601,7 +601,7 @@ class NearbyUserDetail extends Component {
                           // backgroundColor: 'pink',
                           // backgroundColor: 'rgb(255, 255, 0, alpha)',
                           // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          // backgroundColor: 'rgba(0, 0, 255, 0.1)',
                           backgroundColor: 'rgba(0, 0, 0, 0.0)',
                           justifyContent: 'center',
                           alignItems: 'center',
@@ -659,7 +659,8 @@ class NearbyUserDetail extends Component {
                         borderTopWidth: StyleSheet.hairlineWidth,
                         // borderColor: 'rgba(255, 0, 0, 0.9)',
                         borderColor: 'rgba(0, 0, 0, 0)',
-                        backgroundColor: 'pink',
+                        // backgroundColor: 'pink',
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
                       }}>
 
                         <IconAwesome name="flag" size={18} color="black" resizeMode="contain" />
