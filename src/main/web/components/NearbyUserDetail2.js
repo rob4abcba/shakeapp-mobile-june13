@@ -704,7 +704,8 @@ class NearbyUserDetail extends Component {
                     // ? require('../assets/man_top_half.png')
                     : gender === 'female'
                     ? require('../assets/shakeapp_woman.png')
-                    : require('../assets/seafood.png')
+                    : require('../assets/ComboManWomanOther.png')
+                    // : require('../assets/halfman_halfwoman_top_half.png')
                 }
                 style={{flex: 1, height: undefined, width: undefined, justifyContent: 'center'}}
                 // style={{width: '100%', height: '200%', flex: 1}}
