@@ -369,7 +369,7 @@ class NearbyUserDetail extends Component {
           <View
             style={{
               width: 300,
-              height: 500,
+              height: 200,
               alignItems: 'center',
               justifyContent: 'center',
               // backgroundColor: 'white',
