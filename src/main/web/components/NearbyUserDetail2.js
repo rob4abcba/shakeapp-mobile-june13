@@ -66,6 +66,10 @@ class NearbyUserDetail extends Component {
     //Report Abuse or feedback
     report: false,
     description: '',
+
+    //MC: Model after "report"
+    videoChatMessage: false,
+    playProfileVideo: false,
   };
 
   componentWillMount() {
@@ -90,6 +94,14 @@ class NearbyUserDetail extends Component {
 
   skipReport() {
     this.setState({report: false});
+  }
+
+  skipVideoChatMessage() {
+    this.setState({videoChatMessage: false});
+  }
+
+  skipPlayProfileVideo() {
+    this.setState({playProfileVideo: false});
   }
 
   onChatSend() {
@@ -180,7 +192,6 @@ class NearbyUserDetail extends Component {
   onReportButtonPress(description) {
     const {user} = this.props;
     const {_id} = this.props.nearbyUser.user;
-
     if (!this.state.report) {
       this.setState({report: true});
     } else {
@@ -208,10 +219,85 @@ class NearbyUserDetail extends Component {
         },
         description,
       );
-
       this.setState({report: false});
     }
   }
+
+
+
+
+
+  onVideoChatButtonPress(description) {
+    const {user} = this.props;
+    const {_id} = this.props.nearbyUser.user;
+    if (!this.state.videoChatMessage) {
+      this.setState({videoChatMessage: true});
+    } else {
+      // this.props.videoChatMessageAbuseOrContent(
+      this.props.reportAbuseOrContent(
+        this.props.user,
+        _id,
+        this,
+        function(success, thisRef) {
+          if (!success) {
+            thisRef.setState({
+              modalTitle: 'Try again',
+              modalDescription: 'Please try again after some time.',
+              modalButton: 'Try again',
+              isVisible: true,
+            });
+          } else {
+            thisRef.setState({
+              modalTitle: 'Feedback submitted!',
+              modalDescription:
+                'Thank you for submitting your feedback. We plan to work on a video chat feature.',
+              modalButton: 'Go Back!',
+              isVisible: true,
+            });
+          }
+        },
+        description,
+      );
+      this.setState({videoChatMessage: false});
+    }
+  }
+
+
+  onPlayProfileVideoButtonPress(description) {
+    const {user} = this.props;
+    const {_id} = this.props.nearbyUser.user;
+    if (!this.state.playProfileVideo) {
+      this.setState({playProfileVideo: true});
+    } else {
+      // this.props.playProfileVideoAbuseOrContent(
+        this.props.reportAbuseOrContent(
+        this.props.user,
+        _id,
+        this,
+        function(success, thisRef) {
+          if (!success) {
+            thisRef.setState({
+              modalTitle: 'Try again',
+              modalDescription: 'Please try again after some time.',
+              modalButton: 'Try again',
+              isVisible: true,
+            });
+          } else {
+            thisRef.setState({
+              modalTitle: 'Feedback submitted!',
+              modalDescription:
+                'Thank you for submitting your feedback. The profile video will play.',
+              modalButton: 'Go Back!',
+              isVisible: true,
+            });
+          }
+        },
+        description,
+      );
+      this.setState({playProfileVideo: false});
+    }
+  }
+
 
   onDescriptionChange(description) {
     this.setState({description: description});
@@ -264,6 +350,10 @@ class NearbyUserDetail extends Component {
 
     if (this.state.invite) {
       return this.nearByResturants();
+    } else if (this.state.videoChatMessage) {
+      return this.videoChatMessage();
+    } else if (this.state.playProfileVideo) {
+      return this.playProfileVideo();
     } else if (this.state.report) {
       return this.reportOptions();
     }
@@ -620,7 +710,8 @@ class NearbyUserDetail extends Component {
                       </TouchableOpacity>
                       <TouchableOpacity
                         // onPress={this.onChatButtonPress.bind(this)}
-                        onPress={() => Actions.chatAuth()}
+                        // onPress={() => Actions.chatAuth()}
+                        onPress={this.onVideoChatButtonPress.bind(this)}
                         activeOpacity={0.5} //MC: Opacity when clicked
                         style={{
                           height: 50,
@@ -636,7 +727,7 @@ class NearbyUserDetail extends Component {
                           shadowOpacity: 0.1,
                           shadowColor: 'rgb(36, 100, 193)',
                           shadowOffset: {width: 4, height: 2},
-                          marginBottom: 30,
+                          marginBottom: 10,
                         }}>
                         {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                         <Image
@@ -646,6 +737,37 @@ class NearbyUserDetail extends Component {
                         />
                       </TouchableOpacity>
 
+{videoURL && (
+                      <TouchableOpacity
+                        // onPress={this.onChatButtonPress.bind(this)}
+                        // onPress={this.onReportButtonPress.bind(this)}
+                        onPress={this.onPlayProfileVideoButtonPress.bind(this)}
+                        // onPress={() => Actions.chatAuth()}
+                        activeOpacity={0.5} //MC: Opacity when clicked
+                        style={{
+                          height: 50,
+                          width: 50,
+                          // backgroundColor: 'pink',
+                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 8,
+                          shadowOpacity: 0.1,
+                          shadowColor: 'rgb(36, 100, 193)',
+                          shadowOffset: {width: 4, height: 2},
+                          marginBottom: 10,
+                        }}>
+                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+                        <Image
+                          style={{width: 50}}
+                          source={require('../assets/icons8-play-100.png')}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+)}
 
                       <TouchableOpacity
                       onPress={this.onReportButtonPress.bind(this)}
@@ -836,7 +958,7 @@ class NearbyUserDetail extends Component {
               onPress={() => this.skipReport()}>
               <Text
                 style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
-                SKIP
+                SKIP REPORT
               </Text>
             </TouchableOpacity>
           </View>
@@ -888,6 +1010,172 @@ class NearbyUserDetail extends Component {
       </ScrollView>
     );
   }
+
+
+// Model videoChatMessage() after reportOptions()
+  videoChatMessage() {
+    return (
+      <ScrollView style={[styles.container, {backgroundColor: 'white'}]}>
+        <View
+          style={{
+            height: '100%',
+            paddingBottom: 61,
+            paddingLeft: 24,
+            paddingRight: 24,
+            backgroundColor: 'orange',
+          }}>
+          <View
+            style={{
+              height: 61,
+              flexDirection: 'row',
+              marginTop: 90, //Move SKIP below Shake Notification at upper right
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              paddingRight: 29,
+              // backgroundColor: 'yellow',
+            }}>
+            <TouchableOpacity
+              style={{justifyContent: 'space-between'}}
+              onPress={() => this.skipVideoChatMessage()}>
+              <Text
+                style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
+                RETURN FROM VIDEO CHAT MESSAGE
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={{letterSpacing: 0.3}}>
+            We are working on a Video Chat feature in our next release. Your feedback helps us know what to work on next.{' '}
+          </Text>
+          <View style={[style.textInputContainer]}>
+            <TextInput
+              placeholder="Enter Reason to report"
+              inputStyle={styles.inputStyle}
+              multiline={true}
+              numberOfLines={4}
+              maxLength={200}
+              onChangeText={this.onDescriptionChange.bind(this)}
+              value={this.props.description}
+            />
+          </View>
+
+          <View style={{height: 50}}>
+            <TouchableOpacity
+              style={{
+                height: 50,
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+              }}
+              onPress={this.onVideoChatButtonPress.bind(
+                this,
+                this.state.description,
+              )}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: '900',
+                  letterSpacing: 2.5,
+                  color: '#62cfb9',
+                }}>
+                Submit feedback regarding video chat
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* <Text style={{letterSpacing: 0.3}}>
+            Note: For any immediate danger or emergency situation, please call
+            local emergency services.
+          </Text> */}
+        </View>
+      </ScrollView>
+    );
+  }
+
+
+
+  // Model playProfileVideo() after reportOptions()
+  playProfileVideo() {
+    return (
+      <ScrollView style={[styles.container, {backgroundColor: 'white'}]}>
+        <View
+          style={{
+            height: '100%',
+            paddingBottom: 61,
+            paddingLeft: 24,
+            paddingRight: 24,
+            backgroundColor: 'orange',
+          }}>
+          <View
+            style={{
+              height: 61,
+              flexDirection: 'row',
+              marginTop: 90, //Move SKIP below Shake Notification at upper right
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              paddingRight: 29,
+              // backgroundColor: 'yellow',
+            }}>
+            <TouchableOpacity
+              style={{justifyContent: 'space-between'}}
+              onPress={() => this.skipPlayProfileVideo()}>
+              <Text
+                style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
+                PLAY PROFILE VIDEO
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={{letterSpacing: 0.3}}>
+            While you are here, do you want to leave any feedback?  Your feedback helps us to know what to work on next.{' '}
+          </Text>
+          <View style={[style.textInputContainer]}>
+            <TextInput
+              placeholder="Enter Reason to report"
+              inputStyle={styles.inputStyle}
+              multiline={true}
+              numberOfLines={4}
+              maxLength={200}
+              onChangeText={this.onDescriptionChange.bind(this)}
+              value={this.props.description}
+            />
+          </View>
+
+          <View style={{height: 50}}>
+            <TouchableOpacity
+              style={{
+                height: 50,
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+              }}
+              onPress={this.onPlayProfileVideoButtonPress.bind(
+                this,
+                this.state.description,
+              )}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: '900',
+                  letterSpacing: 2.5,
+                  color: '#62cfb9',
+                }}>
+                Submit feedback before playing profile video
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={{letterSpacing: 0.3}}>
+            Note: For any immediate danger or emergency situation, please call
+            local emergency services.
+          </Text>
+        </View>
+      </ScrollView>
+    );
+  }
+
+
+
+
+
 }
 const style = ScaledSheet.create({
   container: {
