@@ -524,7 +524,7 @@ class NearbyUserDetail extends Component {
                     flex: 350, //Controls height of transparent banner with info at bottom of user profiles
                     // zIndex: 1,
                     // backgroundColor: 'rgba(255,255,255,.3)', // TODO
-                    backgroundColor: 'rgba(0,255,111,.1)', // TODO
+                    backgroundColor: 'rgba(0,0,111,.01)', // TODO
                     paddingLeft: 5,
                     paddingRight: 1,
                     paddingBottom: 30, // Adjust
@@ -859,6 +859,7 @@ class NearbyUserDetail extends Component {
   <Video
     //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
     source={{uri: videoURL}} // Can be a URL or a local file.
+    controls={true}
     ref={ref => {
       this.player = ref;
     }}
