@@ -889,8 +889,8 @@ console.log("Profile.js: this.props.data = ", this.props.data)
 
             </View>
 
-
-            <Switch
+{/* Hide this extra switch for now.  Maybe later we add a switch to change and/or show gender */}
+            {/* <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
         thumbColor={true ? "#f5dd4b" : "#f4f3f4"}
@@ -899,7 +899,7 @@ console.log("Profile.js: this.props.data = ", this.props.data)
         onValueChange={()=>{}}
         // value={isEnabled}
         value={true}
-      />
+      /> */}
 
 
 
