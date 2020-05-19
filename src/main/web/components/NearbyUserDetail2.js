@@ -701,12 +701,18 @@ class NearbyUserDetail extends Component {
                 //RL: Good syntax but missing other case and photo exists case
                 source={
                   gender === 'male'
-                    ? require('../assets/shakeapp_man.png')
+                    // ? require('../assets/shakeapp_man.png')
+                    ? require('../assets/ManLargeMay18th.png')
+                    // ? require('../assets/ManTopHalfBkgndTransparentMay18th.png')
                     // ? require('../assets/man_top_half.png')
                     : gender === 'female'
-                    ? require('../assets/shakeapp_woman.png')
+                    // ? require('../assets/shakeapp_woman.png')
+                    ? require('../assets/WomanLargeNoShadesMay18th.png')
+                    // ? require('../assets/WomanTopHalfNoShadesMay18th.png')
                     // : require('../assets/ComboManWomanOther.png')
-                    : require('../assets/icons8-female-user-100.png')
+                    // : require('../assets/icons8-female-user-100.png')
+                    : require('../assets/WomanLargeWithShadesMay18th.png')
+                    // : require('../assets/WomanTopHalfWithShadesMay18th.png')
                     // : require('../assets/halfman_halfwoman_top_half.png')
                 }
                 style={{flex: 1, height: undefined, width: undefined, justifyContent: 'center'}}
