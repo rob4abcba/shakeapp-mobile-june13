@@ -51,8 +51,8 @@ let titles = ['Welcome', 'Set your Mood', 'Share experiences'];
 
 let descriptions = [
   'Discover new restaurants & friends\neveryday with Shake',
-  "Share with other Shakers your morning hair or today's smile,\nthe new shirt you put on or today's smile",
-  'Great food is great on it’s own, but\ngreat food with great company is even better.\nMake new connections and experience\nthe world one plate at a time.',
+  "Share with others your morning hair or today's smile,\nthe new shirt you put on or today's smile",
+  'Great food & drinks are great on its own, but\nwith great company is even better.\nExperience\nthe world one plate/drink at a time.',
 ];
 
 class Onboarding extends Component {
