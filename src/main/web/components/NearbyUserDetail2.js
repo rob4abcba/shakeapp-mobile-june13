@@ -372,7 +372,8 @@ class NearbyUserDetail extends Component {
               height: 500,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'white',
+              // backgroundColor: 'white',
+              backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
               paddingTop: 40,
               // marginTop: 40,
               borderRadius: 8,
@@ -444,8 +445,8 @@ class NearbyUserDetail extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               // backgroundColor: 'white',
-              backgroundColor: 'rgba(0,0,0,0.3)',
-              // backgroundColor: 'transparent',
+              backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
+              // backgroundColor: 'transparent', //fully transparent
               // backgroundColor: 'rgb(0, 255, 0, 1.0)',
               paddingTop: 40, //MC: Padding originally 40
               borderRadius: 8,
