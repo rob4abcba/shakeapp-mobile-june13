@@ -768,11 +768,88 @@ class NearbyUserDetail extends Component {
           <View style={{
             // flexDirection: 'row-reverse', 
             // flexDirection: 'row', 
-            flexDirection: 'column', 
+            flexDirection: 'column-reverse', 
+            backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            // flexDirection: 'column', 
             flex: 999, 
             marginBottom: 0,
             // paddingBottom: 0,
             }}>
+
+
+
+
+
+{videoURL && (
+  <TouchableOpacity
+    // onPress={this.onChatButtonPress.bind(this)}
+    // onPress={this.onReportButtonPress.bind(this)}
+    onPress={this.onPlayProfileVideoButtonPress.bind(this)}
+    // onPress={() => Actions.chatAuth()}
+    // flex={1} // flex
+    activeOpacity={0.5} //MC: Opacity when clicked
+    style={{
+      position: "absolute",
+      bottom: 10,
+      right: 10,
+      zIndex: 1,
+  
+      height: 50,
+      width: 50,
+      // backgroundColor: 'pink',
+      // backgroundColor: 'rgb(255, 255, 0, alpha)',
+      backgroundColor: 'rgba(255, 255, 0, 0.3)',
+      // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      // backgroundColor: 'rgba(0, 255, 0, 0.0)',
+      justifyContent: 'center',
+      // justifyContent: 'flex-end',
+      alignItems: 'center',
+      // alignItems: 'flex-end',
+      borderRadius: 8,
+      shadowOpacity: 0.1,
+      shadowColor: 'rgb(36, 100, 193)',
+      shadowOffset: {width: 4, height: 2},
+      marginBottom: 0, //marginBottom cannot put play button on top of video. Just pushes video upward.
+    }}>
+    {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+    <Image
+      style={{width: 50}}
+      source={require('../assets/icons8-play-100.png')}
+      // flex={10} // flex
+      resizeMode="contain"
+    />
+  </TouchableOpacity>
+)}
+
+
+
+
+{videoURL && (
+  <Video
+    //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
+    source={{uri: videoURL}} // Can be a URL or a local file.
+    controls={true}
+    // ignoreSilentSwitch={"ignore"} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
+    // muted={false} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
+    // repeat={false}
+    // flex={10} // flex
+    ref={ref => {
+      this.player = ref;
+    }}
+    resizeMode={'cover'}
+    onError={err => {
+      console.warn(err);
+    }}
+    style={{
+      height: '100%',
+      width: '100%',
+      backgroundColor: 'rgba(0,255,0,0.1)',
+    }}
+  />
+)}
+
+
+
 
 
             {!videoURL && photoURL && (
@@ -832,68 +909,8 @@ class NearbyUserDetail extends Component {
             )}
 
 
-{videoURL && (
-  <Video
-    //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
-    source={{uri: videoURL}} // Can be a URL or a local file.
-    controls={true}
-    // ignoreSilentSwitch={"ignore"} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
-    // muted={false} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
-    // repeat={false}
-    flex={10} // flex
-    ref={ref => {
-      this.player = ref;
-    }}
-    resizeMode={'cover'}
-    onError={err => {
-      console.warn(err);
-    }}
-    style={{
-      height: '100%',
-      width: '100%',
-      backgroundColor: 'rgba(0,255,0,0.1)',
-    }}
-  />
-)}
 
 
-
-
-{videoURL && (
-  <TouchableOpacity
-    // onPress={this.onChatButtonPress.bind(this)}
-    // onPress={this.onReportButtonPress.bind(this)}
-    onPress={this.onPlayProfileVideoButtonPress.bind(this)}
-    // onPress={() => Actions.chatAuth()}
-    flex={1} // flex
-    activeOpacity={0.5} //MC: Opacity when clicked
-    style={{
-      height: 50,
-      width: 50,
-      // backgroundColor: 'pink',
-      // backgroundColor: 'rgb(255, 255, 0, alpha)',
-      // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-      // backgroundColor: 'rgba(0, 0, 0, 0.1)',
-      backgroundColor: 'rgba(0, 0, 0, 0.0)',
-      // justifyContent: 'center',
-      justifyContent: 'flex-end',
-      // alignItems: 'center',
-      alignItems: 'flex-end',
-      borderRadius: 8,
-      shadowOpacity: 0.1,
-      shadowColor: 'rgb(36, 100, 193)',
-      shadowOffset: {width: 4, height: 2},
-      marginBottom: 10,
-    }}>
-    {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
-    <Image
-      style={{width: 50}}
-      source={require('../assets/icons8-play-100.png')}
-      flex={10} // flex
-      resizeMode="contain"
-    />
-  </TouchableOpacity>
-)}
 
 
 
