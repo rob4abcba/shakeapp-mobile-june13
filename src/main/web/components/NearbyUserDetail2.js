@@ -523,8 +523,8 @@ class NearbyUserDetail extends Component {
                     flexDirection: 'row',
                     flex: 350, //Controls height of transparent banner with info at bottom of user profiles
                     // zIndex: 1,
-                    // backgroundColor: 'rgba(255,255,255,.3)', // TODO
-                    backgroundColor: 'rgba(255,0,111,.1)', // TODO
+                    backgroundColor: 'rgba(255,255,255,.3)', // TODO
+                    // backgroundColor: 'rgba(255,0,111,.1)', // TODO
                     paddingLeft: 5,
                     paddingRight: 1,
                     paddingBottom: 30, // Adjust
@@ -769,7 +769,9 @@ class NearbyUserDetail extends Component {
             // flexDirection: 'row-reverse', 
             // flexDirection: 'row', 
             flexDirection: 'column-reverse', 
-            backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            // backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            // backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
             // flexDirection: 'column', 
             flex: 999, 
             marginBottom: 0,
@@ -790,7 +792,7 @@ class NearbyUserDetail extends Component {
     activeOpacity={0.5} //MC: Opacity when clicked
     style={{
       position: "absolute",
-      bottom: 10,
+      bottom: 40,
       right: 10,
       zIndex: 1,
   
@@ -798,8 +800,8 @@ class NearbyUserDetail extends Component {
       width: 50,
       // backgroundColor: 'pink',
       // backgroundColor: 'rgb(255, 255, 0, alpha)',
-      backgroundColor: 'rgba(255, 255, 0, 0.3)',
-      // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      // backgroundColor: 'rgba(255, 255, 0, 0.1)',
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
       // backgroundColor: 'rgba(0, 255, 0, 0.0)',
       justifyContent: 'center',
       // justifyContent: 'flex-end',
@@ -843,7 +845,8 @@ class NearbyUserDetail extends Component {
     style={{
       height: '100%',
       width: '100%',
-      backgroundColor: 'rgba(0,255,0,0.1)',
+      // backgroundColor: 'rgba(0,255,0,0.1)',
+      backgroundColor: 'rgba(0,0,0,0.1)',
     }}
   />
 )}
