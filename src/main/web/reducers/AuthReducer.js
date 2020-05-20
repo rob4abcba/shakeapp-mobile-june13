@@ -34,6 +34,7 @@ const INITIAL_STATE = {
   name: '',
   password: '',
   category: '',
+  gender: '',
   user: null,
   error: '',
   loading: false,

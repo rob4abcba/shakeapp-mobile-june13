@@ -475,9 +475,18 @@ export default class UserSwiper extends Component {
               style={{position: 'absolute', top: 60, right: 10, marginRight: 20, height: 45, width: 47}}
               onPress={() => Actions.myActivity({route: 0})}>
               <Image
-                  source={require('../assets/shake-logo-transparent.png')}
+                  // source={require('../assets/shake-logo-transparent.png')}
+                  source={require('../assets/shake-logo.png')} //black
+                  // source={require('../assets/symbol_shake_color.png')}
                   style={{height: 44, width: 35}}
                   resizeMode={'contain'}
+                  // borderColor={'white'}
+                  borderColor={'rgba(255,255,255,0.1)'} //white partially transparent
+                  // backgroundColor={'white'}
+                  // backgroundColor= {'rgba(0,0,0,0.7)'} //black partially transparent
+                  backgroundColor= {'rgba(255,255,255,0.2)'} //white partially transparent
+              
+                  borderWidth={1}
               />
 
               {this.props.notificationCount > 0 ? (

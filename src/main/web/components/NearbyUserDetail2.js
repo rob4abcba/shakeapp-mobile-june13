@@ -31,6 +31,7 @@ import {ScaledSheet} from 'react-native-size-matters';
 import TimeAgo from 'javascript-time-ago';
 // Load locale-specific relative date/time formatting rules.
 import en from 'javascript-time-ago/locale/en';
+import { orange } from 'color-name';
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.locale(en);
 // Create relative date/time formatter.
@@ -66,6 +67,10 @@ class NearbyUserDetail extends Component {
     //Report Abuse or feedback
     report: false,
     description: '',
+
+    //MC: Model after "report"
+    videoChatMessage: false,
+    playProfileVideo: false,
   };
 
   componentWillMount() {
@@ -90,6 +95,14 @@ class NearbyUserDetail extends Component {
 
   skipReport() {
     this.setState({report: false});
+  }
+
+  skipVideoChatMessage() {
+    this.setState({videoChatMessage: false});
+  }
+
+  skipPlayProfileVideo() {
+    this.setState({playProfileVideo: false});
   }
 
   onChatSend() {
@@ -180,7 +193,6 @@ class NearbyUserDetail extends Component {
   onReportButtonPress(description) {
     const {user} = this.props;
     const {_id} = this.props.nearbyUser.user;
-
     if (!this.state.report) {
       this.setState({report: true});
     } else {
@@ -208,10 +220,85 @@ class NearbyUserDetail extends Component {
         },
         description,
       );
-
       this.setState({report: false});
     }
   }
+
+
+
+
+
+  onVideoChatButtonPress(description) {
+    const {user} = this.props;
+    const {_id} = this.props.nearbyUser.user;
+    if (!this.state.videoChatMessage) {
+      this.setState({videoChatMessage: true});
+    } else {
+      // this.props.videoChatMessageAbuseOrContent(
+      this.props.reportAbuseOrContent(
+        this.props.user,
+        _id,
+        this,
+        function(success, thisRef) {
+          if (!success) {
+            thisRef.setState({
+              modalTitle: 'Try again',
+              modalDescription: 'Please try again after some time.',
+              modalButton: 'Try again',
+              isVisible: true,
+            });
+          } else {
+            thisRef.setState({
+              modalTitle: 'Feedback submitted!',
+              modalDescription:
+                'Thank you for submitting your feedback. We plan to work on a video chat feature.',
+              modalButton: 'Go Back!',
+              isVisible: true,
+            });
+          }
+        },
+        description,
+      );
+      this.setState({videoChatMessage: false});
+    }
+  }
+
+
+  onPlayProfileVideoButtonPress(description) {
+    const {user} = this.props;
+    const {_id} = this.props.nearbyUser.user;
+    if (!this.state.playProfileVideo) {
+      this.setState({playProfileVideo: true});
+    } else {
+      // this.props.playProfileVideoAbuseOrContent(
+        this.props.reportAbuseOrContent(
+        this.props.user,
+        _id,
+        this,
+        function(success, thisRef) {
+          if (!success) {
+            thisRef.setState({
+              modalTitle: 'Try again',
+              modalDescription: 'Please try again after some time.',
+              modalButton: 'Try again',
+              isVisible: true,
+            });
+          } else {
+            thisRef.setState({
+              modalTitle: 'Feedback submitted!',
+              modalDescription:
+                'Thank you for submitting your feedback. The profile video will play.',
+              modalButton: 'Go Back!',
+              isVisible: true,
+            });
+          }
+        },
+        description,
+      );
+      this.setState({playProfileVideo: false});
+    }
+  }
+
 
   onDescriptionChange(description) {
     this.setState({description: description});
@@ -252,6 +339,7 @@ class NearbyUserDetail extends Component {
     const {distance} = this.props.nearbyUser;
     const {
       fullName,
+      gender,
       preferences,
       shakes,
       birthday,
@@ -263,12 +351,16 @@ class NearbyUserDetail extends Component {
 
     if (this.state.invite) {
       return this.nearByResturants();
+    } else if (this.state.videoChatMessage) {
+      return this.videoChatMessage();
+    } else if (this.state.playProfileVideo) {
+      return this.playProfileVideo();
     } else if (this.state.report) {
       return this.reportOptions();
     }
 
     return (
-      <View style={{flex: 1, marginBottom: 0}}>
+      <View style={{flexDirection: 'column-reverse', flex: 1, marginBottom: 0}}>
         {/* Error modal */}
         <Modal
           backdropOpacity={0}
@@ -278,10 +370,11 @@ class NearbyUserDetail extends Component {
           <View
             style={{
               width: 300,
-              height: 500,
+              height: 200,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'white',
+              // backgroundColor: 'white',
+              backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
               paddingTop: 40,
               // marginTop: 40,
               borderRadius: 8,
@@ -353,8 +446,8 @@ class NearbyUserDetail extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               // backgroundColor: 'white',
-              backgroundColor: 'rgba(0,0,0,0.3)',
-              // backgroundColor: 'transparent',
+              backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
+              // backgroundColor: 'transparent', //fully transparent
               // backgroundColor: 'rgb(0, 255, 0, 1.0)',
               paddingTop: 40, //MC: Padding originally 40
               borderRadius: 8,
@@ -420,275 +513,427 @@ class NearbyUserDetail extends Component {
             </View>
           </View>
         </Modal>
+        
+        
+        
+        
+    <View style={{flexDirection: 'column-reverse', flex: 1 }}>
 
-        <View style={{flex: 1}}>
-          <ImageBackground
-            // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
-            source={{
-              uri: videoURL
-                ? ''
-                : !photoURL
-                ? 'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png'
-                : photoURL,
-            }}
-            style={{width: '100%', height: '200%', flex: 1}}>
-            <LinearGradient
-              colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
-              style={{height: 100, width: '100%', position: 'absolute', top: 0}}
-            />
-
-            <View style={{flex: 1}}>
-              {videoURL && (
-                <Video
-                  //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
-                  source={{uri: videoURL}} // Can be a URL or a local file.
-                  ref={ref => {
-                    this.player = ref;
-                  }}
-                  resizeMode={'cover'}
-                  onError={err => {
-                    console.warn(err);
-                  }}
+    <View
                   style={{
-                    height: '100%',
-                    width: '100%',
-                    backgroundColor: 'rgba(0,0,0,0)',
-                  }}
-                />
-              )}
-            </View>
+                    // flexDirection: 'column-reverse',
+                    flexDirection: 'row',
+                    flex: 350, //Controls height of transparent banner with info at bottom of user profiles
+                    // zIndex: 1,
+                    backgroundColor: 'rgba(255,255,255,.3)', // TODO
+                    // backgroundColor: 'rgba(255,0,111,.1)', // TODO
+                    paddingLeft: 5,
+                    paddingRight: 1,
+                    paddingBottom: 30, // Adjust
+                    // justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
+                    marginBottom: 0,
+                  }}>
 
-            {/* <TouchableOpacity
-              style={styles.topBackButton}
-              onPress={this.onBackButtonPress.bind(this)}>
-              <Icon name="arrow-back" type="ionicons" color="white" size={35} />
-            </TouchableOpacity> */}
-          </ImageBackground>
-        </View>
 
         <View
-          style={{
-            // flex: 1, //Controls height of transparent banner with info at bottom of user profiles
-            flex: 0.6,
-            backgroundColor: 'rgba(255,255,255,.2)',
-            paddingLeft: 36,
-            paddingRight: 36,
-            justifyContent: 'flex-end',
-            // alignItems: 'flex-end',
+                  style={{
+                    // flexDirection: 'column-reverse',
+                    flexDirection: 'column',
+                    flex: 50, //Controls height of transparent banner with info at bottom of user profiles
+                    zIndex: 1,
+                    // backgroundColor: 'rgba(255,0,255,.2)', // TODO
+                    paddingLeft: 1,
+                    paddingRight: 1,
+                    // justifyContent: 'flex-end',
+                    justifyContent: 'center',
+                    marginBottom: 0,
+                  }}>
+                  <View
+                    style={{
+                      // paddingTop: 26,
+                      paddingTop: 0,
+                      justifyContent: 'space-between',
+                      flexDirection: 'row',
+                      // flex: 1,
+                      // flexDirection: 'column',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        flex: 1,
+                        fontSize: 26,
+                        fontWeight: '700',
+                        letterSpacing: -0.5,
+                      }}>
+                      {fullName}
+                    </Text>
+                  </View>
+
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    {/* <IconAwesome name="map-marker" color="#b1b1b1" size={17} /> */}
+                    <Text
+                      style={{
+                        // color: '#b1b1b1',
+                        color: 'orange',
+                        fontSize: 14,
+                        paddingLeft: 0,
+                        marginTop: 0,
+                        marginLeft: 0,
+                        marginBottom: 0,
+                      }}>
+                      {gender}
+                    </Text>
+                  </View>
+
+                  {birthday && (
+                    <Text
+                      style={{color: 'purple', fontSize: 14, marginTop: 5}}>
+                      {_calculateAge(new Date(birthday)) + ' years old'}
+                    </Text>
+                  )}
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <IconAwesome name="map-marker" color="purple" size={17} />
+                    <Text
+                      style={{
+                        color: 'purple',
+                        fontSize: 14,
+                        paddingLeft: 5,
+                        marginTop: 10,
+                      }}>
+                      {prettyDistance(distance)}
+                    </Text>
+                  </View>
+
+                  {preferences && (
+                    <View
+                      style={{
+                        marginTop: 2,
+                        justifyContent: 'flex-start',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
+                      {preferences.veggie && (
+                        <Image
+                          source={require('../assets/veggie.png')}
+                          style={{
+                            height: 34,
+                            width: 34,
+                            borderRadius: 17,
+                            // backgroundColor: 'white',
+                            backgroundColor: 'rgba(0,0,0,0.1)',
+                          }}
+                        />
+                      )}
+                      {preferences.meat && (
+                        <Image
+                          source={require('../assets/meat.png')}
+                          style={{
+                            height: 34,
+                            width: 34,
+                            borderRadius: 17,
+                            // backgroundColor: 'white',
+                            backgroundColor: 'rgba(0,0,0,0.1)',
+                          }}
+                        />
+                      )}
+                      {preferences.seaFood && (
+                        <Image
+                          source={require('../assets/seafood.png')}
+                          style={{
+                            height: 34,
+                            width: 34,
+                            borderRadius: 17,
+                            // backgroundColor: 'white',
+                            backgroundColor: 'rgba(0,0,0,0.1)',
+                          }}
+                        />
+                      )}
+                      {preferences.drinks && (
+                        <Image
+                          source={require('../assets/drinks.png')}
+                          style={{
+                            height: 34,
+                            width: 34,
+                            borderRadius: 17,
+                            // backgroundColor: 'white',
+                            backgroundColor: 'rgba(0,0,0,0.1)',
+                          }}
+                        />
+                      )}
+                    </View>
+                  )}
+
+                  <Text style={{padding: 0}}>{bio}</Text>
+
+
+                </View>
+          
+
+
+
+        <View
+                      style={{
+                        flexDirection: 'column',
+                        // flexDirection: 'row',
+                        alignItems: 'center',
+                        // justifyContent: 'flex-end',
+                        justifyContent: 'center',
+                        padding: 0,
+                        marginTop: 0,
+                        marginBottom: 0,
+                        flex: 9,
+                      }}>
+                      <TouchableOpacity
+                        onPress={this.onChatButtonPress.bind(this)}
+                        activeOpacity={0.5} //MC: Opacity when clicked
+                        style={{
+                          height: 50,
+                          width: 50,
+                          // backgroundColor: 'pink',
+                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                          // backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 8,
+                          shadowOpacity: 0.1,
+                          shadowColor: 'rgb(36, 100, 193)',
+                          shadowOffset: {width: 4, height: 2},
+                        }}>
+                        <Image
+                          style={{width: 80}}
+                          source={require('../assets/chat_shake.png')}
+                          resizeMode="contain"
+                        />
+                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+                        {/* <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/> */}
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        // onPress={this.onChatButtonPress.bind(this)}
+                        // onPress={() => Actions.chatAuth()}
+                        onPress={this.onVideoChatButtonPress.bind(this)}
+                        activeOpacity={0.5} //MC: Opacity when clicked
+                        style={{
+                          height: 50,
+                          width: 50,
+                          // backgroundColor: 'pink',
+                          // backgroundColor: 'rgb(255, 255, 0, alpha)',
+                          // backgroundColor: 'rgba(255, 255, 0, 0.9)',
+                          // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 8,
+                          shadowOpacity: 0.1,
+                          shadowColor: 'rgb(36, 100, 193)',
+                          shadowOffset: {width: 4, height: 2},
+                          marginBottom: 10,
+                        }}>
+                        {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+                        <Image
+                          style={{width: 50}}
+                          source={require('../assets/icons8-video-call-100.png')}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+
+
+                      <TouchableOpacity
+                      onPress={this.onReportButtonPress.bind(this)}
+                      style={{
+                        flexDirection: 'row',
+                        height: 25,
+                        alignItems: 'flex-end',
+                        paddingRight: 12,
+                        paddingLeft: 1,
+                        paddingTop: 5,
+                        borderTopWidth: StyleSheet.hairlineWidth,
+                        // borderColor: 'rgba(255, 0, 0, 0.9)',
+                        borderColor: 'rgba(0, 0, 0, 0)',
+                        // backgroundColor: 'pink',
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                      }}>
+
+                        <IconAwesome name="flag" size={18} color="black" resizeMode="contain" />
+
+                    </TouchableOpacity>
+
+
+                    </View>
+
+
+      </View>    
+
+          {/* <View style={{flex: 999}}>   */}
+          <View style={{
+            // flexDirection: 'row-reverse', 
+            // flexDirection: 'row', 
+            flexDirection: 'column-reverse', 
+            // backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            // backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            // flexDirection: 'column', 
+            flex: 999, 
             marginBottom: 0,
-          }}>
-          <View
-            style={{
-              // paddingTop: 26,
-              paddingTop: 0,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              // flexDirection: 'column',
-              alignItems: 'center',
+            // paddingBottom: 0,
             }}>
-            <Text
-              style={{
-                flex: 1,
-                fontSize: 26,
-                fontWeight: '700',
-                letterSpacing: -0.5,
-              }}>
-              {fullName}
-            </Text>
 
-            <View
-              style={{
-                alignItems: 'flex-end',
-                padding: 15,
-                marginTop: 15,
-                marginBottom: -80,
-              }}>
-              <TouchableOpacity
-                onPress={this.onChatButtonPress.bind(this)}
-                activeOpacity={0.5} //MC: Opacity when clicked
-                style={{
-                  height: 50,
-                  width: 50,
-                  // backgroundColor: 'pink',
-                  // backgroundColor: 'rgb(255, 255, 0, alpha)',
-                  // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 8,
-                  shadowOpacity: 0.1,
-                  shadowColor: 'rgb(36, 100, 193)',
-                  shadowOffset: {width: 4, height: 2},
-                }}>
-                <Image
-                  style={{width: 100}}
-                  source={require('../assets/chat_shake.png')}
-                  resizeMode="contain"
-                />
-                {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
-                {/* <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/> */}
-              </TouchableOpacity>
-              <TouchableOpacity
-                // onPress={this.onChatButtonPress.bind(this)}
-                onPress={() => Actions.chatAuth()}
-                activeOpacity={0.5} //MC: Opacity when clicked
-                style={{
-                  height: 50,
-                  width: 50,
-                  // backgroundColor: 'pink',
-                  // backgroundColor: 'rgb(255, 255, 0, alpha)',
-                  // backgroundColor: 'rgba(255, 255, 0, 0.9)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 8,
-                  shadowOpacity: 0.1,
-                  shadowColor: 'rgb(36, 100, 193)',
-                  shadowOffset: {width: 4, height: 2},
-                }}>
-                {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
-                <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/>
-              </TouchableOpacity>
-            </View>
 
-            {/*<View style={{flexDirection: 'row', paddingTop: 2}}>*/}
-            {/*<Image*/}
-            {/*source={require('../assets/shakes.png')}*/}
-            {/*style={{*/}
-            {/*height: 18,*/}
-            {/*width: 18,*/}
-            {/*borderRadius: 9,*/}
-            {/*backgroundColor: 'white',*/}
-            {/*}}*/}
-            {/*/>*/}
 
-            {/*<Text*/}
-            {/*style={{*/}
-            {/*fontSize: 15,*/}
-            {/*fontWeight: '500',*/}
-            {/*letterSpacing: 0.2,*/}
-            {/*paddingLeft: 11,*/}
-            {/*}}>*/}
-            {/*{shakes} Shakes*/}
-            {/*</Text>*/}
-            {/*</View>*/}
+
+
+{videoURL && (
+  <TouchableOpacity
+    // onPress={this.onChatButtonPress.bind(this)}
+    // onPress={this.onReportButtonPress.bind(this)}
+    onPress={this.onPlayProfileVideoButtonPress.bind(this)}
+    // onPress={() => Actions.chatAuth()}
+    // flex={1} // flex
+    activeOpacity={0.5} //MC: Opacity when clicked
+    style={{
+      position: "absolute",
+      bottom: 40,
+      right: 10,
+      zIndex: 1,
+  
+      height: 50,
+      width: 50,
+      // backgroundColor: 'pink',
+      // backgroundColor: 'rgb(255, 255, 0, alpha)',
+      // backgroundColor: 'rgba(255, 255, 0, 0.1)',
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      // backgroundColor: 'rgba(0, 255, 0, 0.0)',
+      justifyContent: 'center',
+      // justifyContent: 'flex-end',
+      alignItems: 'center',
+      // alignItems: 'flex-end',
+      borderRadius: 8,
+      shadowOpacity: 0.1,
+      shadowColor: 'rgb(36, 100, 193)',
+      shadowOffset: {width: 4, height: 2},
+      marginBottom: 0, //marginBottom cannot put play button on top of video. Just pushes video upward.
+    }}>
+    {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
+    <Image
+      style={{width: 50}}
+      color={orange}
+      source={require('../assets/icons8-play-button-16-red.png')} //small red play button with transparent background
+      // source={require('../assets/icons8-play-button-50-red.png')}
+      // flex={10} // flex
+      resizeMode="contain"
+    />
+  </TouchableOpacity>
+)}
+
+
+
+
+{videoURL && (
+  <Video
+    //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
+    source={{uri: videoURL}} // Can be a URL or a local file.
+    controls={true}
+    // ignoreSilentSwitch={"ignore"} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
+    // muted={false} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
+    // repeat={false}
+    // flex={10} // flex
+    ref={ref => {
+      this.player = ref;
+    }}
+    resizeMode={'cover'}
+    onError={err => {
+      console.warn(err);
+    }}
+    style={{
+      height: '100%',
+      width: '100%',
+      // backgroundColor: 'rgba(0,255,0,0.1)',
+      backgroundColor: 'rgba(0,0,0,0.1)',
+    }}
+  />
+)}
+
+
+
+
+
+            {!videoURL && photoURL && (
+              <ImageBackground
+                // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
+                source={{
+                  uri: photoURL,
+                }}
+                resizeMode={'cover'}
+                // resizeMode="contain" // If want entire photo shrunk to fit container in worse case axis
+                style={{flex: 1, height: undefined, width: undefined }}>
+                {/* style={{height: '100%', flex: 1}}> */}
+                {/* style={{width: '100%', flex: 1}}> */}
+                {/* style={{width: '100%', height: '100%', flex: 1}}> */}
+
+              </ImageBackground>
+            )}
+
+
+            {!videoURL && !photoURL && (
+              <ImageBackground
+                // source={{uri: !photoURL ?'https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png': photoURL}}
+                // resizeMode={'cover'}
+                resizeMode='contain'
+                //RL: Good syntax but missing other case and photo exists case
+                source={
+                  gender === 'male'
+                    // ? require('../assets/shakeapp_man.png')
+                    ? require('../assets/ManLargeMay18th.png')
+                    // ? require('../assets/ManTopHalfBkgndTransparentMay18th.png')
+                    // ? require('../assets/man_top_half.png')
+                    : gender === 'female'
+                    // ? require('../assets/shakeapp_woman.png')
+                    ? require('../assets/WomanLargeNoShadesMay18th.png')
+                    // ? require('../assets/WomanTopHalfNoShadesMay18th.png')
+                    // : require('../assets/ComboManWomanOther.png')
+                    // : require('../assets/icons8-female-user-100.png')
+                    : require('../assets/WomanLargeWithShadesMay18th.png')
+                    // : require('../assets/WomanTopHalfWithShadesMay18th.png')
+                    // : require('../assets/halfman_halfwoman_top_half.png')
+                }
+                style={{flex: 1, height: undefined, width: undefined, justifyContent: 'center'}}
+                // style={{width: '100%', height: '200%', flex: 1}}
+                >
+          
+                {/* <LinearGradient
+                  colors={['rgba(0, 0, 0, 0.5)', 'transparent']}
+                  style={{
+                    height: 100,
+                    width: '100%',
+                    position: 'absolute',
+                    top: 0,
+                  }}
+                /> */}
+
+              </ImageBackground>
+            )}
+
+
+
+
+
+
+
+
+
+
           </View>
 
-          {birthday && (
-            <Text style={{color: '#b1b1b1', fontSize: 14, marginTop: 5}}>
-              {_calculateAge(new Date(birthday)) + ' years old'}
-            </Text>
-          )}
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <IconAwesome name="map-marker" color="#b1b1b1" size={17} />
-            <Text
-              style={{
-                color: '#b1b1b1',
-                fontSize: 14,
-                paddingLeft: 5,
-                marginTop: 10,
-              }}>
-              {prettyDistance(distance)}
-            </Text>
-          </View>
 
-          {preferences && (
-            <View
-              style={{
-                marginTop: 12,
-                justifyContent: 'flex-start',
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-              {preferences.veggie && (
-                <Image
-                  source={require('../assets/veggie.png')}
-                  style={{
-                    height: 34,
-                    width: 34,
-                    borderRadius: 17,
-                    // backgroundColor: 'white',
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                  }}
-                />
-              )}
-              {preferences.meat && (
-                <Image
-                  source={require('../assets/meat.png')}
-                  style={{
-                    height: 34,
-                    width: 34,
-                    borderRadius: 17,
-                    // backgroundColor: 'white',
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                  }}
-                />
-              )}
-              {preferences.seaFood && (
-                <Image
-                  source={require('../assets/seafood.png')}
-                  style={{
-                    height: 34,
-                    width: 34,
-                    borderRadius: 17,
-                    // backgroundColor: 'white',
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                  }}
-                />
-              )}
-              {preferences.drinks && (
-                <Image
-                  source={require('../assets/drinks.png')}
-                  style={{
-                    height: 34,
-                    width: 34,
-                    borderRadius: 17,
-                    // backgroundColor: 'white',
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                  }}
-                />
-              )}
-            </View>
-          )}
 
-          <Text style={{padding: 14}}>{bio}</Text>
 
-          {/* <View style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}> */}
-          <View>
-            <TouchableOpacity
-              onPress={this.onReportButtonPress.bind(this)}
-              style={{
-                flexDirection: 'row',
-                height: 25,
-                alignItems: 'flex-end',
-                paddingRight: 12,
-                paddingLeft: 15,
-                paddingTop: 5,
-                borderTopWidth: StyleSheet.hairlineWidth,
-                // borderColor: 'rgba(255, 0, 0, 0.9)',
-                borderColor: 'rgba(0, 0, 0, 0)',
-              }}>
-              <View
-                style={{
-                  flex: 1,
-                  height: 25,
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
-                  marginBottom: 1,
-                }}>
-                {/* <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: '500',
-                    color: 'red',
-                    letterSpacing: 2.5,
-                    
-                  }}> */}
-                <IconAwesome name="flag" size={18} color="black" />
-                {/* </Text> */}
-              </View>
-            </TouchableOpacity>
-          </View>
+
+
+
+
+
         </View>
       </View>
     );
@@ -762,13 +1007,13 @@ class NearbyUserDetail extends Component {
               onPress={() => this.skipReport()}>
               <Text
                 style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
-                SKIP
+                SKIP REPORT
               </Text>
             </TouchableOpacity>
           </View>
 
           <Text style={{letterSpacing: 0.3}}>
-            Your feedback helps us to find any issues when something's not
+            Your feedback helps us find any issues when something's not
             right.{' '}
           </Text>
           <View style={[style.textInputContainer]}>
@@ -814,6 +1059,198 @@ class NearbyUserDetail extends Component {
       </ScrollView>
     );
   }
+
+
+// Model videoChatMessage() after reportOptions()
+  videoChatMessage() {
+    return (
+      <ScrollView style={[styles.container, {backgroundColor: 'white'}]}>
+        <View
+          style={{
+            height: '100%',
+            paddingBottom: 61,
+            paddingLeft: 24,
+            paddingRight: 24,
+            backgroundColor: 'orange',
+          }}>
+          <View
+            style={{
+              height: 61,
+              flexDirection: 'row',
+              marginTop: 90, //Move SKIP below Shake Notification at upper right
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              paddingRight: 29,
+              // backgroundColor: 'yellow',
+            }}>
+            <TouchableOpacity
+              style={{justifyContent: 'space-between'}}
+              onPress={() => this.skipVideoChatMessage()}>
+              <Text
+                style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
+                RETURN FROM VIDEO CHAT MESSAGE
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={{
+            fontSize: 20,
+            // letterSpacing: 0.5
+            letterSpacing: 0.3
+            // letterSpacing: 0.1
+            // letterSpacing: 0.0
+            }}>
+            We are working on a Video Chat feature in our next release. What other features would you like to see?  Your feedback helps us know what to work on next.{' '}
+          </Text>
+          <View style={[style.textInputContainer]}>
+            <TextInput
+              placeholder="Enter Feedback"
+              inputStyle={styles.inputStyle}
+              alignContent="center"
+              textAlign="center"
+              multiline={true}
+              numberOfLines={4}
+              // maxLength={200}
+              maxLength={300}
+              onChangeText={this.onDescriptionChange.bind(this)}
+              value={this.props.description}
+            />
+          </View>
+
+          <View style={{height: 50}}>
+            <TouchableOpacity
+              style={{
+                height: 50,
+                justifyContent: 'center',
+                // justifyContent: 'space-between',
+                alignItems: 'flex-end',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+              }}
+              onPress={this.onVideoChatButtonPress.bind(
+                this,
+                this.state.description,
+              )}>
+              <Text
+                style={{
+                  // fontSize: 14,
+                  fontSize: 20,
+                  fontWeight: '900',
+                  // alignContent: 'center',
+                  alignContent: 'flex-start',
+                  // alignContent: 'stretch',
+                  // textAlign: 'center',
+                  textAlign: 'left',
+                  // letterSpacing: 2.5,
+                  letterSpacing: 2.0,
+                  color: '#62cfb9',
+                }}>
+                Submit feedback
+              </Text>
+              {/* <Text
+                style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
+                SUBMIT FEEDBACK
+              </Text> */}
+            </TouchableOpacity>
+          </View>
+          {/* <Text style={{letterSpacing: 0.3}}>
+            Note: For any immediate danger or emergency situation, please call
+            local emergency services.
+          </Text> */}
+        </View>
+      </ScrollView>
+    );
+  }
+
+
+
+  // Model playProfileVideo() after reportOptions()
+  playProfileVideo() {
+    return (
+      <ScrollView style={[styles.container, {backgroundColor: 'white'}]}>
+        <View
+          style={{
+            height: '100%',
+            paddingBottom: 61,
+            paddingLeft: 24,
+            paddingRight: 24,
+            backgroundColor: 'orange',
+          }}>
+          <View
+            style={{
+              height: 61,
+              flexDirection: 'row',
+              marginTop: 90, //Move SKIP below Shake Notification at upper right
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              paddingRight: 29,
+              // backgroundColor: 'yellow',
+            }}>
+            <TouchableOpacity
+              style={{justifyContent: 'space-between'}}
+              onPress={() => this.skipPlayProfileVideo()}>
+              <Text
+                style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
+                PLAY PROFILE VIDEO NOW
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={{
+            letterSpacing: 0.3,
+            // fontSize:16,
+            fontSize:20,
+            }}>
+            While you are here, do you want to leave any feedback?  Your feedback helps us know what to work on next.{' '}
+          </Text>
+          <View style={[style.textInputContainer]}>
+            <TextInput
+              placeholder="Enter Feedback"
+              inputStyle={styles.inputStyle}
+              multiline={true}
+              numberOfLines={4}
+              maxLength={200}
+              onChangeText={this.onDescriptionChange.bind(this)}
+              value={this.props.description}
+            />
+          </View>
+
+          <View style={{height: 50}}>
+            <TouchableOpacity
+              style={{
+                height: 50,
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                borderBottomWidth: StyleSheet.hairlineWidth,
+              }}
+              onPress={this.onPlayProfileVideoButtonPress.bind(
+                this,
+                this.state.description,
+              )}>
+              <Text
+                style={{
+                  // fontSize: 14,
+                  fontSize: 20,
+                  fontWeight: '900',
+                  letterSpacing: 2.5,
+                  color: '#62cfb9',
+                }}>
+                Submit feedback before playing profile video
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* <Text style={{letterSpacing: 0.3}}>
+            Note: For any immediate danger or emergency situation, please call
+            local emergency services.
+          </Text> */}
+        </View>
+      </ScrollView>
+    );
+  }
+
+
+
+
+
 }
 const style = ScaledSheet.create({
   container: {

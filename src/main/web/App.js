@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 // org.reactjs.native.example.newshake
-
 import {createStore, applyMiddleware, compose} from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from './reducers';
 import Router from './Router';
@@ -44,7 +44,9 @@ const persistedReducer = persistReducer(config, rootReducer);
 
 const store = createStore(
   persistedReducer,
-  compose(applyMiddleware(ReduxThunk)),
+  // compose(applyMiddleware(ReduxThunk)),
+  // compose(applyMiddleware(ReduxThunk), DevTools.instrument()),
+  composeWithDevTools(applyMiddleware(ReduxThunk), )
 );
 
 // --> Redux Persist

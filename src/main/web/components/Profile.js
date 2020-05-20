@@ -91,6 +91,7 @@ class Profile extends Component {
   componentWillMount() {
     StatusBar.setHidden(true);
     this.props.profileFetch(this.props.user);
+    console.log("Profile.js: this.props.user = ", this.props.user);
 
     if (this.props.data) {
       this.setState({data: this.props.data});
@@ -269,7 +270,7 @@ class Profile extends Component {
     if (this.props.isFetchingProfileData) {
       return <Spinner size="large" />;
     }
-
+console.log("Profile.js: this.props.data = ", this.props.data)
     const {fullName, shakes, birthday} = this.props.data;
     var photoURL = this.props.data.mood.photoURL;
 
@@ -884,7 +885,12 @@ class Profile extends Component {
                 switchWidthMultiplier={2} // multipled by the `circleSize` prop to calculate total width of the Switch
               />
 
-<Switch
+
+
+            </View>
+
+{/* Hide this extra switch for now.  Maybe later we add a switch to change and/or show gender */}
+            {/* <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
         thumbColor={true ? "#f5dd4b" : "#f4f3f4"}
@@ -893,9 +899,10 @@ class Profile extends Component {
         onValueChange={()=>{}}
         // value={isEnabled}
         value={true}
-      />
+      /> */}
 
-            </View>
+
+
           </View>
         </View>
       </View>

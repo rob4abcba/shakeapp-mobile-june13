@@ -269,8 +269,9 @@ class Mood2 extends Component {
             }}>
             Take photo
           </Text> */}
-          <Image style={{width:100 }} source={require('../assets/icons8-polaroid-100.png')} resizeMode="contain"/>
-          {/* <Image style={{width:100 }} source={require('../assets/camera-white.png')} resizeMode="contain"/> */}
+          {/* <Image style={{width:100 }} source={require('../assets/icons8-polaroid-100.png')} resizeMode="contain"/> */}
+          <Image style={{width:80 }} source={require('../assets/icons8-camera-100-May18th.png')} resizeMode="contain"/>
+          {/* <Image style={{width:80 }} source={require('../assets/camera-white.png')} resizeMode="contain"/> */}
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -296,7 +297,7 @@ class Mood2 extends Component {
             }}>
             Take video
           </Text> */}
-          <Image style={{width:100 }} source={require('../assets/icons8-video-call-white.png')} resizeMode="contain"/>
+          <Image style={{width:80 }} source={require('../assets/icons8-video-call-white.png')} resizeMode="contain"/>
 
         </TouchableOpacity>
       </View>
@@ -332,7 +333,10 @@ class Mood2 extends Component {
     }
 
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, 
+      // backgroundColor: 'white',
+      backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
+      }}>
         <View
           style={{
             paddingTop: 59,
@@ -344,7 +348,10 @@ class Mood2 extends Component {
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <Image
               source={require('../assets/shake-logo.png')}
-              style={{height: 30, width: 23, backgroundColor: 'white'}}
+              style={{height: 30, width: 23, 
+                // backgroundColor: 'white',
+                backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
+              }}
               resizeMode={'contain'}
             />
 
