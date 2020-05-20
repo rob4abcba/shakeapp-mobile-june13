@@ -18,6 +18,7 @@ import NearbyUserDetail2 from "./NearbyUserDetail2";
 import SocketIOClient from "socket.io-client";
 import {Actions} from "react-native-router-flux";
 import {Badge} from "react-native-elements";
+import RNShake from 'react-native-shake';
 
 // Need profileFetch from DrawerContent.js amazingCircle?
 import {socialAccountsFetch, profileFetch} from '../actions';
@@ -47,6 +48,12 @@ export default class UserSwiper extends Component {
     report: false,
     nearbyRestaurantList: {},
   };
+
+  componentWillMount() {
+    RNShake.addEventListener('ShakeEvent', () => {
+      this._carousel.snapToNext();
+    });
+  }
 
   onInvite = list => {
     this.setState({invite: true});
@@ -441,11 +448,17 @@ export default class UserSwiper extends Component {
           scrollInterpolator={scrollInterpolator}
           slideInterpolatedStyle={animatedStyle}
           vertical={false}
+          ref={(c) => {
+            this._carousel = c;
+          }}
         />
       </View>
     );
   }
 
+  componentWillUnmount() {
+    RNShake.removeEventListener('ShakeEvent');
+  }
 
   render() {
     console.log("Inside render of UserSwiper.js")
