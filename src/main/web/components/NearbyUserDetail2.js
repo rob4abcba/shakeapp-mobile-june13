@@ -31,6 +31,7 @@ import {ScaledSheet} from 'react-native-size-matters';
 import TimeAgo from 'javascript-time-ago';
 // Load locale-specific relative date/time formatting rules.
 import en from 'javascript-time-ago/locale/en';
+import { orange } from 'color-name';
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.locale(en);
 // Create relative date/time formatter.
@@ -817,7 +818,9 @@ class NearbyUserDetail extends Component {
     {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
     <Image
       style={{width: 50}}
-      source={require('../assets/icons8-play-100.png')}
+      color={orange}
+      source={require('../assets/icons8-play-button-16-red.png')} //small red play button with transparent background
+      // source={require('../assets/icons8-play-button-50-red.png')}
       // flex={10} // flex
       resizeMode="contain"
     />
@@ -1010,7 +1013,7 @@ class NearbyUserDetail extends Component {
           </View>
 
           <Text style={{letterSpacing: 0.3}}>
-            Your feedback helps us to find any issues when something's not
+            Your feedback helps us find any issues when something's not
             right.{' '}
           </Text>
           <View style={[style.textInputContainer]}>
@@ -1090,16 +1093,25 @@ class NearbyUserDetail extends Component {
             </TouchableOpacity>
           </View>
 
-          <Text style={{letterSpacing: 0.3}}>
-            We are working on a Video Chat feature in our next release. Your feedback helps us know what to work on next.{' '}
+          <Text style={{
+            fontSize: 20,
+            // letterSpacing: 0.5
+            letterSpacing: 0.3
+            // letterSpacing: 0.1
+            // letterSpacing: 0.0
+            }}>
+            We are working on a Video Chat feature in our next release. What other features would you like to see?  Your feedback helps us know what to work on next.{' '}
           </Text>
           <View style={[style.textInputContainer]}>
             <TextInput
-              placeholder="Enter Reason to report"
+              placeholder="Enter Feedback"
               inputStyle={styles.inputStyle}
+              alignContent="center"
+              textAlign="center"
               multiline={true}
               numberOfLines={4}
-              maxLength={200}
+              // maxLength={200}
+              maxLength={300}
               onChangeText={this.onDescriptionChange.bind(this)}
               value={this.props.description}
             />
@@ -1110,6 +1122,7 @@ class NearbyUserDetail extends Component {
               style={{
                 height: 50,
                 justifyContent: 'center',
+                // justifyContent: 'space-between',
                 alignItems: 'flex-end',
                 borderBottomWidth: StyleSheet.hairlineWidth,
               }}
@@ -1119,13 +1132,24 @@ class NearbyUserDetail extends Component {
               )}>
               <Text
                 style={{
-                  fontSize: 14,
+                  // fontSize: 14,
+                  fontSize: 20,
                   fontWeight: '900',
-                  letterSpacing: 2.5,
+                  // alignContent: 'center',
+                  alignContent: 'flex-start',
+                  // alignContent: 'stretch',
+                  // textAlign: 'center',
+                  textAlign: 'left',
+                  // letterSpacing: 2.5,
+                  letterSpacing: 2.0,
                   color: '#62cfb9',
                 }}>
-                Submit feedback regarding video chat
+                Submit feedback
               </Text>
+              {/* <Text
+                style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
+                SUBMIT FEEDBACK
+              </Text> */}
             </TouchableOpacity>
           </View>
           {/* <Text style={{letterSpacing: 0.3}}>
@@ -1166,17 +1190,21 @@ class NearbyUserDetail extends Component {
               onPress={() => this.skipPlayProfileVideo()}>
               <Text
                 style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
-                PLAY PROFILE VIDEO
+                PLAY PROFILE VIDEO NOW
               </Text>
             </TouchableOpacity>
           </View>
 
-          <Text style={{letterSpacing: 0.3}}>
-            While you are here, do you want to leave any feedback?  Your feedback helps us to know what to work on next.{' '}
+          <Text style={{
+            letterSpacing: 0.3,
+            // fontSize:16,
+            fontSize:20,
+            }}>
+            While you are here, do you want to leave any feedback?  Your feedback helps us know what to work on next.{' '}
           </Text>
           <View style={[style.textInputContainer]}>
             <TextInput
-              placeholder="Enter Reason to report"
+              placeholder="Enter Feedback"
               inputStyle={styles.inputStyle}
               multiline={true}
               numberOfLines={4}
@@ -1200,7 +1228,8 @@ class NearbyUserDetail extends Component {
               )}>
               <Text
                 style={{
-                  fontSize: 14,
+                  // fontSize: 14,
+                  fontSize: 20,
                   fontWeight: '900',
                   letterSpacing: 2.5,
                   color: '#62cfb9',
@@ -1209,10 +1238,10 @@ class NearbyUserDetail extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <Text style={{letterSpacing: 0.3}}>
+          {/* <Text style={{letterSpacing: 0.3}}>
             Note: For any immediate danger or emergency situation, please call
             local emergency services.
-          </Text>
+          </Text> */}
         </View>
       </ScrollView>
     );
