@@ -333,7 +333,10 @@ class Mood2 extends Component {
     }
 
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, 
+      // backgroundColor: 'white',
+      backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
+      }}>
         <View
           style={{
             paddingTop: 59,
@@ -345,7 +348,10 @@ class Mood2 extends Component {
           <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
             <Image
               source={require('../assets/shake-logo.png')}
-              style={{height: 30, width: 23, backgroundColor: 'white'}}
+              style={{height: 30, width: 23, 
+                // backgroundColor: 'white',
+                backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
+              }}
               resizeMode={'contain'}
             />
 
