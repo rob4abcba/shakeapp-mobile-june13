@@ -467,8 +467,12 @@ export default class UserSwiper extends Component {
                   // source={require('../assets/symbol_shake_color.png')}
                   style={{height: 44, width: 35}}
                   resizeMode={'contain'}
-                  borderColor={'white'}
-                  backgroundColor={'white'}
+                  // borderColor={'white'}
+                  borderColor={'rgba(255,255,255,0.1)'} //white partially transparent
+                  // backgroundColor={'white'}
+                  // backgroundColor= {'rgba(0,0,0,0.7)'} //black partially transparent
+                  backgroundColor= {'rgba(255,255,255,0.2)'} //white partially transparent
+              
                   borderWidth={1}
               />
 
