@@ -214,6 +214,8 @@ PODS:
   - react-native-onesignal (3.4.1):
     - OneSignal (= 2.11.0)
     - React (< 1.0.0, >= 0.13.0)
+  - react-native-shake (3.4.0):
+    - React
   - react-native-video (5.0.2):
     - React
     - react-native-video/Video (= 5.0.2)
@@ -298,6 +300,7 @@ DEPENDENCIES:
   - react-native-image-resizer (from `../node_modules/react-native-image-resizer`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
+  - react-native-shake (from `../node_modules/react-native-shake`)
   - react-native-video (from `../node_modules/react-native-video`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -370,6 +373,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-onesignal:
     :path: "../node_modules/react-native-onesignal"
+  react-native-shake:
+    :path: "../node_modules/react-native-shake"
   react-native-video:
     :path: "../node_modules/react-native-video"
   React-RCTActionSheet:
@@ -436,6 +441,7 @@ SPEC CHECKSUMS:
   react-native-image-resizer: 487329f0748d62a075f9d1ba1676c3ab394d169f
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-onesignal: 869795afed44059e269827e5b7b7a319aa0838e9
+  react-native-shake: 4ce03b12439f4b9fdf0acd40c5b0f476b8105f9f
   react-native-video: 961749da457e73bf0b5565edfbaffc25abfb8974
   React-RCTActionSheet: af4d951113b1e068bb30611f91b984a7a73597ff
   React-RCTAnimation: 4f518d70bb6890b7c3d9d732f84786d6693ca297
