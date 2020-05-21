@@ -672,7 +672,6 @@ class NearbyUserDetail extends Component {
                 style={{
                   height: 50,
                   width: 50,
-                  // backgroundColor: 'pink',
                   // backgroundColor: 'rgb(255, 255, 0, alpha)',
                   // backgroundColor: 'rgba(255, 255, 0, 0.9)',
                   // backgroundColor: 'rgba(0, 0, 255, 0.1)',
@@ -692,7 +691,7 @@ class NearbyUserDetail extends Component {
                 {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                 {/* <Image style={{width:100 }} source={require('../assets/icons8-video-call-100.png')} resizeMode="contain"/> */}
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 // onPress={this.onChatButtonPress.bind(this)}
                 // onPress={() => Actions.chatAuth()}
                 onPress={this.onVideoChatButtonPress.bind(this)}
@@ -700,7 +699,6 @@ class NearbyUserDetail extends Component {
                 style={{
                   height: 50,
                   width: 50,
-                  // backgroundColor: 'pink',
                   // backgroundColor: 'rgb(255, 255, 0, alpha)',
                   // backgroundColor: 'rgba(255, 255, 0, 0.9)',
                   // backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -713,13 +711,12 @@ class NearbyUserDetail extends Component {
                   shadowOffset: {width: 4, height: 2},
                   marginBottom: 10,
                 }}>
-                {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                 <Image
                   style={{width: 50}}
                   source={require('../assets/icons8-video-call-100.png')}
                   resizeMode="contain"
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity
                 onPress={this.onReportButtonPress.bind(this)}
