@@ -721,6 +721,9 @@ class NearbyUserDetail extends Component {
               <TouchableOpacity
                 onPress={this.onReportButtonPress.bind(this)}
                 style={{
+                  position: 'absolute',
+                  bottom: 40,
+                  right: 10,
                   flexDirection: 'row',
                   height: 25,
                   alignItems: 'flex-end',
