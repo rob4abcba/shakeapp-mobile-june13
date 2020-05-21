@@ -960,7 +960,7 @@ class NearbyUserDetail extends Component {
             </TouchableOpacity>
           </View>
 
-          <Text style={{letterSpacing: 0.3}}>
+          <Text style={{letterSpacing: 0.3, color: 'white'}}>
             Your feedback helps us find any issues when something's not right.{' '}
           </Text>
           <View style={[style.textInputContainer]}>
@@ -998,7 +998,7 @@ class NearbyUserDetail extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          <Text style={{letterSpacing: 0.3}}>
+          <Text style={{letterSpacing: 0.3, color:'white'}}>
             Note: For any immediate danger or emergency situation, please call
             local emergency services.
           </Text>
