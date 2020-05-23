@@ -481,12 +481,12 @@ export default class UserSwiper extends Component {
                   style={{height: 44, width: 35}}
                   resizeMode={'contain'}
                   // borderColor={'white'}
-                  borderColor={'rgba(255,255,255,0.1)'} //white partially transparent
+                  // borderColor={'rgba(255,255,255,0.1)'} //white partially transparent
                   // backgroundColor={'white'}
                   // backgroundColor= {'rgba(0,0,0,0.7)'} //black partially transparent
-                  backgroundColor= {'rgba(255,255,255,0.2)'} //white partially transparent
+                  // backgroundColor= {'rgba(255,255,255,0.2)'} //white partially transparent
               
-                  borderWidth={1}
+                  // borderWidth={1}
               />
 
               {this.props.notificationCount > 0 ? (
