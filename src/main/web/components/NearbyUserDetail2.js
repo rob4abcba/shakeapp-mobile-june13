@@ -367,6 +367,7 @@ class NearbyUserDetail extends Component {
               height: 200,
               alignItems: 'center',
               justifyContent: 'center',
+              // color: 'orange',
               // backgroundColor: 'white',
               backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
               paddingTop: 40,
@@ -376,7 +377,7 @@ class NearbyUserDetail extends Component {
               shadowColor: 'rgb(36, 100, 193)',
               shadowOffset: {width: 4, height: 2},
             }}>
-            <Text style={{fontSize: 24, fontWeight: '800'}}>
+            <Text style={{fontSize: 24, fontWeight: '800', color:'orange'}}>
               {this.state.modalTitle}
             </Text>
 
@@ -386,7 +387,8 @@ class NearbyUserDetail extends Component {
                 fontSize: 15,
                 paddingTop: 16,
                 fontWeight: '500',
-                color: '#484848',
+                // color: '#484848',
+                color: 'orange',
               }}>
               {this.state.modalDescription}
             </Text>
@@ -414,6 +416,7 @@ class NearbyUserDetail extends Component {
                 <Text
                   style={{
                     color: 'white',
+                    // color: 'orange',
                     letterSpacing: -0.2,
                     fontSize: 18,
                     fontWeight: '600',
@@ -449,7 +452,7 @@ class NearbyUserDetail extends Component {
               shadowColor: 'rgb(36, 100, 193)',
               shadowOffset: {width: 4, height: 2},
             }}>
-            <Text style={{fontSize: 24, fontWeight: '800'}}>Let's talk</Text>
+            <Text style={{fontSize: 24, fontWeight: '800', color: 'orange'}}>Let's talk</Text>
 
             <Text
               style={{
@@ -457,7 +460,8 @@ class NearbyUserDetail extends Component {
                 fontSize: 15,
                 paddingTop: 16,
                 fontWeight: '500',
-                color: '#484848',
+                // color: '#484848',
+                color: 'orange',
               }}>
               Please write your message below.
             </Text>
@@ -497,6 +501,7 @@ class NearbyUserDetail extends Component {
                 <Text
                   style={{
                     color: 'white',
+                    // color: 'orange',
                     letterSpacing: -0.2,
                     fontSize: 18,
                     fontWeight: '600',
@@ -958,12 +963,12 @@ class NearbyUserDetail extends Component {
               onPress={() => this.skipReport()}>
               <Text
                 style={{fontSize: 16, fontWeight: 'bold', letterSpacing: 0.5}}>
-                SKIP REPORT
+                SKIP FEEDBACK
               </Text>
             </TouchableOpacity>
           </View>
 
-          <Text style={{letterSpacing: 0.3, color: 'white'}}>
+          <Text style={{letterSpacing: 0.3, color: 'black'}}>
             Your feedback helps us find any issues when something's not right.{' '}
           </Text>
           <View style={[style.textInputContainer]}>
@@ -995,16 +1000,17 @@ class NearbyUserDetail extends Component {
                   fontSize: 14,
                   fontWeight: '900',
                   letterSpacing: 2.5,
-                  color: '#62cfb9',
+                  // color: '#62cfb9',
+                  color: 'black',
                 }}>
-                Submit feedback
+                SUBMIT FEEDBACK
               </Text>
             </TouchableOpacity>
           </View>
-          <Text style={{letterSpacing: 0.3, color:'white'}}>
+          {/* <Text style={{letterSpacing: 0.3, color:'white'}}>
             Note: For any immediate danger or emergency situation, please call
             local emergency services.
-          </Text>
+          </Text> */}
         </View>
       </ScrollView>
     );
