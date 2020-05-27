@@ -727,7 +727,7 @@ class NearbyUserDetail extends Component {
                 onPress={this.onReportButtonPress.bind(this)}
                 style={{
                   position: 'absolute',
-                  bottom: 40,
+                  bottom: 10, // 40 too high for iPhoneSE
                   right: 10,
                   flexDirection: 'row',
                   height: 25,
