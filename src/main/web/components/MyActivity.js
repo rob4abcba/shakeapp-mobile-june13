@@ -30,7 +30,8 @@ class MyActivity extends Component {
 
     // CHAT
     // RL this.socket = SocketIOClient('https://www.shakeapp-backend.net');
-    this.socket = SocketIOClient('http://localhost:8000');
+    // this.socket = SocketIOClient('http://localhost:8000');
+    this.socket = SocketIOClient('http://54.176.181.106:8001');
 
     this.socket.emit('init', {
       token: this.props.user,
