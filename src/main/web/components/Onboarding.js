@@ -49,10 +49,16 @@ let images = [
 
 let titles = ['Welcome', 'Set your Mood', 'Share experiences'];
 
+// let descriptions = [
+//   'Discover new restaurants & friends\neveryday with Shake',
+//   "Share with others your morning hair\nor today's smile",
+//   'Great food & drinks are great on its own, but\nwith great company is even better.\nExperience\nthe world one plate/drink at a time.',
+// ];
+
 let descriptions = [
-  'Discover new restaurants & friends\neveryday with Shake',
-  "Share with others your morning hair or today's smile,\nthe new shirt you put on or today's smile",
-  'Great food & drinks are great on its own, but\nwith great company is even better.\nExperience\nthe world one plate/drink at a time.',
+  'Set your preferences',
+  "Share with others your morning hair\nor today's smile",
+  'Make new friends, everywhere!',
 ];
 
 class Onboarding extends Component {
