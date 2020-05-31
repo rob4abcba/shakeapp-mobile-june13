@@ -44,7 +44,8 @@ function prettyDistance(distance) {
 let images = [
   'https://i.ibb.co/qkK8cxR/cook-and-barman-png.png',
   'https://image.ibb.co/nOp9N8/mood.png',
-  'https://i.ibb.co/VwYPQNR/SHAKESHAKEPI-AS.jpg',
+  // 'https://i.ibb.co/VwYPQNR/SHAKESHAKEPI-AS.jpg',
+  'https://shakeapp-backend.s3.eu-central-1.amazonaws.com/assets/ManAndWomanTogether.png',
 ];
 
 let titles = ['Welcome', 'Set your Mood', 'Share experiences'];
