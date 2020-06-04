@@ -53,7 +53,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Your application need Calendars permission.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>SHAKE need your Camera to capture pictures and video.</string>
+	<string>SHAKE needs your Camera to capture pictures and video.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Your application need Contacts permission.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
