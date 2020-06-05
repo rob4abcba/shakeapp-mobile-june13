@@ -409,7 +409,7 @@ class ChatConversation extends Component {
                   color: 'white',
                   paddingLeft: 50,
                 }}>
-                Block
+                Flag
               </Text>
             </TouchableOpacity>
           </View>
