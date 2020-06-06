@@ -448,6 +448,7 @@ export default class UserSwiper extends Component {
           scrollInterpolator={scrollInterpolator}
           slideInterpolatedStyle={animatedStyle}
           vertical={false}
+          removeClippedSubviews={false}
           ref={(c) => {
             this._carousel = c;
           }}
