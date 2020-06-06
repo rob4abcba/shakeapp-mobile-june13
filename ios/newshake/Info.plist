@@ -53,17 +53,17 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Your application need Calendars permission.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Your application need Camera permission.</string>
+	<string>SHAKE needs your Camera to capture pictures and video.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Your application need Contacts permission.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
+	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>I want to get your location Information in background</string>
+	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>NSLocationWhenInUseUsageDescription</string>
+	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Your application need Microphone permission.</string>
+	<string>SHAKE needs your Microphone access to record audio during video.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Your application need NSMotionUsageDescription permission.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -104,8 +104,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

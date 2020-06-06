@@ -71,6 +71,8 @@ class NearbyUserDetail extends Component {
     //MC: Model after "report"
     videoChatMessage: false,
     playProfileVideo: false,
+    paused: true, // June5: Pause profile video until click PLAY button
+    // paused: false, // June5: Pause profile video until click PLAY button
   };
 
   componentWillMount() {
@@ -102,7 +104,8 @@ class NearbyUserDetail extends Component {
   }
 
   skipPlayProfileVideo() {
-    this.setState({playProfileVideo: false});
+    // this.setState({playProfileVideo: false});
+    this.setState({paused: false}); // June5: Pause profile video until click PLAY button
   }
 
   onChatSend() {
@@ -765,11 +768,15 @@ class NearbyUserDetail extends Component {
               marginBottom: 0,
               // paddingBottom: 0,
             }}>
+
+             {/* Comment out red YouTube like PLAY button on ProfileVideos  */}
+        {/*
             {videoURL && (
               <TouchableOpacity
                 // onPress={this.onChatButtonPress.bind(this)}
                 // onPress={this.onReportButtonPress.bind(this)}
                 onPress={this.onPlayProfileVideoButtonPress.bind(this)}
+                // onPress={() => this.skipPlayProfileVideo()} //June5: Worked once but not after that
                 // onPress={() => Actions.chatAuth()}
                 // flex={1} // flex
                 activeOpacity={0.5} //MC: Opacity when clicked
@@ -796,7 +803,6 @@ class NearbyUserDetail extends Component {
                   shadowOffset: {width: 4, height: 2},
                   marginBottom: 0, //marginBottom cannot put play button on top of video. Just pushes video upward.
                 }}>
-                {/* // Video chat icon goes here.  Navigate to ConnectyCube auth.js onPress and pass in the ID of the friend as a prop.  */}
                 <Image
                   style={{width: 50}}
                   color={orange}
@@ -807,12 +813,14 @@ class NearbyUserDetail extends Component {
                 />
               </TouchableOpacity>
             )}
+        */}
 
             {videoURL && (
               <Video
                 //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
                 source={{uri: videoURL}} // Can be a URL or a local file.
                 controls={true}
+                paused={this.state.paused} // June5: Pause profile video until click PLAY button
                 // ignoreSilentSwitch={"ignore"} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
                 // muted={false} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
                 // repeat={false}

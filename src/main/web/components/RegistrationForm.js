@@ -172,9 +172,9 @@ class RegistrationForm extends Component {
   }
 
   privacyPolicyClick = () => {
-    Linking.canOpenURL('http://www.shakeapp.today/privacy').then(supported => {
+    Linking.canOpenURL('http://www.shakeapp.today/privacy-policy').then(supported => {
       if (supported) {
-        Linking.openURL('http://www.shakeapp.today/privacy');
+        Linking.openURL('http://www.shakeapp.today/privacy-policy');
       } else {
         console.log("Don't know how to open URI");
       }
