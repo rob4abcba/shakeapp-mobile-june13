@@ -7,7 +7,7 @@ import {
   Animated,
   StyleSheet,
   Dimensions,
-    Alert
+  Alert
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -431,7 +431,7 @@ class ChatConversation extends Component {
                   color: 'white',
                   paddingLeft: 50,
                 }}>
-                Flag
+                Block
               </Text>
             </TouchableOpacity>
           </View>
