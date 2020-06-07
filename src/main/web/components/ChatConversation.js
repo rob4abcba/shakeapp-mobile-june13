@@ -7,6 +7,7 @@ import {
   Animated,
   StyleSheet,
   Dimensions,
+  Alert,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -301,6 +302,27 @@ class ChatConversation extends Component {
     Actions.popTo('myActivity');
   }
 
+    onBlock() {
+
+        Alert.alert(
+            'Are you sure you want to block this user?',
+            'You will no longer be able to communicate with this person',
+            [
+                {
+                    text: 'Yes I am sure',
+                    onPress: () => this.onBlockButtonPress()
+                },
+                {
+                    text: 'No, Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                },
+            ],
+            {cancelable: false}
+        );
+    }
+
+
   onBlockButtonPress() {
     const {user} = this.props;
 
@@ -329,9 +351,14 @@ class ChatConversation extends Component {
         }
       },
     );
-
-    //goto previoud page
-    Actions.myActivity({route: 1});
+    //Choose where to goto after BlockUser event
+    Actions.myActivity({route: 1}); // GoTo Previous Page
+    // Actions.myActivity({route: 0}); // GoTo Previous Page
+    // Actions.nearbyUserDetail(); // Got TypeError
+    // Actions.nearbyUserDetail({  // Got TypeError
+    //   nearbyUser: this.props.nearbyUser,
+    //   notification: this.props.notification,
+    // });
   }
   render() {
     var photoURL = this.props.friend.photoURL;
@@ -400,7 +427,7 @@ class ChatConversation extends Component {
               {this.props.friend.fullName}
             </Text>
 
-            <TouchableOpacity onPress={this.onBlockButtonPress.bind(this)}>
+              <TouchableOpacity onPress={this.onBlock.bind(this)}>
               <Text
                 style={{
                   fontSize: 12,
@@ -409,7 +436,7 @@ class ChatConversation extends Component {
                   color: 'white',
                   paddingLeft: 50,
                 }}>
-                Flag
+                Block
               </Text>
             </TouchableOpacity>
           </View>
