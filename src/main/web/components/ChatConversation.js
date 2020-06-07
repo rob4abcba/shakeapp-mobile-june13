@@ -7,7 +7,7 @@ import {
   Animated,
   StyleSheet,
   Dimensions,
-  Alert
+  Alert,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -351,9 +351,14 @@ class ChatConversation extends Component {
         }
       },
     );
-
-    //goto previoud page
-    Actions.myActivity({route: 1});
+    //Choose where to goto after BlockUser event
+    Actions.myActivity({route: 1}); // GoTo Previous Page
+    // Actions.myActivity({route: 0}); // GoTo Previous Page
+    // Actions.nearbyUserDetail(); // Got TypeError
+    // Actions.nearbyUserDetail({  // Got TypeError
+    //   nearbyUser: this.props.nearbyUser,
+    //   notification: this.props.notification,
+    // });
   }
   render() {
     var photoURL = this.props.friend.photoURL;
