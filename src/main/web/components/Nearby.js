@@ -38,6 +38,7 @@ import Mood from './Mood2';
 // import Mood from './Mood_RNCamera';
 import GridView from 'react-native-super-grid';
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
+import Geolocation from '@react-native-community/geolocation';
 import Modal from 'react-native-modal';
 import Permissions from 'react-native-permissions';
 import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
@@ -116,8 +117,9 @@ class Nearby extends Component {
     Permissions.check('location', {type: 'always'}).then(response => {
       if (response !== 'denied') {
         try {
-          navigator.geolocation.getCurrentPosition(
+            Geolocation.getCurrentPosition(
             ({coords}) => {
+                console.log("this is the coordinates", coords)
               this.geoUpdate.bind(this);
             },
             (err) => {
@@ -137,7 +139,7 @@ class Nearby extends Component {
     Permissions.check('location', {type: 'whenInUse'}).then(response => {
       if (response !== 'denied') {
         try {
-        navigator.geolocation.getCurrentPosition(
+            Geolocation.getCurrentPosition(
           ({coords}) => {
             this.geoUpdate.bind(this);
           },
@@ -152,6 +154,10 @@ class Nearby extends Component {
           console.log(e); // getCurrentPosition is not a function
         }
         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+      }
+      else {
+          console.log("Permission denied Geoupdate call");
+          this.geoUpdate({coordinates: {latitude: "39.773972", longitude: "-129.431297"}})
       }
     });
 
