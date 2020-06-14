@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "patch": "cd src && git apply ../gender_fields.patch",
     "cleanbig": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && npm cache clean --force",
-    "cleansmall": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force"
+    "cleansmall": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
+    "cleansmallios1": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force && react-native run-ios",
+    "cleansmallios2": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force && react-native run-ios && react-native run-ios"
   },
   "dependencies": {
     "@mauron85/react-native-background-geolocation": "0.6.3",
