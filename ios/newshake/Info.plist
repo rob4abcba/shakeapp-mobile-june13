@@ -56,10 +56,10 @@
 	<string>SHAKE needs your Camera to capture pictures and video.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Your application need Contacts permission.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<!-- <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string>
+	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string> -->
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>SHAKE requests your location to show you other users around you, so you can have a reliable experience with us.</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -92,7 +92,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
-		<string>location</string>
+		<!-- <string>location</string> -->
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
