@@ -1,0 +1,31 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+inhibit_all_warnings!
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'shakeapp-mobile' do
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
+  pod 'React', :path => '../node_modules/react-native'
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'react-native-google-maps'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+      end
+    end
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end
+
+install! 'cocoapods', :deterministic_uuids => false

@@ -1,0 +1,86 @@
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision 06a8962e31fa30226d82a8a21075301f3f93f89f)
++++ package.json	(date 1589981241000)
+@@ -44,6 +44,7 @@
+     "react-native-reanimated": "^1.3.0",
+     "react-native-router-flux": "^4.0.6",
+     "react-native-screens": "^2.4.0",
++    "react-native-shake": "^3.4.0",
+     "react-native-size-matters": "^0.2.1",
+     "react-native-snap-carousel": "^3.8.1",
+     "react-native-star-rating": "^1.1.0",
+Index: src/main/web/components/UserSwiper.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/web/components/UserSwiper.js	(revision 06a8962e31fa30226d82a8a21075301f3f93f89f)
++++ src/main/web/components/UserSwiper.js	(date 1589981481000)
+@@ -18,6 +18,7 @@
+ import SocketIOClient from "socket.io-client";
+ import {Actions} from "react-native-router-flux";
+ import {Badge} from "react-native-elements";
++import RNShake from 'react-native-shake';
+ 
+ const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
+ 
+@@ -42,6 +43,12 @@
+     nearbyRestaurantList: {},
+   };
+ 
++    componentWillMount() {
++        RNShake.addEventListener('ShakeEvent', () => {
++            this._carousel.snapToNext();
++        });
++    }
++
+   onInvite = list => {
+     this.setState({invite: true});
+     this.setState({nearbyRestaurantList: list});
+@@ -76,23 +83,30 @@
+     return (
+       <View style={[styles.container, styles.containerLight]}>
+         <Carousel
+-          data={this.state.nearbyUsers}
+-          renderItem={this.renderNearbyUserDetail.bind(this)}
+-          sliderWidth={viewportWidth}
+-          itemWidth={viewportWidth}
+-          sliderHeight={viewportHeight - 45}
+-          itemHeight={viewportHeight - 45}
+-          slideStyle={{width: viewportWidth, height: viewportHeight - 45}}
+-          containerCustomStyle={styles.slider}
+-          contentContainerCustomStyle={styles.sliderContentContainer}
+-          scrollInterpolator={scrollInterpolator}
+-          slideInterpolatedStyle={animatedStyle}
+-          vertical={false}
++            data={this.state.nearbyUsers}
++            renderItem={this.renderNearbyUserDetail.bind(this)}
++            sliderWidth={viewportWidth}
++            itemWidth={viewportWidth}
++            sliderHeight={viewportHeight - 45}
++            itemHeight={viewportHeight - 45}
++            slideStyle={{width: viewportWidth, height: viewportHeight - 45}}
++            containerCustomStyle={styles.slider}
++            contentContainerCustomStyle={styles.sliderContentContainer}
++            scrollInterpolator={scrollInterpolator}
++            slideInterpolatedStyle={animatedStyle}
++            vertical={false}
++            ref={(c) => {
++                this._carousel = c;
++            }}
+         />
+       </View>
+     );
+   }
+ 
++    componentWillUnmount() {
++        RNShake.removeEventListener('ShakeEvent');
++    }
++
+   render() {
+     console.log("Inside render of UserSwiper.js")
+     if (this.state.invite) {

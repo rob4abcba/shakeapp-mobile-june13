@@ -1,0 +1,52 @@
+Index: src/main/web/components/NearbyUserDetail2.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/web/components/NearbyUserDetail2.js	(revision 99871e77ebb71362f720c817c7f7e4a01fcadc5b)
++++ src/main/web/components/NearbyUserDetail2.js	(date 1591373890000)
+@@ -71,6 +71,7 @@
+     //MC: Model after "report"
+     videoChatMessage: false,
+     playProfileVideo: false,
++      paused: true
+   };
+ 
+   componentWillMount() {
+@@ -102,7 +103,7 @@
+   }
+ 
+   skipPlayProfileVideo() {
+-    this.setState({playProfileVideo: false});
++      this.setState({paused: false});
+   }
+ 
+   onChatSend() {
+@@ -811,20 +812,21 @@
+             {videoURL && (
+               <Video
+                 //source={{ uri: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
+-                source={{uri: videoURL}} // Can be a URL or a local file.
+-                controls={true}
++                  source={{uri: videoURL}} // Can be a URL or a local file.
++                  controls={true}
++                  paused={this.state.paused}
+                 // ignoreSilentSwitch={"ignore"} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
+                 // muted={false} //McBk Headphone Vol 60% hear vid w/o mute SilentSwi
+                 // repeat={false}
+                 // flex={10} // flex
+-                ref={ref => {
++                  ref={ref => {
+                   this.player = ref;
+                 }}
+-                resizeMode={'cover'}
+-                onError={err => {
++                  resizeMode={'cover'}
++                  onError={err => {
+                   console.warn(err);
+                 }}
+-                style={{
++                  style={{
+                   height: '100%',
+                   width: '100%',
+                   // backgroundColor: 'rgba(0,255,0,0.1)',
