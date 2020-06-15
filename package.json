@@ -14,7 +14,6 @@
     "cleansmall": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force"
   },
   "dependencies": {
-    "@mauron85/react-native-background-geolocation": "0.6.3",
     "@react-native-community/async-storage": "1.6.2",
     "@react-native-community/geolocation": "2.0.2",
     "add": "2.0.6",

@@ -436,20 +436,20 @@ export default class UserSwiper extends Component {
     return (
       <View style={[styles.container, styles.containerLight]}>
         <Carousel
-          data={this.state.nearbyUsers}
-          renderItem={this.renderNearbyUserDetail.bind(this)}
-          sliderWidth={viewportWidth}
-          itemWidth={viewportWidth}
-          sliderHeight={viewportHeight - 45}
-          itemHeight={viewportHeight - 45}
-          slideStyle={{width: viewportWidth, height: viewportHeight - 45}}
-          containerCustomStyle={styles.slider}
-          contentContainerCustomStyle={styles.sliderContentContainer}
-          scrollInterpolator={scrollInterpolator}
-          slideInterpolatedStyle={animatedStyle}
-          vertical={false}
-          removeClippedSubviews={false}
-          ref={(c) => {
+            data={this.state.nearbyUsers}
+            renderItem={this.renderNearbyUserDetail.bind(this)}
+            sliderWidth={viewportWidth}
+            itemWidth={viewportWidth}
+            sliderHeight={viewportHeight - 45}
+            itemHeight={viewportHeight - 45}
+            slideStyle={{width: viewportWidth, height: viewportHeight - 45}}
+            containerCustomStyle={styles.slider}
+            contentContainerCustomStyle={styles.sliderContentContainer}
+            scrollInterpolator={scrollInterpolator}
+            slideInterpolatedStyle={animatedStyle}
+            vertical={false}
+            removeClippedSubviews={true}
+            ref={(c) => {
             this._carousel = c;
           }}
         />

@@ -13,8 +13,8 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		8970E6F2B5961F252603AC94 /* libPods-newshake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A22657E501462F9DCFFECB /* libPods-newshake.a */; };
-		F813179F86CA2C0F744E4E34 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1462B92C6855F146D63AA88C /* libPods-OneSignalNotificationServiceExtension.a */; };
+		2416257325555EF11C6BE753 /* libPods-newshake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56FEA38A046D10C6D1F4ADB9 /* libPods-newshake.a */; };
+		EF5D197E5E8F2ABF957499BB /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81AFB499F2E3BA2BC2D58C67 /* libPods-OneSignalNotificationServiceExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				240041A0D8E6744AA46AACF6 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
+				EF5D197E5E8F2ABF957499BB /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79D600CEE709910316CC793C /* libPods-newshake.a in Frameworks */,
+				2416257325555EF11C6BE753 /* libPods-newshake.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
