@@ -39,8 +39,9 @@ import Mood from './Mood2';
 import GridView from 'react-native-super-grid';
 import Geolocation from '@react-native-community/geolocation';
 import Modal from 'react-native-modal';
-import Permissions from 'react-native-permissions';
+import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
+import {request} from "react-native-permissions";
 var styles = require('../Styles');
 
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
@@ -102,65 +103,136 @@ class Nearby extends Component {
     ) {});
   }
 
-  componentWillMount() {
+    componentWillMount() {
     console.log('this.props.nearbyList = ', this.props.nearbyList)
     StatusBar.setHidden(true);
     const {user} = this.props;
-
     this.props.updateNotificationId(user);
 
-    Permissions.check('location', {type: 'always'}).then(response => {
-      if (response !== 'denied') {
-        try {
-            Geolocation.getCurrentPosition(
-            ({coords}) => {
-                console.log("this is the coordinates", coords)
-              this.geoUpdate.bind(this);
-            },
-            (err) => {
-              console.log('err = ');
-              console.log(err);
-            },
-            { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
-            );
-          } catch (e) {
-            console.log('e = ');
-            console.log(e);  // getCurrentPosition is not a function
-          }
-        // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
-      }
-      else {
-          console.log("Permission denied Geoupdate call");
-          this.geoUpdate({coordinates: {latitude: "39.773972", longitude: "-129.431297"}})
-      }
-    });
+        request(PERMISSIONS.IOS.LOCATION_ALWAYS)
+            .then((result) => {
+                switch (result) {
+                    case RESULTS.UNAVAILABLE:
+                        console.log(
+                            'This feature is not available (on this device / in this context)',
+                        );
+                        break;
+                    case RESULTS.DENIED:
+                        console.log(
+                            'The permission has not been requested / is denied but requestable',
+                        );
+                        break;
+                    case RESULTS.GRANTED:
+                        console.log('The permission is granted');
+                        break;
+                    case RESULTS.BLOCKED:
+                        console.log('The permission is denied and not requestable anymore');
+                        break;
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            });
 
-    Permissions.check('location', {type: 'whenInUse'}).then(response => {
-      if (response !== 'denied') {
-        try {
-            Geolocation.getCurrentPosition(
-          ({coords}) => {
-            this.geoUpdate.bind(this);
-          },
-          (err) => {
-            console.log('err = ');
-            console.log(err);
-          },
-          { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
-          );
-        } catch (e) {
-          console.log('e = ');
-          console.log(e); // getCurrentPosition is not a function
-        }
-        // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
-      }
-      else {
-          console.log("Permission denied Geoupdate call");
-          this.geoUpdate({coordinates: {latitude: "39.773972", longitude: "-129.431297"}})
-      }
-    });
+        check(PERMISSIONS.IOS.LOCATION_ALWAYS)
+            .then((result) => {
+                switch (result) {
+                    case RESULTS.UNAVAILABLE:
+                        console.log(
+                            'This feature is not available (on this device / in this context)',
+                        );
+                        break;
+                    case RESULTS.DENIED:
+                        console.log(
+                            'The permission has not been requested / is denied but requestable',
+                        );
+                        break;
+                    case RESULTS.GRANTED: {
+                        try {
+                            Geolocation.getCurrentPosition(
+                                ({coords}) => {
+                                    console.log("this is the coordinates", coords)
+                                    this.geoUpdate.bind(this);
+                                    this.geoUpdate({coords: {latitude: coords.latitude, longitude: coords.longitude}})
 
-    // Recebeu uma notificação e a app não estava aberta, por isso salta para o
+                                },
+                                (err) => {
+                                    console.log('err = ');
+                                    console.log(err);
+                                },
+                                {enableHighAccuracy: false, timeout: 20000, maximumAge: 3000}
+                            );
+                        } catch (e) {
+                            console.log('e = ');
+                            console.log(e);  // getCurrentPosition is not a function
+                        }
+                    }
+                        break;
+                    case RESULTS.BLOCKED:
+                        console.log('The permission is denied and not requestable anymore');
+                        break;
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+        // Permissions.check('location', {type: 'always'}).then(response => {
+        //     if (response !== 'denied') {
+        //         try {
+        //             Geolocation.getCurrentPosition(
+        //                 ({coords}) => {
+        //                     console.log("this is the coordinates", coords)
+        //                     this.geoUpdate.bind(this);
+        //                     this.geoUpdate({coords: {latitude: coords.latitude, longitude: coords.longitude}})
+        //
+        //                 },
+        //                 (err) => {
+        //                     console.log('err = ');
+        //                     console.log(err);
+        //                 },
+        //                 { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+        //             );
+        //         } catch (e) {
+        //             console.log('e = ');
+        //             console.log(e);  // getCurrentPosition is not a function
+        //         }
+        //         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+        //     }
+        //     else {
+        //         console.log("Permission denied Geoupdate call");
+        //         this.geoUpdate({coordinates: {latitude: "39.773972", longitude: "-129.431297"}})
+        //     }
+        // });
+
+        // Permissions.check('location', {type: 'whenInUse'}).then(response => {
+        //     if (response !== 'denied') {
+        //         try {
+        //             Geolocation.getCurrentPosition(
+        //                 ({coords}) => {
+        //                     this.geoUpdate.bind(this);
+        //                     console.log("this is the coordinates", coords)
+        //                     this.geoUpdate({coords: {latitude: coords.latitude, longitude: coords.longitude}})
+        //
+        //                 },
+        //                 (err) => {
+        //                     console.log('err = ');
+        //                     console.log(err);
+        //                 },
+        //                 { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+        //             );
+        //         } catch (e) {
+        //             console.log('e = ');
+        //             console.log(e); // getCurrentPosition is not a function
+        //         }
+        //         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+        //     }
+        //     else {
+        //         console.log("Permission denied Geoupdate call");
+        //         this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
+        //     }
+        // });
+        // Recebeu uma notificação e a app não estava aberta, por isso salta para o
     // ecrã
     if (global.notificationReceived) {
       global.notificationReceived = false;

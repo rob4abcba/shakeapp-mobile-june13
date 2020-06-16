@@ -17,6 +17,8 @@ import {
 } from '../actions';
 import {Spinner} from './common';
 import {PermissionsAndroid} from 'react-native';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+
 async function requestLocationPermission() {
   try {
     const granted = await PermissionsAndroid.request(
@@ -44,7 +46,6 @@ class Welcome extends Component {
   componentWillMount() {
     StatusBar.setHidden(false);
 
-    requestLocationPermission();
     this.props.configFetch();
     this.props.checkValidToken(this.props.user);
 
@@ -55,7 +56,44 @@ class Welcome extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+    requestiOSLocationPermission() {
+        console.log("inside the permission chamber")
+
+        try {
+            request(PERMISSIONS.IOS.LOCATION_ALWAYS)
+                .then((result) => {
+                    switch (result) {
+                        case RESULTS.UNAVAILABLE:
+                            console.log(
+                                'This feature is not available (on this device / in this context)',
+                            );
+                            break;
+                        case RESULTS.DENIED:
+                            console.log(
+                                'The permission has not been requested / is denied but requestable',
+                            );
+                            break;
+                        case RESULTS.GRANTED:
+                            console.log('The permission is granted');
+                            break;
+                        case RESULTS.BLOCKED:
+                            console.log('The permission is denied and not requestable anymore');
+                            break;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+
+        }
+        catch (err) {
+            console.log(err)
+        }
+
+    }
+
+
+    componentWillReceiveProps(nextProps) {
     console.log(
       'Welcome.js - componentWillReceiveProps: ' +
         nextProps.user +
@@ -85,7 +123,31 @@ class Welcome extends Component {
   }
 
   render() {
-    console.log(
+      request(PERMISSIONS.IOS.LOCATION_ALWAYS)
+          .then((result) => {
+              switch (result) {
+                  case RESULTS.UNAVAILABLE:
+                      console.log(
+                          'This feature is not available (on this device / in this context)',
+                      );
+                      break;
+                  case RESULTS.DENIED:
+                      console.log(
+                          'The permission has not been requested / is denied but requestable',
+                      );
+                      break;
+                  case RESULTS.GRANTED:
+                      console.log('The permission is granted');
+                      break;
+                  case RESULTS.BLOCKED:
+                      console.log('The permission is denied and not requestable anymore');
+                      break;
+              }
+          })
+          .catch((error) => {
+              console.log(error)
+          });
+      console.log(
       'validatingToken: ' +
         this.props.validatingToken +
         ' validToken: ' +
