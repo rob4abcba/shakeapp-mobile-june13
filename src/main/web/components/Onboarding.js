@@ -28,6 +28,7 @@ import MapView from 'react-native-maps';
 import NearbyUser from './NearbyUser';
 import {sendShake} from '../actions';
 import {showLocation} from 'react-native-map-link';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 var globalStyles = require('../Styles');
 
 const deviceWidth = Dimensions.get('window').width;
@@ -104,7 +105,30 @@ class Onboarding extends Component {
 
   skip() {
     this.storeData();
-    Actions.login();
+      request(PERMISSIONS.IOS.LOCATION_ALWAYS)
+          .then((result) => {
+              switch (result) {
+                  case RESULTS.UNAVAILABLE:
+                      console.log(
+                          'This feature is not available (on this device / in this context)',
+                      );
+                      break;
+                  case RESULTS.DENIED:
+                      console.log(
+                          'The permission has not been requested / is denied but requestable',
+                      );
+                      break;
+                  case RESULTS.GRANTED:
+                      Actions.login();
+                      break;
+                  case RESULTS.BLOCKED:
+                      console.log('The permission is denied and not requestable anymore');
+                      break;
+              }
+          })
+          .catch((error) => {
+              console.log(error)
+          });
   }
 
   render() {

@@ -108,31 +108,8 @@ class Nearby extends Component {
     StatusBar.setHidden(true);
     const {user} = this.props;
     this.props.updateNotificationId(user);
+        this.geoUpdate.bind(this);
 
-        request(PERMISSIONS.IOS.LOCATION_ALWAYS)
-            .then((result) => {
-                switch (result) {
-                    case RESULTS.UNAVAILABLE:
-                        console.log(
-                            'This feature is not available (on this device / in this context)',
-                        );
-                        break;
-                    case RESULTS.DENIED:
-                        console.log(
-                            'The permission has not been requested / is denied but requestable',
-                        );
-                        break;
-                    case RESULTS.GRANTED:
-                        console.log('The permission is granted');
-                        break;
-                    case RESULTS.BLOCKED:
-                        console.log('The permission is denied and not requestable anymore');
-                        break;
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-            });
 
         check(PERMISSIONS.IOS.LOCATION_ALWAYS)
             .then((result) => {
@@ -152,13 +129,13 @@ class Nearby extends Component {
                             Geolocation.getCurrentPosition(
                                 ({coords}) => {
                                     console.log("this is the coordinates", coords)
-                                    this.geoUpdate.bind(this);
                                     this.geoUpdate({coords: {latitude: coords.latitude, longitude: coords.longitude}})
 
                                 },
                                 (err) => {
                                     console.log('err = ');
                                     console.log(err);
+                                    this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
                                 },
                                 {enableHighAccuracy: false, timeout: 20000, maximumAge: 3000}
                             );
