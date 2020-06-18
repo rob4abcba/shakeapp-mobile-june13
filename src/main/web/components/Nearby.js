@@ -118,11 +118,13 @@ class Nearby extends Component {
                         console.log(
                             'This feature is not available (on this device / in this context)',
                         );
+                        this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
                         break;
                     case RESULTS.DENIED:
                         console.log(
                             'The permission has not been requested / is denied but requestable',
                         );
+                        this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
                         break;
                     case RESULTS.GRANTED: {
                         try {
@@ -142,16 +144,19 @@ class Nearby extends Component {
                         } catch (e) {
                             console.log('e = ');
                             console.log(e);  // getCurrentPosition is not a function
+                            this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
                         }
                     }
                         break;
                     case RESULTS.BLOCKED:
                         console.log('The permission is denied and not requestable anymore');
+                        this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
                         break;
                 }
             })
             .catch((error) => {
                 console.log(error)
+                this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
             });
 
         // Permissions.check('location', {type: 'always'}).then(response => {
