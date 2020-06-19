@@ -10,6 +10,7 @@
     "test": "jest",
     "lint": "eslint .",
     "patch": "cd src && git apply ../gender_fields.patch",
+    "cleanbiggest": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && npm cache clean --force && rm -rf node_modules && npm i",
     "cleanbig": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && npm cache clean --force",
     "cleansmall": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force"
   },
