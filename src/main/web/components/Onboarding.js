@@ -108,7 +108,6 @@ class Onboarding extends Component {
       request(PERMISSIONS.IOS.LOCATION_ALWAYS)
           .then((result) => {
               switch (result) {
-<<<<<<< HEAD
                 case RESULTS.UNAVAILABLE:
                   console.log(
                     'Onboarding.js: This IOS.LOCATION feature is not available (on this device / in this context)',
@@ -131,20 +130,6 @@ class Onboarding extends Component {
                   console.log('Onboarding.js: The IOS.LOCATION permission is denied and not requestable anymore');
                   Actions.login();
                   break;
-=======
-                  case RESULTS.UNAVAILABLE:
-                      Actions.login();
-                      break;
-                  case RESULTS.DENIED:
-                      Actions.login();
-                      break;
-                  case RESULTS.GRANTED:
-                      Actions.login();
-                      break;
-                  case RESULTS.BLOCKED:
-                      Actions.login();
-                      break;
->>>>>>> 19f9b3fc11fb2a0ae8e1018f09e6d6675925fd95
               }
           })
           .catch((error) => {
