@@ -274,7 +274,7 @@ class LoginForm extends Component {
                 letterSpacing: 0.5,
                 paddingLeft: 6,
               }}>
-              Shake
+              Shake!
             </Text>
           </View>
 
@@ -285,7 +285,7 @@ class LoginForm extends Component {
               <Text style={style.titleText}>Welcome</Text>
 
               <Text style={style.subtitleText}>
-                Sign in to continue to Shake App
+                Sign in to continue to ShakeApp
               </Text>
             </View>
 
