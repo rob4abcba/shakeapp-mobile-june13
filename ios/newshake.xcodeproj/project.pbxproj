@@ -155,7 +155,6 @@
 				A249AC9469DC91990E7BC1C3 /* Pods-newshake.debug.xcconfig */,
 				B0AEE4F7EE72FC80F5B9D632 /* Pods-newshake.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -512,7 +511,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = K3SNVHJ6L2;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -542,7 +541,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = K3SNVHJ6L2;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -566,7 +565,7 @@
 				CODE_SIGN_ENTITLEMENTS = newshake/newshake.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = K3SNVHJ6L2;
 				INFOPLIST_FILE = newshake/Info.plist;
@@ -594,7 +593,7 @@
 				CODE_SIGN_ENTITLEMENTS = newshake/newshake.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = K3SNVHJ6L2;
 				INFOPLIST_FILE = newshake/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
