@@ -108,26 +108,33 @@ class Onboarding extends Component {
       request(PERMISSIONS.IOS.LOCATION_ALWAYS)
           .then((result) => {
               switch (result) {
-                  case RESULTS.UNAVAILABLE:
-                      console.log(
-                          'This feature is not available (on this device / in this context)',
-                      );
-                      break;
-                  case RESULTS.DENIED:
-                      console.log(
-                          'The permission has not been requested / is denied but requestable',
-                      );
-                      break;
-                  case RESULTS.GRANTED:
-                      Actions.login();
-                      break;
-                  case RESULTS.BLOCKED:
-                      console.log('The permission is denied and not requestable anymore');
-                      break;
+                case RESULTS.UNAVAILABLE:
+                  console.log(
+                    'Onboarding.js: This IOS.LOCATION feature is not available (on this device / in this context)',
+                  );
+                  Actions.login();
+                  break;
+                case RESULTS.DENIED:
+                  console.log(
+                    'Onboarding.js: The IOS.LOCATION permission has not been requested / is denied but requestable',
+                  );
+                  Actions.login();
+                  break;
+                case RESULTS.GRANTED:
+                  console.log(
+                    'Onboarding.js: The IOS.LOCATION permission has successfully been granted',
+                  );
+                  Actions.login();
+                  break;
+                case RESULTS.BLOCKED:
+                  console.log('Onboarding.js: The IOS.LOCATION permission is denied and not requestable anymore');
+                  Actions.login();
+                  break;
               }
           })
           .catch((error) => {
               console.log(error)
+              Actions.login();
           });
   }
 
