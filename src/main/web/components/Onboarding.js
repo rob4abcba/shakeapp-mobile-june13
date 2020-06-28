@@ -28,6 +28,7 @@ import MapView from 'react-native-maps';
 import NearbyUser from './NearbyUser';
 import {sendShake} from '../actions';
 import {showLocation} from 'react-native-map-link';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 var globalStyles = require('../Styles');
 
 const deviceWidth = Dimensions.get('window').width;
@@ -104,7 +105,27 @@ class Onboarding extends Component {
 
   skip() {
     this.storeData();
-    Actions.login();
+      request(PERMISSIONS.IOS.LOCATION_ALWAYS)
+          .then((result) => {
+              switch (result) {
+                  case RESULTS.UNAVAILABLE:
+                      Actions.login();
+                      break;
+                  case RESULTS.DENIED:
+                      Actions.login();
+                      break;
+                  case RESULTS.GRANTED:
+                      Actions.login();
+                      break;
+                  case RESULTS.BLOCKED:
+                      Actions.login();
+                      break;
+              }
+          })
+          .catch((error) => {
+              console.log(error)
+              Actions.login();
+          });
   }
 
   render() {
@@ -260,7 +281,6 @@ class Onboarding extends Component {
             ])}>
             {imageArray}
           </ScrollView>
-
           <View style={styles.barContainer}>{barArray}</View>
         </View>
       </View>

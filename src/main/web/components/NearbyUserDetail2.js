@@ -316,13 +316,17 @@ class NearbyUserDetail extends Component {
       'NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.fullName) = ' +
         JSON.stringify(this.props.nearbyUser.user.fullName),
     );
+    // console.log(
+    //   'NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.videoURL) = ' +
+    //     JSON.stringify(this.props.nearbyUser.user.videoURL),
+    // );
+    // console.log(
+    //   'NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.photoURL) = ' +
+    //     JSON.stringify(this.props.nearbyUser.user.photoURL),
+    // );
     console.log(
-      'NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.videoURL) = ' +
-        JSON.stringify(this.props.nearbyUser.user.videoURL),
-    );
-    console.log(
-      'NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.photoURL) = ' +
-        JSON.stringify(this.props.nearbyUser.user.photoURL),
+      'NearbyUserDetail2: JSON.stringify(this.props.nearbyUser.user.gender) = ' +
+        JSON.stringify(this.props.nearbyUser.user.gender),
     );
     if (user.mood != undefined) {
       photoURL = user.mood.photoURL;
@@ -442,22 +446,28 @@ class NearbyUserDetail extends Component {
           <View
             style={{
               width: 300,
-              height: 400, //MC: Height of modal
+              // height: 400, //MC: Height of modal
+              // height: 300, //MC: Height of modal
+              // height: 250, //MC: Height of modal
+              height: 230, //MC: Height of modal
+              // height: 220, //MC: Height of modal
+              // height: 200, //MC: Height of modal
               alignItems: 'center',
               justifyContent: 'center',
               // backgroundColor: 'white',
               backgroundColor: 'rgba(0,0,0,0.3)', //partially transparent
               // backgroundColor: 'transparent', //fully transparent
               // backgroundColor: 'rgb(0, 255, 0, 1.0)',
-              paddingTop: 40, //MC: Padding originally 40
+              // paddingTop: 40, //MC: Padding originally 40
+              paddingTop: 20, //MC: Padding originally 40
               borderRadius: 8,
               shadowOpacity: 0.1,
               shadowColor: 'rgb(36, 100, 193)',
               shadowOffset: {width: 4, height: 2},
             }}>
-            <Text style={{fontSize: 24, fontWeight: '800', color: 'orange'}}>Let's talk</Text>
+            {/* <Text style={{fontSize: 24, fontWeight: '800', color: 'orange'}}>Let's talk</Text> */}
 
-            <Text
+            {/* <Text
               style={{
                 selfAlign: 'center',
                 fontSize: 15,
@@ -467,7 +477,7 @@ class NearbyUserDetail extends Component {
                 color: 'orange',
               }}>
               Please write your message below.
-            </Text>
+            </Text> */}
 
             <View style={[style.textInputContainer]}>
               <TextInput
@@ -485,9 +495,11 @@ class NearbyUserDetail extends Component {
               style={{
                 width: '100%',
                 paddingLeft: 36,
-                paddingTop: 40,
+                // paddingTop: 40,
+                paddingTop: 20,
                 paddingRight: 36,
-                paddingBottom: 36,
+                // paddingBottom: 36,
+                paddingBottom: 18,
               }}>
               <TouchableOpacity
                 style={{
@@ -509,7 +521,7 @@ class NearbyUserDetail extends Component {
                     fontSize: 18,
                     fontWeight: '600',
                   }}>
-                  Send
+                  Let's Talk
                 </Text>
               </TouchableOpacity>
             </View>

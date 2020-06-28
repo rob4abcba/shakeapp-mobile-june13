@@ -1,0 +1,59 @@
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision 99871e77ebb71362f720c817c7f7e4a01fcadc5b)
++++ package.json	(date 1591884173000)
+@@ -16,6 +16,7 @@
+   "dependencies": {
+     "@mauron85/react-native-background-geolocation": "^0.6.3",
+     "@react-native-community/async-storage": "^1.6.2",
++    "@react-native-community/geolocation": "^2.0.2",
+     "add": "^2.0.6",
+     "javascript-time-ago": "^2.0.2",
+     "kleur": "^3.0.3",
+Index: src/main/web/components/Nearby.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/web/components/Nearby.js	(revision 99871e77ebb71362f720c817c7f7e4a01fcadc5b)
++++ src/main/web/components/Nearby.js	(date 1591884393000)
+@@ -38,6 +38,7 @@
+ // import Mood from './Mood_RNCamera';
+ import GridView from 'react-native-super-grid';
+ import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
++import Geolocation from '@react-native-community/geolocation';
+ import Modal from 'react-native-modal';
+ import Permissions from 'react-native-permissions';
+ import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
+@@ -116,7 +117,7 @@
+     Permissions.check('location', {type: 'always'}).then(response => {
+       if (response !== 'denied') {
+         try {
+-          navigator.geolocation.getCurrentPosition(
++            Geolocation.getCurrentPosition(
+             ({coords}) => {
+               this.geoUpdate.bind(this);
+             },
+@@ -137,7 +138,7 @@
+     Permissions.check('location', {type: 'whenInUse'}).then(response => {
+       if (response !== 'denied') {
+         try {
+-        navigator.geolocation.getCurrentPosition(
++            Geolocation.getCurrentPosition(
+           ({coords}) => {
+             this.geoUpdate.bind(this);
+           },
+@@ -153,6 +154,10 @@
+         }
+         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+       }
++      else {
++          console.log("Permission denied Geoupdate call");
++          this.geoUpdate({coordinates: {latitude: "39.773972", longitude: "-129.431297"}})
++      }
+     });
+ 
+     BackgroundGeolocation.configure({

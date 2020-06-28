@@ -27,6 +27,8 @@ import ImageResizer from 'react-native-image-resizer';
 
 var styles = require('../Styles');
 
+console.ignoredYellowBox = ['Warning:']; // Don't put those yellow warning boxes at bottom so can press buttons
+
 class Mood2 extends Component {
   constructor(props) {
     super(props);

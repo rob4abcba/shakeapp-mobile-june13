@@ -1,4 +1,6 @@
 {
   "name": "newshake",
-  "displayName": "newshake"
+  // "name": "shake",
+  // "displayName": "newshake"
+  "displayName": "shake"
 }

@@ -17,6 +17,8 @@ import {
 } from '../actions';
 import {Spinner} from './common';
 import {PermissionsAndroid} from 'react-native';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+
 async function requestLocationPermission() {
   try {
     const granted = await PermissionsAndroid.request(
@@ -44,7 +46,6 @@ class Welcome extends Component {
   componentWillMount() {
     StatusBar.setHidden(false);
 
-    requestLocationPermission();
     this.props.configFetch();
     this.props.checkValidToken(this.props.user);
 
@@ -55,7 +56,8 @@ class Welcome extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+
+    componentWillReceiveProps(nextProps) {
     console.log(
       'Welcome.js - componentWillReceiveProps: ' +
         nextProps.user +
@@ -85,7 +87,7 @@ class Welcome extends Component {
   }
 
   render() {
-    console.log(
+      console.log(
       'validatingToken: ' +
         this.props.validatingToken +
         ' validToken: ' +

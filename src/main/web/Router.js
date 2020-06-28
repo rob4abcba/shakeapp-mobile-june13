@@ -41,6 +41,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {Text, View, TouchableOpacity} from 'react-native';
 import AuthScreen from './components/AuthScreen';
+import SearchFilter from './components/SearchFilter';
 var styles = require('./Styles');
 
 
@@ -155,6 +156,7 @@ const RouterComponent = () => {
             <Scene key="settings" component={Settings} navBar={Header} />
 
             <Scene key="profile" component={Profile} hideNavBar />
+            <Scene key="searchFilter" component={SearchFilter} hideNavBar />
 
             <Scene key="changePassword" component={ChangePassword} hideNavBar />
 

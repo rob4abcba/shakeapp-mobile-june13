@@ -37,11 +37,11 @@ import Preferences from './Preferences';
 import Mood from './Mood2';
 // import Mood from './Mood_RNCamera';
 import GridView from 'react-native-super-grid';
-import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 import Geolocation from '@react-native-community/geolocation';
 import Modal from 'react-native-modal';
-import Permissions from 'react-native-permissions';
+import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
+import {request} from 'react-native-permissions';
 var styles = require('../Styles');
 
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
@@ -60,12 +60,7 @@ class Nearby extends Component {
     moodFirstSetup: true,
   };
 
-  componentWillUnmount() {
-    // unregister all event listeners
-    BackgroundGeolocation.events.forEach(event =>
-      BackgroundGeolocation.removeAllListeners(event),
-    );
-  }
+  componentWillUnmount() {}
 
   geoUpdate(position) {
     const {user} = this.props;
@@ -96,6 +91,7 @@ class Nearby extends Component {
         }
       },
     );
+    //this.setState({state:this.state});
   }
 
   onRefreshButton() {
@@ -109,275 +105,138 @@ class Nearby extends Component {
   }
 
   componentWillMount() {
-    console.log('this.props.nearbyList = ', this.props.nearbyList)
+    // console.log('Nearby.js: this.props.nearbyList = ', this.props.nearbyList);
+    // console.log('Nearby.js: this.props.nearbyList[0] = ', this.props.nearbyList[0]);
+    // console.log('Nearby.js: JSON.stringify(this.props.nearbyList[1]) = ', JSON.stringify(this.props.nearbyList[1]));
+    console.log(
+      'Nearby.js: this.props.navigation.state.params = ',
+      this.props.navigation.state.params,
+    );
     StatusBar.setHidden(true);
     const {user} = this.props;
-
     this.props.updateNotificationId(user);
+    this.geoUpdate.bind(this);
 
-    Permissions.check('location', {type: 'always'}).then(response => {
-      if (response !== 'denied') {
-        try {
-            Geolocation.getCurrentPosition(
-            ({coords}) => {
-              console.log('Permission type ALWAYS. BEFORE geoUpdate coords = ', coords);
-              this.geoUpdate.bind(this);
-              console.log('Permission type ALWAYS. AFTER geoUpdate coords = ', coords);
-            },
-            (err) => {
-              console.log('err = ');
-              console.log(err);
-            },
-            { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+    check(PERMISSIONS.IOS.LOCATION_ALWAYS)
+      .then(result => {
+        switch (result) {
+          case RESULTS.UNAVAILABLE:
+            console.log(
+              'This feature is not available (on this device / in this context)',
             );
-          } catch (e) {
-            console.log('Permission type ALWAYS e1 = ');
-            console.log(e);  // getCurrentPosition is not a function
-          }
-        // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
-      }
-    });
-
-    Permissions.check('location', {type: 'whenInUse'}).then(response => {
-      if (response !== 'denied') {
-        try {
-          Geolocation.getCurrentPosition(
-          ({coords}) => {
-            this.geoUpdate.bind(this);
-            console.log('Permission type whenInUse. AFTER geoUpdate coords = ', coords);
-          },
-          (err) => {
-            console.log('err = ');
-            console.log(err);
-          },
-          { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
-          );
-        } catch (e) {
-          console.log('Permission type whenInUse: e2 = ');
-          console.log(e); // getCurrentPosition is not a function
-        }
-        // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
-      } else {
-          console.log('Permission denied Geoupdate call');
-          this.geoUpdate({coordinates: {latitude: '39.773972', longitude: '-129.431297'}});
-      }
-    });
-
-    BackgroundGeolocation.configure({ // Comment out 166-379 June13th
-      desiredAccuracy:
-        Platform.OS === 'android'
-          ? BackgroundGeolocation.LOW_ACCURACY
-          : BackgroundGeolocation.HIGH_ACCURACY,
-      stationaryRadius: 20,
-      distanceFilter: 20,
-      notificationTitle: 'Background tracking',
-      notificationText: 'disabled',
-      debug: false, // sound
-      startOnBoot: false,
-      stopOnTerminate: false,
-      maxLocations: 1,
-      locationProvider: BackgroundGeolocation.DISTANCE_FILTER_PROVIDER,
-      interval: 10000,
-      fastestInterval: 5000,
-      activitiesInterval: 10000,
-      stopOnStillActivity: false,
-      // url: 'https://shakeapp-backend.net/node_app/user/update_location',
-      // httpHeaders: {
-      // 'Content-Type': 'application/x-www-form-urlencoded'
-      // },
-      // customize post properties
-      // postTemplate: {
-      // lat: '@latitude',
-      // lon: '@longitude',
-      // token: this.props.user // you can also add your own properties
-      // }
-    });
-
-    BackgroundGeolocation.on('location', location => {
-      console.log('[INFO] New location: ', location);
-      // handle your locations here
-      // to perform long running operation on iOS
-      // you need to create background task
-      BackgroundGeolocation.startTask(taskKey => {
-        // execute long running task
-        // eg. ajax post location
-        // IMPORTANT: task has to be ended by endTask
-        this.props.sendNewLocation(
-          location.latitude,
-          location.longitude,
-          this.props.user,
-          this,
-          function(success, thisRef) {
-            if (!thisRef.state.moodFirstSetup) {
-              thisRef.props.profileFetch(thisRef.props.user);
-              const {user} = thisRef.props;
-              thisRef.props.nearbyUsersFetch({user}, thisRef, function(
-                success,
-                nearbyRef,
-              ) {});
-              thisRef.props.nearbyRestaurantsFetch({user}, thisRef, function(
-                success,
-                nearbyRestaurantRef,
-              ) {});
-            }
-
-            BackgroundGeolocation.endTask(taskKey);
-          },
-        );
-      });
-    });
-
-    BackgroundGeolocation.on('stationary', stationaryLocation => {
-      // handle stationary locations here
-      // Actions.sendLocation(stationaryLocation);
-
-      BackgroundGeolocation.startTask(taskKey => {
-        // execute long running task
-        // eg. ajax post location
-        // IMPORTANT: task has to be ended by endTask
-        this.props.sendNewLocation(
-          stationaryLocation.latitude,
-          stationaryLocation.longitude,
-          this.props.user,
-          function(success) {
-            BackgroundGeolocation.endTask(taskKey);
-          },
-        );
-      });
-      console.log('WARN STATIONARY LOCATION: ' + stationaryLocation);
-    });
-
-    BackgroundGeolocation.on('error', error => {
-      console.log('[ERROR] BackgroundGeolocation error:', error);
-    });
-
-    BackgroundGeolocation.on('start', () => {
-      console.log('[INFO] BackgroundGeolocation service has been started');
-    });
-
-    BackgroundGeolocation.on('stop', () => {
-      console.log('[INFO] BackgroundGeolocation service has been stopped');
-    });
-
-    BackgroundGeolocation.on('authorization', status => {
-      console.warn(
-        '[INFO] BackgroundGeolocation authorization status: ' + status,
-      );
-      if (status === BackgroundGeolocation.AUTHORIZED) {
-        this.setState({isVisible: false});
-
-        // navigator.geolocation.getCurrentPosition(
-        console.log("navigatorYZ = " + navigator);  
-        if (!navigator.geolocation) 
-        {
-          this.props.sendNewLocation(
-            // RL Add dummy coordinates for SF (37, -122) just in case position.coords.latitude & longitude are invalid.
-            // position.coords.latitude || "37.773972",
-            // position.coords.longitude || "-122.431297",              
-            "39.773972",
-            "-129.431297",
-            user,
-            this,
-            function(success, thisRef) {
-              if (success) {
-                thisRef.props.profileFetch(user);
-                thisRef.props.nearbyUsersFetch({user}, thisRef, function(
-                  success,
-                  nearbyRef,
-                ) {});
-                thisRef.props.nearbyRestaurantsFetch(
-                  {user},
-                  thisRef,
-                  function(success, nearbyRestaurantRef) {},
+            this.geoUpdate({
+              coords: {latitude: '39.773972', longitude: '-129.431297'},
+            });
+            break;
+          case RESULTS.DENIED:
+            console.log(
+              'The permission has not been requested / is denied but requestable',
+            );
+            this.geoUpdate({
+              coords: {latitude: '39.773972', longitude: '-129.431297'},
+            });
+            break;
+          case RESULTS.GRANTED:
+            {
+              try {
+                Geolocation.getCurrentPosition(
+                  ({coords}) => {
+                    console.log('this is the coordinates', coords);
+                    this.geoUpdate({
+                      coords: {
+                        latitude: coords.latitude,
+                        longitude: coords.longitude,
+                      },
+                    });
+                  },
+                  err => {
+                    console.log('err = ');
+                    console.log(err);
+                    this.geoUpdate({
+                      coords: {latitude: '39.773972', longitude: '-129.431297'},
+                    });
+                  },
+                  {enableHighAccuracy: false, timeout: 20000, maximumAge: 3000},
                 );
-              } else {
-                // try again pop up
+              } catch (e) {
+                console.log('e = ');
+                console.log(e); // getCurrentPosition is not a function
+                this.geoUpdate({
+                  coords: {latitude: '39.773972', longitude: '-129.431297'},
+                });
               }
-            },
-          );
-        } else {
-        navigator.geolocation.getCurrentPosition(  
-          position => {
-            console.warn('POSITION_Yo ' + JSON.stringify(position) + ' ' + user);
-
-            this.props.sendNewLocation(
-              // RL Add dummy coordinates for SF (37, -122) just in case position.coords.latitude & longitude are invalid.
-              // position.coords.latitude || "37.773972",
-              // position.coords.longitude || "-122.431297",              
-              position.coords.latitude || "39.773972",
-              position.coords.longitude || "-129.431297",
-              user,
-              this,
-              function(success, thisRef) {
-                if (success) {
-                  thisRef.props.profileFetch(user);
-                  thisRef.props.nearbyUsersFetch({user}, thisRef, function(
-                    success,
-                    nearbyRef,
-                  ) {});
-                  thisRef.props.nearbyRestaurantsFetch(
-                    {user},
-                    thisRef,
-                    function(success, nearbyRestaurantRef) {},
-                  );
-                } else {
-                  // try again pop up
-                }
-              },
-            );
-          },
-          error => this.setState({error: error.message}),
-          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-        );
-      }
-      } else {
-        // Unable to procceed
-
-        this.setState({
-          modalTitle: 'Location permission',
-          modalDescription:
-            "We noticed you've removed\nlocation permissions for Shake.\n\nPlease turn ON location\nsharing to get an\nimproved experience.",
-          modalButton: 'Change settings',
-          isVisible: true,
+            }
+            break;
+          case RESULTS.BLOCKED:
+            console.log('The permission is denied and not requestable anymore');
+            this.geoUpdate({
+              coords: {latitude: '39.773972', longitude: '-129.431297'},
+            });
+            break;
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        this.geoUpdate({
+          coords: {latitude: '39.773972', longitude: '-129.431297'},
         });
-      }
-    });
+      });
 
-    BackgroundGeolocation.on('background', () => {
-      console.log('[INFO] App is in background');
-    });
+    // Permissions.check('location', {type: 'always'}).then(response => {
+    //     if (response !== 'denied') {
+    //         try {
+    //             Geolocation.getCurrentPosition(
+    //                 ({coords}) => {
+    //                     console.log("this is the coordinates", coords)
+    //                     this.geoUpdate.bind(this);
+    //                     this.geoUpdate({coords: {latitude: coords.latitude, longitude: coords.longitude}})
+    //
+    //                 },
+    //                 (err) => {
+    //                     console.log('err = ');
+    //                     console.log(err);
+    //                 },
+    //                 { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+    //             );
+    //         } catch (e) {
+    //             console.log('e = ');
+    //             console.log(e);  // getCurrentPosition is not a function
+    //         }
+    //         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+    //     }
+    //     else {
+    //         console.log("Permission denied Geoupdate call");
+    //         this.geoUpdate({coordinates: {latitude: "39.773972", longitude: "-129.431297"}})
+    //     }
+    // });
 
-    BackgroundGeolocation.on('foreground', () => {
-      console.log('[INFO] App is in foreground');
-    });
-
-    BackgroundGeolocation.checkStatus(status => {
-      console.log(
-        '[INFO] BackgroundGeolocation service is running',
-        status.isRunning,
-      );
-      console.log(
-        '[INFO] BackgroundGeolocation service has permissions',
-        status.hasPermissions,
-      );
-      console.log(
-        '[INFO] BackgroundGeolocation auth status: ' + status.authorization,
-      );
-
-      if (!status.hasPermissions) {
-        console.warn(
-          '[INFO] BackgroundGeolocation service has permissions',
-          status.hasPermissions,
-        );
-      }
-
-      // you don't need to check status before start (this is just the
-      // example)
-      if (!status.isRunning) {
-        BackgroundGeolocation.start(); // triggers start on start event
-      }
-    }); // Comment out 166-379 June13th
-
+    // Permissions.check('location', {type: 'whenInUse'}).then(response => {
+    //     if (response !== 'denied') {
+    //         try {
+    //             Geolocation.getCurrentPosition(
+    //                 ({coords}) => {
+    //                     this.geoUpdate.bind(this);
+    //                     console.log("this is the coordinates", coords)
+    //                     this.geoUpdate({coords: {latitude: coords.latitude, longitude: coords.longitude}})
+    //
+    //                 },
+    //                 (err) => {
+    //                     console.log('err = ');
+    //                     console.log(err);
+    //                 },
+    //                 { enableHighAccuracy: false, timeout: 20000, maximumAge: 3000 }
+    //             );
+    //         } catch (e) {
+    //             console.log('e = ');
+    //             console.log(e); // getCurrentPosition is not a function
+    //         }
+    //         // navigator.geolocation.getCurrentPosition(this.geoUpdate.bind(this));
+    //     }
+    //     else {
+    //         console.log("Permission denied Geoupdate call");
+    //         this.geoUpdate({coords: {latitude: "39.773972", longitude: "-129.431297"}})
+    //     }
+    // });
     // Recebeu uma notificação e a app não estava aberta, por isso salta para o
     // ecrã
     if (global.notificationReceived) {
@@ -391,10 +250,6 @@ class Nearby extends Component {
   //   this.onSendMessage()
   // }
   // // RL
-
-  primaryButtonPress() {
-    BackgroundGeolocation.showLocationSettings();
-  }
 
   componentDidReceiveProps(nextProps) {
     this.forceUpdate();
@@ -426,7 +281,7 @@ class Nearby extends Component {
   }
 
   render2() {
-  // render() {
+    // render() {
     if (!this.props.data) {
       return <Spinner size="large" />;
     }
@@ -438,18 +293,21 @@ class Nearby extends Component {
 
     // if (this.props.data.mood.firstSetup)
     if (this.state.moodFirstSetup) {
-      console.log(this.props)
+      console.log('Nearby.js: this.state.moodFirstSetup = true');
+      // console.log(this.props);
       // return <Mood onDone={this.onMoodDone.bind(this)} />;
     }
 
     const {fullName} = this.props.data;
     var photoURL = this.props.data.mood.photoURL;
 
+    console.log('Nearby.js: Before return View UserSwiper & Footer: filterNearby = ', filterNearby);
     return (
       <View>
-        {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
-        <UserSwiper nearbyUsers={this.props.nearbyList} />
-        {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
+        <UserSwiper
+          // nearbyUsers={this.props.nearbyList}
+          nearbyUsers={this.filterNearby}
+        />
 
         <Footer
           photoURL={this.props.data.mood.photoURL}
@@ -458,10 +316,33 @@ class Nearby extends Component {
       </View>
     );
   }
-  render() { //Swap render2 & render to get profile icon & Shake logo notification footer on top
-  // render2() {
-    console.log(this.props.nearbyList)
-    if (!this.props.data) {
+  render() {
+    //Swap render2 & render to get profile icon & Shake logo notification footer on top
+    // render2() {
+    // let genderFilter = this.props.navigation.state.params.params.gender;
+    // console.log('Nearby.js: this.props.nearbyList = ', this.props.nearbyList); // HUGE List
+    // console.log('Nearby.js: this.props.nearbyList.user.gender = ', this.props.nearbyList.user.gender); // Error: Undefined not an object
+    let filterNearby = this.props.nearbyList;
+    // console.log('Nearby.js: filterNearby[0] = ', filterNearby[0]);
+    // console.log('Nearby.js: filterNearby[1] = ', filterNearby[1]);
+    // if (this.props.navigation.state.params.params.gender) {
+    console.log(
+      'Nearby.js: this.props.navigation.state.params.params = ',
+      this.props.navigation.state.params.params,
+    );
+    if (this.props.navigation.state.params.params) {
+      let genderFilter = this.props.navigation.state.params.params.gender;
+      console.log('Nearby.js: genderFilter = ', genderFilter);
+      // (this.props.nearbyUser.user.gender) = "female"
+      filterNearby = this.props.nearbyList.filter(
+        // filterNearby = this.props.nearbyUser.filter(
+        obj => obj.user.gender === genderFilter, // this.props.nearbyUser.user.gender
+      );
+      console.log('Nearby.js: filterNearby = ', filterNearby);
+    }
+    // console.log('Nearby.js: this.props.nearbyList = ', this.props.nearbyList); // HUGE List
+    console.log('Nearby.js: !this.props.nearbyList = ', !this.props.nearbyList); // Boolean
+    if (!this.props.nearbyList) {
       return <Spinner size="large" />;
     }
 
@@ -472,25 +353,28 @@ class Nearby extends Component {
 
     if (this.props.data.mood.firstSetup) {
       //    if (this.state.moodFirstSetup)
-      console.log(this.props)
+      console.log('Nearby.js: this.props.data.mood.firstSetup');
+      // console.log(this.props);
       // return <Mood onDone={this.onMoodDone.bind(this)} />;
     }
 
+    console.log('Nearby.js: Before return StickyHeaderFooterScrollView View UserSwiper: filterNearby = ', filterNearby);
     return (
       <StickyHeaderFooterScrollView
         makeScrollable={false}
-          // renderStickyFooter={() => (
-          //   <Footer
-          //     photoURL={this.props.data.mood.photoURL}
-          //     notificationCount={this.props.data.notificationCount}
-          //   />
-          //)}
+        // renderStickyFooter={() => (
+        //   <Footer
+        //     photoURL={this.props.data.mood.photoURL}
+        //     notificationCount={this.props.data.notificationCount}
+        //   />
+        //)}
       >
-          <View style={{height: viewportHeight}}>
-              <UserSwiper nearbyUsers={this.props.nearbyList} photoURL={this.props.data.mood.photoURL}
-                          notificationCount={this.props.data.notificationCount}/>
-          {/* <UserSwiper2 nearbyUsers={this.props.nearbyList} /> */}
-          {/* <UserSwiper55 nearbyUsers={this.props.nearbyList} /> */}
+        <View style={{height: viewportHeight}}>
+          <UserSwiper
+            nearbyUsers={filterNearby}
+            photoURL={this.props.data.mood.photoURL}
+            notificationCount={this.props.data.notificationCount}
+          />
         </View>
       </StickyHeaderFooterScrollView>
     );

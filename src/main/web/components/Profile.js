@@ -7,6 +7,7 @@ import {
   StatusBar,
   TouchableHighlight,
   KeyboardAvoidingView,
+  Keyboard,
   ScrollView,
   TouchableOpacity,
   Alert,
@@ -116,6 +117,7 @@ class Profile extends Component {
       },
       changesMade: true,
     });
+    Keyboard.dismiss(); //MC: Get rid of keyboard after done typing
   }
   onBioChange(text) {
     this.setState({
@@ -565,7 +567,8 @@ console.log("Profile.js: this.props.data = ", this.props.data)
                 letterSpacing: 2.5,
               }}
               placeholder="John Doe"
-              maxLength={25}
+              // maxLength={25}
+              maxLength={20}
               returnKeyType={'next'}
               value={this.state.data.fullName}
               underlineColorAndroid="transparent"

@@ -1,45 +1,47 @@
 import React, {Component} from 'react';
 import {
-    View,
-    ScrollView,
-    SafeAreaView,
-    Dimensions,
-    FlatList,
-    TouchableOpacity,
-    TextInput,
-    Text, Image,
+  View,
+  ScrollView,
+  SafeAreaView,
+  Dimensions,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  Text,
+  Image,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styles from './swipe/styles/index.style';
 import {scrollInterpolator, animatedStyle} from './swipe/utils/animations';
 import NearbyUserDetail from './NearbyUserDetail';
 import NearbyRestaurant from './NearbyRestaurant';
-import NearbyUserDetail2 from "./NearbyUserDetail2";
-import SocketIOClient from "socket.io-client";
-import {Actions} from "react-native-router-flux";
-import {Badge} from "react-native-elements";
+import NearbyUserDetail2 from './NearbyUserDetail2';
+import SocketIOClient from 'socket.io-client';
+import {Actions} from 'react-native-router-flux';
+import {Badge} from 'react-native-elements';
 import RNShake from 'react-native-shake';
 
 // Need profileFetch from DrawerContent.js amazingCircle?
 import {socialAccountsFetch, profileFetch} from '../actions';
 import DrawerContent from './DrawerContent';
 
-
-
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 export default class UserSwiper extends Component {
   constructor(props) {
     super(props);
-      // this.socket = SocketIOClient('http://localhost:8001');
-      // this.socket = SocketIOClient('http://50.18.1.14:8001/node_app'); //MC: Do NOT add node_app
-      // this.socket = SocketIOClient('http://18.144.176.174:8001'); //MC: NonElastic WORKS!!
-      this.socket = SocketIOClient('http://54.176.181.106:8001'); //MC: Elastic IP works also!!
+    // this.socket = SocketIOClient('http://localhost:8001');
+    // this.socket = SocketIOClient('http://50.18.1.14:8001/node_app'); //MC: Do NOT add node_app
+    // this.socket = SocketIOClient('http://18.144.176.174:8001'); //MC: NonElastic WORKS!!
+    this.socket = SocketIOClient('http://54.176.181.106:8001'); //MC: Elastic IP works also!!
 
-      console.log("UserSwiper.js> constructor(props):  PROPS PROPS BABY.  VANILLA PROPS PROPS BABY", props);
-    this.state = {
-      nearbyUsers: props.nearbyUsers,
-    };
+    console.log('UserSwiper.js> constructor(props)');
+    // console.log("UserSwiper.js> constructor(props):  PROPS PROPS BABY.  VANILLA PROPS PROPS BABY", props);
+
+    // this.state = {
+    //   nearbyUsers: props.nearbyUsers, // Should NOT set state to props
+    // };
+
   }
 
   state = {
@@ -66,24 +68,15 @@ export default class UserSwiper extends Component {
     return (
       //View to show when list is empty
       <View>
-        <Text style={{ textAlign: 'center' }}>No Data Found</Text>
+        <Text style={{textAlign: 'center'}}>No Data Found</Text>
       </View>
     );
   };
-
-
-
-
-
 
   // componentWillMount() {
   //   // fetch data do profile
   //   this.props.profileFetch(this.props.user);
   // }
-
-
-
-
 
   // amazingCircle(user) {
   //   var colors = [];
@@ -182,8 +175,6 @@ export default class UserSwiper extends Component {
   //             }}
   //           />
   //         )}
-
-
 
   //       </View>
   //     );
@@ -409,20 +400,11 @@ export default class UserSwiper extends Component {
   //   }
   // }
 
-
-
-
-
-
-
-
-
-  
   renderNearbyUserDetail = ({item, index}) => {
     return (
-        <View style={{flex: 1}}>
+      <View style={{flex: 1}}>
         <NearbyUserDetail2
-            conn={this.socket}
+          conn={this.socket}
           nearbyUser={item}
           nearby={true}
           onInvite={this.onInvite.bind(this)}
@@ -436,7 +418,8 @@ export default class UserSwiper extends Component {
     return (
       <View style={[styles.container, styles.containerLight]}>
         <Carousel
-          data={this.state.nearbyUsers}
+          // data={this.state.nearbyUsers}
+          data={this.props.nearbyUsers}
           renderItem={this.renderNearbyUserDetail.bind(this)}
           sliderWidth={viewportWidth}
           itemWidth={viewportWidth}
@@ -448,8 +431,8 @@ export default class UserSwiper extends Component {
           scrollInterpolator={scrollInterpolator}
           slideInterpolatedStyle={animatedStyle}
           vertical={false}
-          removeClippedSubviews={false}
-          ref={(c) => {
+          removeClippedSubviews={true}
+          ref={c => {
             this._carousel = c;
           }}
         />
@@ -462,7 +445,7 @@ export default class UserSwiper extends Component {
   }
 
   render() {
-    console.log("Inside render of UserSwiper.js")
+    console.log('Inside render of UserSwiper.js');
     if (this.state.invite) {
       return this.nearByResturants();
     } else if (this.state.report) {
@@ -472,79 +455,90 @@ export default class UserSwiper extends Component {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>{this.renderCarousel()}</View>
-          <TouchableOpacity
-              style={{position: 'absolute', top: 60, right: 10, marginRight: 20, height: 45, width: 47}}
-              onPress={() => Actions.myActivity({route: 0})}>
-              <Image
-                  // source={require('../assets/shake-logo-transparent.png')}
-                  source={require('../assets/shake-logo.png')} //black
-                  // source={require('../assets/symbol_shake_color.png')}
-                  style={{height: 44, width: 35}}
-                  resizeMode={'contain'}
-                  // borderColor={'white'}
-                  // borderColor={'rgba(255,255,255,0.1)'} //white partially transparent
-                  // backgroundColor={'white'}
-                  // backgroundColor= {'rgba(0,0,0,0.7)'} //black partially transparent
-                  // backgroundColor= {'rgba(255,255,255,0.2)'} //white partially transparent
-              
-                  // borderWidth={1}
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: 60,
+            right: 10,
+            marginRight: 20,
+            height: 45,
+            width: 47,
+          }}
+          onPress={() => Actions.myActivity({route: 0})}>
+          <Image
+            // source={require('../assets/shake-logo-transparent.png')}
+            source={require('../assets/shake-logo.png')} //black
+            // source={require('../assets/symbol_shake_color.png')}
+            style={{height: 44, width: 35}}
+            resizeMode={'contain'}
+            // borderColor={'white'}
+            // borderColor={'rgba(255,255,255,0.1)'} //white partially transparent
+            // backgroundColor={'white'}
+            // backgroundColor= {'rgba(0,0,0,0.7)'} //black partially transparent
+            // backgroundColor= {'rgba(255,255,255,0.2)'} //white partially transparent
+
+            // borderWidth={1}
+          />
+
+          {this.props.notificationCount > 0 ? (
+            <View style={{position: 'absolute', overflow: 'visible'}}>
+              <Badge
+                value={this.props.notificationCount}
+                textStyle={{color: 'white', fontSize: 14}}
+                status="error"
+                containerStyle={{backgroundColor: 'rgba(0,0,0,0.0)'}}
               />
+            </View>
+          ) : (
+            false
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: 60,
+            left: 10,
+            marginLeft: 20,
+            height: 45,
+            width: 47,
+          }}
+          onPress={() => Actions.mood()}>
+          <View
+            style={{
+              height: 45,
+              width: 45,
+              borderRadius: 22,
+              backgroundColor: 'white',
+              borderWidth: 2,
+              // borderColor: '#b1b1b1',
+              borderColor: 'black',
+            }}>
+            {this.props.photoURL ? (
+              <Image
+                source={{uri: this.props.photoURL}}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  borderRadius: 20,
+                  // backgroundColor: 'rgba(0,0,0,0)',
+                  backgroundColor: 'pink',
+                }}
+              />
+            ) : (
+              <Image
+                source={require('../assets/avatar.jpg')}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  borderRadius: 20,
+                  backgroundColor: 'rgba(0,0,0,0)',
+                }}
+              />
+            )}
+          </View>
 
-              {this.props.notificationCount > 0 ? (
-                  <View style={{position: 'absolute', overflow: 'visible'}}>
-                      <Badge
-                          value={this.props.notificationCount}
-                          textStyle={{color: 'white', fontSize: 14}}
-                          status='error'
-                          containerStyle={{backgroundColor: 'rgba(0,0,0,0.0)'}}
-                      />
-                  </View>
-              ) : (
-                  false
-              )}
-          </TouchableOpacity>
-          <TouchableOpacity
-              style={{position: 'absolute', top: 60, left: 10, marginLeft: 20, height: 45, width: 47}}
-              onPress={() => Actions.mood()}>
-              <View
-                  style={{
-                      height: 45,
-                      width: 45,
-                      borderRadius: 22,
-                      backgroundColor: 'white',
-                      borderWidth: 2,
-                      // borderColor: '#b1b1b1',
-                      borderColor: 'black',
-                  }}>
-                  {this.props.photoURL ? (
-                      <Image
-                          source={{uri: this.props.photoURL}}
-                          style={{
-                              height: '100%',
-                              width: '100%',
-                              borderRadius: 20,
-                              // backgroundColor: 'rgba(0,0,0,0)',
-                              backgroundColor: 'pink',
-                          }}
-                      />
-                  ) : (
-                      <Image
-                          source={require('../assets/avatar.jpg')}
-                          style={{
-                              height: '100%',
-                              width: '100%',
-                              borderRadius: 20,
-                              backgroundColor: 'rgba(0,0,0,0)',
-                          }}
-                      />
-                  )}
-              </View>
-
-
-{/* // {this.amazingCircle(this.props.data)} */}
-
-
-          </TouchableOpacity>
+          {/* // {this.amazingCircle(this.props.data)} */}
+        </TouchableOpacity>
       </SafeAreaView>
     );
   }
@@ -572,7 +566,8 @@ export default class UserSwiper extends Component {
           </View>
 
           <Text style={{fontSize: 18, fontWeight: '700', letterSpacing: 0.3}}>
-            Choose the restaurant (UserSwiper.js > nearByResturants() > ScrollView)
+            Choose the restaurant (UserSwiper.js > nearByResturants() >
+            ScrollView)
           </Text>
 
           <FlatList
@@ -732,8 +727,6 @@ export default class UserSwiper extends Component {
     );
   }
 }
-
-
 
 // From DrawerContent.js to implement amazingCircle?
 // const mapStateToProps = ({auth, profile}) => {

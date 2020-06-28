@@ -322,7 +322,7 @@ class MyActivity extends Component {
           renderTabBar={ (props) => (<TabBar {...props}
             // indicatorStyle={{ backgroundColor: 'rgba(0,0,0,0)' }}
             indicatorStyle={{ backgroundColor: 'yellow' }}
-            style={{ backgroundColor: 'purple' }}
+            style={{ backgroundColor: 'purple' }} // Color surrounding NOTIFICATIONS banner of Drawer > Notifications page
           /> ) }
         />
         {/* <Text

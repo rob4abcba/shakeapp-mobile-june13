@@ -29,9 +29,15 @@ class DrawerContent extends React.Component {
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
+
+    // console.log(
+    //   'DrawerContent: componentWillReceiveProps: JSON.stringify(nextProps.data) = ' +
+    //     JSON.stringify(nextProps.data),
+    // );
+
     console.log(
-      'DrawerContent > componentWillReceiveProps: ' +
-        JSON.stringify(nextProps.data),
+      'DrawerContent: componentWillReceiveProps: nextProps.data.gender = ' +
+        nextProps.data.gender,
     );
 
     // if (nextProps.data) {
@@ -53,6 +59,13 @@ class DrawerContent extends React.Component {
   onSettingsPress() {
     Actions.settings();
   }
+
+
+  onSearchFilterPress() {
+    console.log('DrawerContent.js > this.onSearchFilterPress: Before Actions.searchFilter();');
+    Actions.searchFilter();
+  }
+
 
   amazingCircle(user) {
     var colors = [];
@@ -487,7 +500,25 @@ class DrawerContent extends React.Component {
               Settings
             </Text>
           </TouchableOpacity>
+
+{/* Search by Gender for now.  Later will search by name, etc. */}
+          <TouchableOpacity
+            style={{paddingBottom: 12}}
+            onPress={this.onSearchFilterPress.bind(this)}>
+            <Text
+              style={{fontSize: 22, fontWeight: '500', letterSpacing: -0.4}}>
+              Search
+            </Text>
+          </TouchableOpacity>
+
+
+
+
         </View>
+
+
+
+
 
         {/* App Version */}
         <View

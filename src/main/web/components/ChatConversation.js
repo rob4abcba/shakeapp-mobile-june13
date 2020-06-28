@@ -8,6 +8,8 @@ import {
   StyleSheet,
   Dimensions,
   Alert,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
@@ -19,6 +21,30 @@ import MapView from 'react-native-maps';
 import {showLocation} from 'react-native-map-link';
 import {onSendMessage, onBlockShake} from '../actions';
 import {GiftedChat, Bubble, Time} from 'react-native-gifted-chat';
+
+
+
+
+
+
+// import {Keyboard, TouchableWithoutFeedback} from 'react-native'
+// wrap your root component with TouchableWithoutFeedback and trigger Keyboard.dismiss at onPress, like following
+
+// <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+//     <View style={{flex: 1}}>
+//           ........
+//           //rest of the component
+//           ........
+//     </View>
+// </TouchableWithoutFeedback>
+
+
+
+
+
+
+
+
 
 var stylesGlobal = require('../Styles');
 const deviceWidth = Dimensions.get('window').width;
@@ -171,7 +197,7 @@ class ChatConversation extends Component {
 
         <View
           style={{
-            backgroundColor: 'white',
+            backgroundColor: 'yellow',
             borderRadius: 8,
             shadowOpacity: 0.2,
             shadowColor: 'rgb(36, 100, 193)',
@@ -352,8 +378,10 @@ class ChatConversation extends Component {
       },
     );
     //Choose where to goto after BlockUser event
-    Actions.myActivity({route: 1}); // GoTo Previous Page
+    // Actions.start(); // GoTo Previous Page
+    // Actions.myActivity({route: 1}); // GoTo Previous Page
     // Actions.myActivity({route: 0}); // GoTo Previous Page
+    Actions.nearby(); // Got TypeError
     // Actions.nearbyUserDetail(); // Got TypeError
     // Actions.nearbyUserDetail({  // Got TypeError
     //   nearbyUser: this.props.nearbyUser,
@@ -380,7 +408,8 @@ class ChatConversation extends Component {
           <View
             style={{
               flex: 1,
-              marginLeft: 74,
+              // marginLeft: 74,
+              marginLeft: 53,
               flexDirection: 'row',
               alignItems: 'center',
             }}>
@@ -391,7 +420,9 @@ class ChatConversation extends Component {
                 borderRadius: 22,
                 backgroundColor: 'white',
                 borderWidth: 3,
-                borderColor: '#b1b1b1',
+                // borderColor: '#b1b1b1',
+                // borderColor: 'purple',
+                borderColor: 'orange',
               }}>
               {photoURL ? (
                 <Image
@@ -400,7 +431,8 @@ class ChatConversation extends Component {
                     height: '100%',
                     width: '100%',
                     borderRadius: 20,
-                    backgroundColor: 'rgba(0,0,0,0)',
+                    // backgroundColor: 'rgba(0,0,0,0)',
+                    backgroundColor: 'red',
                   }}
                 />
               ) : (
@@ -410,7 +442,8 @@ class ChatConversation extends Component {
                     height: '100%',
                     width: '100%',
                     borderRadius: 20,
-                    backgroundColor: 'rgba(0,0,0,0)',
+                    // backgroundColor: 'rgba(0,0,0,0)',
+                    backgroundColor: 'red',
                   }}
                 />
               )}
@@ -418,11 +451,14 @@ class ChatConversation extends Component {
 
             <Text
               style={{
-                fontSize: 24,
+                // fontSize: 24,
+                fontSize: 20,
                 fontWeight: '700',
-                letterSpacing: 0.4,
+                // letterSpacing: 0.4,
+                letterSpacing: 0.3,
                 color: 'white',
-                paddingLeft: 13,
+                // paddingLeft: 13,
+                paddingLeft: 10,
               }}>
               {this.props.friend.fullName}
             </Text>
@@ -430,17 +466,26 @@ class ChatConversation extends Component {
               <TouchableOpacity onPress={this.onBlock.bind(this)}>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: '300',
                   letterSpacing: 0.4,
                   color: 'white',
-                  paddingLeft: 50,
+                  // color: 'orange',
+                  // paddingLeft: 50,
+                  paddingLeft: 30,
                 }}>
-                Block
+                BlockYo
               </Text>
             </TouchableOpacity>
           </View>
         </View>
+
+
+{/* This TouchableOpacityWithoutFeedback & Keyboard.dismiss introduces a 
+// Send button to the right of the text that I input!  Nice! */}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={{flex: 1}}>
+
 
         <GiftedChat
           messages={this.getMappedMessages()}
@@ -453,18 +498,22 @@ class ChatConversation extends Component {
                 {...props}
                 textStyle={{
                   left: {
-                    color: 'black',
+                    // color: 'black',
+                    color: 'purple', // Chat text color of left column chatter
                   },
                   right: {
-                    color: 'black',
+                    // color: 'black',
+                    color: 'orange', // Chat text color of right column chatter
                   },
                 }}
                 wrapperStyle={{
                   left: {
-                    backgroundColor: 'white',
+                    // backgroundColor: 'white',
+                    backgroundColor: 'yellow', // Chat bubble fill color of left column chatter
                   },
                   right: {
-                    backgroundColor: 'white',
+                    // backgroundColor: 'white',
+                    backgroundColor: 'green', // Chat bubble fill color of right column chatter
                   },
                 }}
               />
@@ -488,6 +537,13 @@ class ChatConversation extends Component {
             );
           }}
         />
+
+
+      </View>
+    </TouchableWithoutFeedback>
+
+
+
       </View>
     );
   }
