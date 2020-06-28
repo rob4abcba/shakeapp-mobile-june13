@@ -42,8 +42,8 @@ class SearchFilter extends Component {
 
     this.state = {
       // gender: 'male',
-      // gender: 'female', // Set initial gender filter
-      gender: '', // Set initial gender filter
+      gender: 'female', // Set initial gender filter
+      // gender: '', // Set initial gender filter
       // gender: null, // Set initial gender filter
     };
     // this.onGenderChange.bind(this);
